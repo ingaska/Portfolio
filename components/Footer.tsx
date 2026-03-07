@@ -45,12 +45,6 @@ export default function Footer() {
         <div className="flex flex-col gap-3">
           <span className="text-[10px] uppercase tracking-widest text-[#1a1a1a]/35 mb-1">Connect</span>
           <a
-            href="mailto:hello@sumska.io"
-            className="text-sm text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors"
-          >
-            hello@sumska.io
-          </a>
-          <a
             href="https://www.linkedin.com/in/sumska/"
             target="_blank"
             rel="noopener noreferrer"
@@ -81,6 +75,12 @@ export default function Footer() {
             className="text-sm text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors"
           >
             Behance
+          </a>
+          <a
+            href="mailto:hello@sumska.io"
+            className="text-sm text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors"
+          >
+            hello@sumska.io
           </a>
         </div>
       </div>
