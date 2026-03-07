@@ -10,8 +10,8 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="px-6 md:px-12 pt-36 pb-16 md:pt-44 md:pb-20">
-        <h1 className="text-[#1a1a1a] text-2xl md:text-3xl font-light leading-snug max-w-xl">
+      <section className="px-6 md:px-12 pt-28 pb-12 md:pt-44 md:pb-20">
+        <h1 className="text-[#1a1a1a] text-3xl md:text-3xl font-light leading-snug max-w-xl">
           Product Design Lead —{' '}
           <span className="text-[#1a1a1a]/40">
             from zero to scale, building products people return to
@@ -20,8 +20,8 @@ export default async function HomePage() {
       </section>
 
       {/* Cases grid */}
-      <section className="px-6 md:px-12 pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-14">
+      <section className="px-6 md:px-12 pb-16 md:pb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-10 md:gap-y-14">
           {cases.map((c, i) => (
             <CaseCard
               key={c.slug}

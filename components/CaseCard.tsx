@@ -56,7 +56,7 @@ export default function CaseCard({ case_, imageUrl, index }: CaseCardProps) {
         </div>
 
         <div className="pt-4 pb-2">
-          <div className="flex items-baseline justify-between">
+          <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between">
             <h3 className="text-[#1a1a1a] text-base font-medium">{case_.title}</h3>
             <span className="text-[#1a1a1a]/40 text-sm">{case_.subtitle}</span>
           </div>

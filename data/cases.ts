@@ -29,7 +29,9 @@ export interface Case {
   industry: string
   tags: string[]
   figmaNodeId: string       // cover frame
-  detailNodeIds: string[]   // visual screen frames for right column
+  detailNodeIds: string[]   // visual screen frames for right column (desktop)
+  mobileMappings?: Record<string, string[]>  // desktop nodeId → mobile frame(s) to show instead
+  mobileAppendNodeIds?: string[]             // mobile-only frames appended after all desktop frames
   metrics?: string[]
   accentColor: string
   accordionSections: AccordionSection[]
@@ -61,6 +63,12 @@ export const cases: Case[] = [
       '2410:9909', // Case 1.15
       '2322:5732', // Case 1.17
     ],
+    mobileMappings: {
+      '318:6883':   ['2585:17334', '2585:20671'],  // Case 1.2  → 1.2 mob + 1.2.1 mob
+      '2563:19919': ['2594:29840', '2594:32281'],  // Case 1.4  → 1.4 mob + 1.4.1 mob
+      '321:5652':   ['2595:36780', '2595:38996'],  // Case 1.5  → 1.6 mob + 1.6.1 mob
+      '2322:5732':  ['2595:40106'],                // Case 1.17 → 1.19 mob
+    },
     metrics: ['Featured by App Store', '4.9 App Store', '4.6 Google Play', 'Retention M1-60%'],
     accentColor: '#5E71CD',
     accordionSections: [
@@ -112,6 +120,15 @@ export const cases: Case[] = [
         paragraphs: [
           "We built a suite of health monitoring tools that turned raw cycle data into clear, personal guidance — fertility window calculations, cycle pattern analysis, ovulation test logging, and a health profile that shaped daily insights and long-term recommendations.",
           "The result was a product that felt like it genuinely understood each user's body, acting like a personalised health companion that got more useful with every cycle logged.",
+        ],
+      },
+      {
+        title: 'Pregnancy mode: supporting users through every life change',
+        afterImageIndex: 2,
+        paragraphs: [
+          "When a user becomes pregnant, her needs change completely — but she shouldn't have to leave the app to get support. Pregnancy mode was designed to make that transition feel seamless, keeping users in a product they already trusted rather than forcing them to start over somewhere else.",
+          "We built a dedicated pregnancy experience woven into the same product: week-by-week guidance, tailored health content, and a tone that acknowledged this was a different chapter — not a different app.",
+          "Crucially, the experience was designed with the full arc in mind. When pregnancy ended, Femia was ready to welcome users back — reconnecting them with their cycle, their goals, and their health data, exactly where they left off.",
         ],
       },
       {

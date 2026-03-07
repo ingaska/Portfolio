@@ -27,7 +27,10 @@ export default async function CasePage({ params }: Props) {
   const c = cases.find((c) => c.slug === slug)
   if (!c) notFound()
 
-  const allUrls = await getCaseDetailImages(c.detailNodeIds)
+  const mobileMappings = c.mobileMappings ?? {}
+  const mobileAppendIds = c.mobileAppendNodeIds ?? []
+  const allMobileIds = [...Object.values(mobileMappings).flat(), ...mobileAppendIds]
+  const allUrls = await getCaseDetailImages([...c.detailNodeIds, ...allMobileIds])
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen pt-16">
@@ -37,12 +40,10 @@ export default async function CasePage({ params }: Props) {
         md:w-[40%] lg:w-[38%] shrink-0
         md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:overflow-y-auto
         bg-[#f7f7f5]
-        px-8 md:px-10 py-10 md:py-12
-        flex flex-col gap-8
+        px-5 md:px-10 py-7 md:py-12
+        flex flex-col gap-5 md:gap-8
         border-b md:border-b-0 md:border-r border-[#1a1a1a]/8
       ">
-
-        {/* Title */}
         <div>
           <h1 className="text-3xl md:text-4xl font-light text-[#1a1a1a] mb-2 leading-tight">
             {c.title}
@@ -50,12 +51,10 @@ export default async function CasePage({ params }: Props) {
           <p className="text-sm text-[#1a1a1a]/45">{c.subtitle}</p>
         </div>
 
-        {/* Description */}
         <p className="text-sm text-[#1a1a1a]/60 leading-relaxed">
           {c.description}
         </p>
 
-        {/* Metadata grid */}
         <div className="grid grid-cols-2 gap-x-6 gap-y-5">
           <div>
             <p className="text-[10px] uppercase tracking-widest text-[#1a1a1a]/35 mb-1">Role</p>
@@ -83,7 +82,6 @@ export default async function CasePage({ params }: Props) {
           </div>
         </div>
 
-        {/* Metrics */}
         {c.metrics && (
           <div className="flex flex-wrap gap-2">
             {c.metrics.map((m) => (
@@ -97,36 +95,63 @@ export default async function CasePage({ params }: Props) {
           </div>
         )}
 
-        {/* Accordion */}
         <CaseAccordion sections={c.accordionSections} />
       </aside>
 
-      {/* ── RIGHT: scrolling images ── */}
-      <main className="flex-1 bg-white p-4 md:p-6 flex flex-col gap-4">
+      {/* ── RIGHT: unified image + text stream ── */}
+      <main className="flex-1 bg-white p-3 md:p-6 flex flex-col gap-3 md:gap-4">
 
-        {/* Detail screens — text sections injected after each image by afterImageIndex */}
         {c.detailNodeIds.map((nodeId, i) => {
-          const url = allUrls[nodeId]
-          if (!url) return null
+          const desktopUrl = allUrls[nodeId]
+          const mobileIds = mobileMappings[nodeId] ?? []
+          const hasMobile = mobileIds.length > 0
           const sectionsAfterThis = c.textSections?.filter(
             (s) => (s.afterImageIndex ?? 0) === i
           )
+
           return (
-            <div key={nodeId} className="contents">
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-gray-100">
+            <div key={nodeId} className="flex flex-col gap-3 md:gap-4">
+
+              {/* Desktop image — hidden on mobile when a mobile replacement exists */}
+              {desktopUrl && (
                 <Image
-                  src={url}
+                  src={desktopUrl}
                   alt={`${c.title} — screen ${i + 1}`}
-                  fill
-                  className="object-cover"
+                  width={1200}
+                  height={675}
+                  className={`w-full h-auto rounded-2xl${hasMobile ? ' hidden md:block' : ''}`}
                   priority={i === 0}
                   sizes="(max-width: 768px) 100vw, 60vw"
                 />
-              </div>
+              )}
+
+              {/* Mobile replacement frames — shown only on mobile */}
+              {hasMobile && (
+                <div className="md:hidden flex flex-col gap-3">
+                  {mobileIds.map((mId, j) => {
+                    const url = allUrls[mId]
+                    if (!url) return null
+                    return (
+                      <Image
+                        key={mId}
+                        src={url}
+                        alt={`${c.title} — screen ${i + 1}.${j + 1}`}
+                        width={800}
+                        height={1000}
+                        className="w-full h-auto rounded-2xl"
+                        priority={i === 0}
+                        sizes="100vw"
+                      />
+                    )
+                  })}
+                </div>
+              )}
+
+              {/* Text sections — same position on mobile and desktop */}
               {sectionsAfterThis?.map((section, j) => (
                 <div
                   key={`text-${i}-${j}`}
-                  className="w-full rounded-2xl bg-[#f7f7f5] px-8 md:px-12 py-10 md:py-12 flex flex-col gap-6"
+                  className="w-full rounded-2xl bg-[#f7f7f5] px-5 md:px-12 py-7 md:py-12 flex flex-col gap-5 md:gap-6"
                 >
                   <h2 className="text-2xl md:text-3xl font-light text-[#1a1a1a] leading-tight">
                     {section.title}
@@ -167,8 +192,29 @@ export default async function CasePage({ params }: Props) {
             </div>
           )
         })}
-      </main>
 
+        {/* Mobile-only frames appended after all main content */}
+        {mobileAppendIds.length > 0 && (
+          <div className="md:hidden flex flex-col gap-3">
+            {mobileAppendIds.map((nodeId, i) => {
+              const url = allUrls[nodeId]
+              if (!url) return null
+              return (
+                <Image
+                  key={nodeId}
+                  src={url}
+                  alt={`${c.title} — additional screen ${i + 1}`}
+                  width={800}
+                  height={1000}
+                  className="w-full h-auto rounded-2xl"
+                  sizes="100vw"
+                />
+              )
+            })}
+          </div>
+        )}
+
+      </main>
     </div>
   )
 }
