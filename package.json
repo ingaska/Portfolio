@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/download-figma.mjs",
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/download-figma.mjs && next build",
     "start": "next start",
     "lint": "eslint"
   },
