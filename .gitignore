@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# figma image cache (downloaded at build time)
+/public/figma-cache/
+
 # vercel
 .vercel
 

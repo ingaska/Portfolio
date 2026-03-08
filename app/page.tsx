@@ -3,8 +3,6 @@ import { getFigmaImageUrls } from '@/lib/figma'
 import CaseCard from '@/components/CaseCard'
 import AboutSection from '@/components/AboutSection'
 
-export const dynamic = 'force-dynamic'
-
 export default async function HomePage() {
   const nodeIds = cases.map((c) => c.figmaNodeId)
   const imageUrls = await getFigmaImageUrls(nodeIds)

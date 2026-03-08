@@ -4,12 +4,13 @@ import { cases } from '@/data/cases'
 import { getCaseDetailImages } from '@/lib/figma'
 import CaseAccordion from '@/components/CaseAccordion'
 
-export const dynamic = 'force-dynamic'
-
 interface Props {
   params: Promise<{ slug: string }>
 }
 
+export async function generateStaticParams() {
+  return cases.map((c) => ({ slug: c.slug }))
+}
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
