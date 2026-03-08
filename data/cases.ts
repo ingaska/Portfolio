@@ -66,7 +66,7 @@ export const cases: Case[] = [
     mobileMappings: {
       '318:6883':   ['2585:17334', '2585:20671'],  // Case 1.2  → 1.2 mob + 1.2.1 mob
       '2563:19919': ['2594:29840', '2594:32281'],  // Case 1.4  → 1.4 mob + 1.4.1 mob
-      '321:5652':   ['2595:36780'],                 // Case 1.5  → 1.6 mob (1.6.1 mob 2595:38996 won't render in Figma)
+      '321:5652':   ['2595:36780', '2605:28812'],    // Case 1.5  → mobile frames
       '2322:5732':  ['2595:40106'],                // Case 1.17 → 1.19 mob
     },
     metrics: ['Featured by App Store', '4.9 App Store', '4.6 Google Play', 'Retention M1-60%'],
