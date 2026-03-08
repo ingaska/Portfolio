@@ -39,14 +39,14 @@ const src = readFileSync(join(ROOT, 'data', 'cases.ts'), 'utf-8')
 const nodeIds = [...new Set([...src.matchAll(/'(\d+:\d+)'/g)].map(m => m[1]))]
 console.log(`[figma] ${nodeIds.length} node IDs found`)
 
-// Fetch Figma image URLs — batch of 4 with retry, never throws
-const BATCH = 4
+// Fetch Figma image URLs — batch of 2 at scale=1 to avoid render timeouts
+const BATCH = 2
 const allImages = {}
 
 for (let i = 0; i < nodeIds.length; i += BATCH) {
   const batch = nodeIds.slice(i, i + BATCH)
   const ids = batch.join(',')
-  const url = `https://api.figma.com/v1/images/${FILE_ID}?ids=${encodeURIComponent(ids)}&format=png&scale=2`
+  const url = `https://api.figma.com/v1/images/${FILE_ID}?ids=${encodeURIComponent(ids)}&format=png&scale=1`
 
   let success = false
   for (let attempt = 1; attempt <= 3; attempt++) {
