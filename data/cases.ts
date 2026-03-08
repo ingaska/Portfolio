@@ -318,6 +318,46 @@ export const cases: Case[] = [
       '2329:8408', // Cases 3.5
     ],
     accentColor: '#2D0A5E',
+    textSections: [
+      {
+        title: 'Core experience & creative mechanics',
+        afterImageIndex: 0,
+        paragraphs: [
+          "Every design decision was built around one idea: make music creation feel like play, not production. The interface had to remove every barrier between a first tap and a finished beat.",
+        ],
+        items: [
+          {
+            label: 'Beat grid',
+            description: 'A visual, tap-based sequencer that lets users build rhythms intuitively — no musical knowledge required.',
+          },
+          {
+            label: 'Curated soundpacks',
+            description: 'Original instrument kits across genres, giving users creative variety while keeping choices focused and non-overwhelming.',
+          },
+          {
+            label: 'Real-time effects',
+            description: 'Instant audio manipulation — filters, reverb, tempo — so every session feels like experimentation, not configuration.',
+          },
+          {
+            label: 'Loop layering',
+            description: 'A simple stacking system that turns individual sounds into full compositions, building complexity without adding friction.',
+          },
+          {
+            label: 'Share & export',
+            description: 'One-tap sharing that turned personal creations into social content — the mechanic that made the product go viral on YouTube.',
+          },
+        ],
+      },
+      {
+        title: 'Original soundpacks & visual identity',
+        afterImageIndex: 1,
+        paragraphs: [
+          "Every soundpack in Groovy Loops was original — crafted from scratch by a professional sound producer specifically for the app. No stock samples, no recycled kits. Each pack had its own genre, mood, and personality, giving users a curated palette that felt premium from the first beat.",
+          "To match the quality of the audio, the design team created original cover artwork for every soundpack — each with a distinct visual style that reflected the genre and energy of the sounds inside. The covers became part of the browsing experience, making discovery feel like flipping through a record collection rather than scrolling a list.",
+          "The result was a product where sound and visuals were inseparable — every pack felt like a complete creative world to explore.",
+        ],
+      },
+    ],
     accordionSections: [
       {
         title: 'Challenge',
@@ -349,6 +389,33 @@ export const cases: Case[] = [
       '204:43',  // Cases 3.8
     ],
     accentColor: '#111827',
+    textSections: [
+      {
+        title: 'Learning system & core mechanics',
+        afterImageIndex: 0,
+        paragraphs: [
+          "The product was designed to take someone who had never touched a piano and guide them to playing real songs — with every mechanic built around making progress feel immediate and visible.",
+        ],
+        items: [
+          {
+            label: 'Guided note system',
+            description: 'Animated falling notes with real-time finger placement feedback, turning sheet music into an intuitive visual language.',
+          },
+          {
+            label: 'Progressive song library',
+            description: 'Songs structured by difficulty — from single-hand melodies to full arrangements — so users always have the right challenge.',
+          },
+          {
+            label: 'Lesson architecture',
+            description: 'Bite-sized lessons that teach technique through playing, not theory — keeping sessions short enough to repeat and rewarding enough to finish.',
+          },
+          {
+            label: 'Practice streaks & rewards',
+            description: 'A gamification layer that turned daily practice into a habit loop, rewarding consistency over perfection.',
+          },
+        ],
+      },
+    ],
     accordionSections: [
       {
         title: 'Challenge',
@@ -375,6 +442,37 @@ export const cases: Case[] = [
       '7:199', // Cases 3.10
     ],
     accentColor: '#3B4FCD',
+    textSections: [
+      {
+        title: 'Core tools & sleep mechanics',
+        afterImageIndex: 0,
+        paragraphs: [
+          "Five distinct tools had to feel like one calm, unified experience. Each feature was designed to serve a different moment in the sleep cycle — from winding down to waking up — without ever breaking the nighttime atmosphere.",
+        ],
+        items: [
+          {
+            label: 'Snore tracking',
+            description: 'Overnight audio recording with morning reports — giving users insight into sleep quality they can actually act on.',
+          },
+          {
+            label: 'Sleep sounds',
+            description: 'A curated library of ambient soundscapes with mixing controls, designed to help users build a personal wind-down ritual.',
+          },
+          {
+            label: 'Smart alarm',
+            description: 'A wake-up system that detects light sleep phases and triggers gently — so mornings feel less abrupt.',
+          },
+          {
+            label: 'Guided wind-down animations',
+            description: 'Breathing exercises and visual meditations that ease the transition from screen time to sleep.',
+          },
+          {
+            label: 'Weekly sleep insights',
+            description: 'Aggregated reports that surface patterns over time, turning nightly data into long-term awareness.',
+          },
+        ],
+      },
+    ],
     accordionSections: [
       {
         title: 'Challenge',
@@ -401,6 +499,33 @@ export const cases: Case[] = [
       '2356:7298', // Cases 3.11 detail
     ],
     accentColor: '#7C3AED',
+    textSections: [
+      {
+        title: 'Brand identity & core experience',
+        afterImageIndex: 0,
+        paragraphs: [
+          "The product needed to go beyond scan-and-identify. Every touchpoint was designed to feel personal and warm — turning a utility into a companion users would reach for out of curiosity, not just necessity.",
+        ],
+        items: [
+          {
+            label: 'Instant plant scan',
+            description: 'A camera-first flow that delivers identification in seconds — no menus, no setup, just point and discover.',
+          },
+          {
+            label: 'Plant profiles & care guides',
+            description: 'Rich detail pages with watering schedules, sunlight needs, and care tips — giving every scan lasting practical value.',
+          },
+          {
+            label: 'Lily mascot',
+            description: 'A character that guides, reacts, and adds personality to every interaction — turning a technical tool into something that feels alive.',
+          },
+          {
+            label: 'Personal collection',
+            description: 'A garden-like library of scanned plants that grows with the user, creating a sense of progress and ownership.',
+          },
+        ],
+      },
+    ],
     accordionSections: [
       {
         title: 'Challenge',
