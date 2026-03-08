@@ -6,7 +6,7 @@ async function fetchBatch(nodeIds: string[]): Promise<Record<string, string>> {
   const url = `https://api.figma.com/v1/images/${FILE_ID}?ids=${encodeURIComponent(ids)}&format=png&scale=1`
   const res = await fetch(url, {
     headers: { 'X-Figma-Token': TOKEN },
-    next: { revalidate: 3600 },
+    cache: 'no-store',
   })
   if (!res.ok) {
     console.error('Figma API error:', res.status, await res.text())
