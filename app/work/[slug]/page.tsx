@@ -10,9 +10,6 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
-export async function generateStaticParams() {
-  return cases.map((c) => ({ slug: c.slug }))
-}
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
