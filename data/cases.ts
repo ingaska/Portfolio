@@ -217,6 +217,10 @@ export const cases: Case[] = [
       '2329:10820',// Case 2.8
       '2361:11271',// Case 2.9
     ],
+    mobileMappings: {
+      '12:9861':  ['2605:23074', '2605:24634'],  // Case 2.2 → mobile frames
+      '12:21256': ['2605:26198', '2605:26721'],  // Case 2.6 → mobile frames
+    },
     accentColor: '#9333EA',
     textSections: [
       {
