@@ -4,8 +4,6 @@ import { cases } from '@/data/cases'
 import { getCaseDetailImages } from '@/lib/figma'
 import CaseAccordion from '@/components/CaseAccordion'
 
-export const dynamic = 'force-dynamic'
-
 interface Props {
   params: Promise<{ slug: string }>
 }

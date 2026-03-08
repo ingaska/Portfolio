@@ -46,7 +46,7 @@ const allImages = {}
 for (let i = 0; i < nodeIds.length; i += BATCH) {
   const batch = nodeIds.slice(i, i + BATCH)
   const ids = batch.join(',')
-  const url = `https://api.figma.com/v1/images/${FILE_ID}?ids=${encodeURIComponent(ids)}&format=png&scale=1`
+  const url = `https://api.figma.com/v1/images/${FILE_ID}?ids=${encodeURIComponent(ids)}&format=png&scale=2`
 
   let success = false
   for (let attempt = 1; attempt <= 3; attempt++) {
@@ -80,6 +80,7 @@ const results = await Promise.allSettled(
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     const buf = Buffer.from(await res.arrayBuffer())
     await writeFile(join(OUT, `${id.replace(/:/g, '-')}.png`), buf)
+    console.log(`[figma] Saved ${id}`)
   })
 )
 
@@ -87,3 +88,4 @@ const ok = results.filter(r => r.status === 'fulfilled').length
 const fail = results.filter(r => r.status === 'rejected').length
 console.log(`[figma] Done: ${ok} saved, ${fail} failed`)
 // Always exit 0 — never crash the build
+process.exit(0)
