@@ -9,7 +9,7 @@ async function fetchBatch(nodeIds: string[]): Promise<Record<string, string>> {
 
   const res = await fetch(url, {
     headers: { 'X-Figma-Token': TOKEN },
-    next: { revalidate: 86400 },
+    next: { revalidate: 3600 },
   })
 
   if (!res.ok) {
