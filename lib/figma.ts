@@ -1,7 +1,7 @@
 const FILE_ID = process.env.FIGMA_FILE_ID!
 const TOKEN = process.env.FIGMA_API_TOKEN!
 
-const BATCH_SIZE = 4
+const BATCH_SIZE = 20
 
 async function fetchBatch(nodeIds: string[]): Promise<Record<string, string>> {
   const ids = nodeIds.join(',')
@@ -9,7 +9,7 @@ async function fetchBatch(nodeIds: string[]): Promise<Record<string, string>> {
 
   const res = await fetch(url, {
     headers: { 'X-Figma-Token': TOKEN },
-    cache: 'no-store',
+    next: { revalidate: 3600 },
   })
 
   if (!res.ok) {
@@ -23,12 +23,14 @@ async function fetchBatch(nodeIds: string[]): Promise<Record<string, string>> {
 
 export async function getFigmaImageUrls(nodeIds: string[]): Promise<Record<string, string>> {
   if (!TOKEN || !FILE_ID || !nodeIds.length) return {}
-  const result: Record<string, string> = {}
+
+  // Split into batches and fetch all in parallel
+  const batches: string[][] = []
   for (let i = 0; i < nodeIds.length; i += BATCH_SIZE) {
-    const images = await fetchBatch(nodeIds.slice(i, i + BATCH_SIZE))
-    Object.assign(result, images)
+    batches.push(nodeIds.slice(i, i + BATCH_SIZE))
   }
-  return result
+  const results = await Promise.all(batches.map(fetchBatch))
+  return Object.assign({}, ...results)
 }
 
 // Handles both Figma node IDs and local asset paths (prefixed with "local:")
