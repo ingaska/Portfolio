@@ -76,12 +76,6 @@ export default function Footer() {
           >
             Behance
           </a>
-          <a
-            href="mailto:hello@sumska.io"
-            className="text-sm text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors"
-          >
-            hello@sumska.io
-          </a>
         </div>
       </div>
 
