@@ -441,6 +441,9 @@ export const cases: Case[] = [
     detailNodeIds: [
       '7:199', // Cases 3.10
     ],
+    mobileMappings: {
+      '7:199': ['2615:29906', '2617:29943'],  // Cases 3.10 → mobile frames
+    },
     accentColor: '#3B4FCD',
     textSections: [
       {
