@@ -57,7 +57,7 @@ export const cases: Case[] = [
       '2563:19919', // Case 1.4 — Data-driven personalisation & health monitoring
       '321:5652',  // Case 1.5
       '2376:8118', // Case 1.6
-      '321:11601', // Case 1.8 — The Femia world
+      '2412:24499', // Case 1.8 — The Femia world (updated)
       '323:21773', // Case 1.11 — A system built to scale
       '325:6402',  // Case 1.14
       '2410:9909', // Case 1.15
@@ -67,7 +67,7 @@ export const cases: Case[] = [
       '318:6883':   ['2585:17334', '2585:20671'],  // Case 1.2  → 1.2 mob + 1.2.1 mob
       '2563:19919': ['2594:29840', '2594:32281'],  // Case 1.4  → 1.4 mob + 1.4.1 mob
       '321:5652':   ['2595:36780', '2605:28812'],    // Case 1.5  → mobile frames
-      '321:11601':  ['2668:23143', '2668:29788'],   // Case 1.8  → mobile frames
+      '2412:24499': ['2699:32527', '2700:34403'],    // Case 1.8  → mobile frames
       '2322:5732':  ['2595:40106'],                // Case 1.17 → 1.19 mob
     },
     metrics: ['Featured by App Store', '4.9 App Store', '4.6 Google Play', 'Retention M1-60%'],
