@@ -201,6 +201,115 @@ export const cases: Case[] = [
     ],
   },
   {
+    slug: 'femia-content-design-system',
+    title: 'Content Design System',
+    subtitle: 'Femia · Content Delivery at Scale',
+    description: "Femia needed to produce personalised health content every day — across cycle phases, fertility goals, and life stages. I built the content design system that made that possible: a shared visual foundation, templated content formats, and a production workflow that let a distributed team create, review, and publish at scale without losing quality.",
+    role: 'Product Design Lead',
+    year: '2022–2025',
+    platforms: ['iOS', 'Android'],
+    industry: 'Femtech',
+    tags: ['Femtech', 'Design System'],
+    figmaNodeId: '2835:28644',
+    detailNodeIds: [
+      '2820:30363', // Slide 1 — Foundation: warm colour palette
+      '2903:29453', // Slide 2 — Foundation: cool colour palette
+      '2849:30445', // Slide 3 — Foundation: Typography
+      '2912:5057',  // 3.1 — Foundation: Icon set
+      '2854:31005', // Slide 4 — Content creation workflow
+      '2860:26419', // Slide 5 — Story title templates
+      '2863:26580', // Slide 6 — Infographics
+      '2895:28710', // Slide 7 — Lists and text blocks
+      '2898:42495', // Slide 8 — Daily advice (personalised stories)
+      '2904:30461', // Slide 10 — Texts and arts
+      '2891:27378', // Slide 9 — Art Library: Objects
+      '2896:27700', // Slide 10 — Art Library: Characters
+      '2896:29713', // Slide 11 — Art Library: Daily Life
+    ],
+    accentColor: '#5E71CD',
+    accordionSections: [
+      {
+        title: 'Challenge',
+        content: "Producing personalised daily health content for over a million users — across fertility stages, cycle phases, and pregnancy — required more than good writing. Without a shared system, each piece of content became a one-off effort: inconsistent, slow, and hard to review. We needed a scalable foundation that a distributed team could work from without losing visual quality or medical accuracy.",
+      },
+      {
+        title: 'Approach',
+        content: "I built the content design system from scratch — starting with a visual foundation of colour, typography, and illustration libraries, then designing a library of content templates covering story titles, infographics, text blocks, daily advice cards, and text-and-art combinations. Alongside the design assets, I defined a production workflow connecting content managers, visual designers, and a review team of medical experts and editors, with publishing into Contentful.",
+      },
+      {
+        title: 'Results',
+        content: "Enabled a distributed team to produce personalised daily content at scale for 1.2M+ users — with every story reviewed by medical experts and published consistently across iOS and Android.",
+      },
+    ],
+    textSections: [
+      {
+        title: 'Visual foundation',
+        afterImageIndex: 0,
+        paragraphs: [
+          "The system started with a shared visual language that every content creator and designer could rely on. The colour system was built as hot-cold paired palettes extending the Femia brand, giving the team a broad but coherent palette to work across different health topics and emotional tones.",
+        ],
+        items: [
+          {
+            label: 'Colour system',
+            description: 'Paired hot-cold palettes built on the Femia brand — giving every content format its own mood while staying visually unified.',
+          },
+          {
+            label: 'Typography',
+            description: 'A type scale designed for both iOS and Android, covering large editorial titles through body text and captions.',
+          },
+          {
+            label: 'Icon set',
+            description: 'A comprehensive health icon library covering reproductive health, body topics, wellness, and lifestyle — all in a consistent illustrative style.',
+          },
+        ],
+      },
+      {
+        title: 'Content creation workflow',
+        afterImageIndex: 4,
+        paragraphs: [
+          "The system wasn't just design assets — it was a production process. Content managers worked from templated wireframes to draft stories. Visual designers used design system components to bring them to life. Every piece then went through a structured review: medical experts checked accuracy, colleagues reviewed tone, and the design lead and content lead signed off before publishing to Contentful.",
+          "This workflow meant quality didn't depend on individual effort — it was built into how the system worked.",
+        ],
+      },
+      {
+        title: 'Content templates',
+        afterImageIndex: 5,
+        paragraphs: [
+          "The core of the system was a library of content templates — each designed for a specific format and purpose. Together they covered the full range of content Femia delivered to users every day.",
+        ],
+        items: [
+          {
+            label: 'Story title templates',
+            description: "Various opening formats to hook readers at the start — from editorial headlines to question-based hooks and data-led intros.",
+          },
+          {
+            label: 'Infographics',
+            description: 'Data visualisation templates for presenting health statistics in a clear, visually engaging way without requiring custom design each time.',
+          },
+          {
+            label: 'Lists and text blocks',
+            description: "Structured tip formats — Do/Don't lists, numbered advice, and text blocks — for delivering practical health guidance in easy-to-scan layouts.",
+          },
+          {
+            label: 'Daily advice cards',
+            description: 'Personalised story formats driven by user cycle data — triggered by cycle day, symptoms, or fertility stage to feel relevant every time.',
+          },
+          {
+            label: 'Text and art',
+            description: 'Templates that combine editorial copy with illustration — for stories where visuals carry meaning alongside the words.',
+          },
+        ],
+      },
+      {
+        title: 'Art library',
+        afterImageIndex: 10,
+        paragraphs: [
+          "To support the content system, I built a dedicated art library of object illustrations covering health topics, lifestyle, food, body, and wellness. These assets gave the content team a shared visual vocabulary — so any story could be illustrated quickly without starting from scratch, while staying consistent with the Femia visual identity.",
+        ],
+      },
+    ],
+  },
+  {
     slug: 'tongo',
     title: 'Tongo',
     subtitle: 'English Learning App',

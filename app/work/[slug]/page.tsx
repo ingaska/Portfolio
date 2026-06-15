@@ -151,7 +151,7 @@ export default async function CasePage({ params }: Props) {
               {sectionsAfterThis?.map((section, j) => (
                 <div
                   key={`text-${i}-${j}`}
-                  className="w-full rounded-2xl bg-[#f7f7f5] px-5 md:px-12 py-7 md:py-12 flex flex-col gap-5 md:gap-6"
+                  className="w-full rounded-2xl bg-[#E9EEFF] px-5 md:px-12 py-7 md:py-12 flex flex-col gap-5 md:gap-6"
                 >
                   <h2 className="text-2xl md:text-3xl font-light text-[#1a1a1a] leading-tight">
                     {section.title}
