@@ -99,7 +99,7 @@ export default async function CasePage({ params }: Props) {
       </aside>
 
       {/* ── RIGHT: unified image + text stream ── */}
-      <main className="flex-1 bg-white p-3 md:p-6 flex flex-col gap-3 md:gap-4">
+      <main className="flex-1 p-3 md:p-6 flex flex-col gap-3 md:gap-4" style={{ backgroundColor: '#f0f0ee' }}>
 
         {c.detailNodeIds.map((nodeId, i) => {
           const desktopUrl = allUrls[nodeId]
