@@ -310,6 +310,85 @@ export const cases: Case[] = [
     ],
   },
   {
+    slug: 'femia-brand',
+    title: 'Femia Brand Identity',
+    subtitle: 'Femia · Brand Guidelines',
+    description: "I named the product and built the full brand identity from scratch — visual language, design principles, tone of voice, and a complete illustration system. The brief was to create something women would genuinely want to be seen using: warm, modern, and distinctly not another pink period tracker.",
+    role: 'Brand & Product Design Lead',
+    year: '2022',
+    platforms: ['iOS', 'Android', 'Web'],
+    industry: 'Femtech',
+    tags: ['Femtech', 'Branding'],
+    figmaNodeId: '2949:30834',
+    detailNodeIds: [
+      '2949:31875', // Mission
+      '2949:31728', // Who is she — 1
+      '2949:31743', // Who is she — 2
+      '2949:31890', // Values — Life-time value
+      '2949:31170', // Design Principles
+      '2949:31199', // Tone of Voice
+      '2949:31612', // Logo — naming & concept
+      '2949:31623', // Logo — usage on backgrounds
+      '2949:30842', // Primary Colors
+      '2949:30868', // Secondary Colors
+      '2949:31506', // Fonts
+      '2949:31634', // Brand Elements — Graphics
+      '2949:31757', // Brand Elements — Graphics composition
+      '2949:30250', // Illustrations
+      '2949:28342', // In use — Text and Picture
+      '2949:28327', // In use — Photo guidelines
+    ],
+    accentColor: '#4C61C7',
+    accordionSections: [
+      {
+        title: 'Challenge',
+        content: "Women's health apps tend to fall into two traps: overly clinical or aggressively pink. Femia needed a brand that felt warm and trustworthy without leaning on either. The identity had to work across a product built for real life — fertility, pregnancy, postpartum — and appeal to women who don't see themselves in the usual femtech aesthetic.",
+      },
+      {
+        title: 'Approach',
+        content: "Started from the name — Femia combines 'Fem' (female) and 'Mia' (mine), making it both universal and personal. Built the full brand system from scratch: mission and values framework, user persona, design principles, tone of voice, logo, colour palette, typography, graphic elements, illustration style, and photography guidelines. Every decision was made to feel approachable without being soft, and confident without being clinical.",
+      },
+      {
+        title: 'Results',
+        content: "A brand system adopted across iOS, Android, and Web — used as the foundation for the full product design system, all marketing materials, and the App Store presence. The illustration style and visual tone were validated through user feedback and became one of the most recognisable parts of the product.",
+      },
+    ],
+    textSections: [
+      {
+        title: 'Brand foundation',
+        afterImageIndex: 0,
+        paragraphs: [
+          "The brand started with a clear mission: improve women's health and wellbeing through accessible technology. Everything else — visual identity, tone, illustration style — was built to serve that intent.",
+          "The target user isn't an abstract demographic. She's active, curious, health-aware, and expects a product that understands her without talking down to her. That profile shaped every design decision from colour to copy.",
+        ],
+      },
+      {
+        title: 'Values & design principles',
+        afterImageIndex: 3,
+        paragraphs: [
+          "The brand values centre on life-time companionship — empowering women to take control of their health at every stage of life, not just at a single moment.",
+          "The design principles reflect this: simple, intuitive, friendly, trustworthy, and universal. The language had to be warm and caring while remaining expert and calm — never preachy, never patronising.",
+        ],
+      },
+      {
+        title: 'Logo & colour system',
+        afterImageIndex: 6,
+        paragraphs: [
+          "The logo is deliberately minimal — a clean wordmark that works at any size and on any background. Simple text logo for maximum recognition and communication clarity.",
+          "The colour palette is built around Bottichelli (a warm periwinkle blue) as the primary brand colour, paired with Carnation for warmth, and supported by secondary palettes — Smoothie, Aqua, and Angel — that give the content system its tonal range.",
+        ],
+      },
+      {
+        title: 'Brand elements & illustration',
+        afterImageIndex: 11,
+        paragraphs: [
+          "A set of organic graphic elements — circles, leaves, drops, rings, seeds — forms the visual texture of the brand. These shapes appear across the product, content, and marketing, giving Femia a recognisable decorative language that feels natural rather than geometric.",
+          "The illustration style was designed to represent real women across life stages and ethnicities — diverse, grounded, and never idealised. Photography guidelines reinforce the same approach: authentic, natural, un-posed people in real life.",
+        ],
+      },
+    ],
+  },
+  {
     slug: 'tongo',
     title: 'Tongo',
     subtitle: 'English Learning App',
