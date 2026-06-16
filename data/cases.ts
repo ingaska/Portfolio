@@ -336,8 +336,9 @@ export const cases: Case[] = [
       '2949:31199', // Tone of Voice
       '2949:31612', // Logo — naming & concept
       '2949:31623', // Logo — usage on backgrounds
-      '2949:30842', // Primary Colors
-      '2949:30868', // Secondary Colors
+      '2949:31136', // Colors — palette overview
+      '2949:30888', // Colors — primary
+      '2949:31021', // Colors — secondary
       '2949:31506', // Fonts
       '2949:31634', // Brand Elements — Graphics
       '2949:31757', // Brand Elements — Graphics composition
