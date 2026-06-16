@@ -329,7 +329,10 @@ export const cases: Case[] = [
       '2949:31974', // Values — 5
       '2949:31728', // Who is she — 1
 
-      '2949:31170', // Design Principles
+      '2949:31170', // Design Principles — 1
+      '2949:31212', // Design Principles — 2
+      '2949:31380', // Design Principles — 3
+      '2949:31390', // Design Principles — 4
       '2949:31199', // Tone of Voice
       '2949:31612', // Logo — naming & concept
       '2949:31623', // Logo — usage on backgrounds
