@@ -322,9 +322,13 @@ export const cases: Case[] = [
     figmaNodeId: '2949:30834',
     detailNodeIds: [
       '2949:31875', // Mission
+      '2949:31890', // Values — Life-time value
+      '2949:31922', // Values — 2
+      '2949:31949', // Values — 3
+      '2949:31960', // Values — 4
+      '2949:31974', // Values — 5
       '2949:31728', // Who is she — 1
       '2949:31743', // Who is she — 2
-      '2949:31890', // Values — Life-time value
       '2949:31170', // Design Principles
       '2949:31199', // Tone of Voice
       '2949:31612', // Logo — naming & concept
