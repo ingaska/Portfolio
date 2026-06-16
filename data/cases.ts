@@ -340,7 +340,6 @@ export const cases: Case[] = [
       '2949:30888', // Colors — primary
       '2949:31021', // Colors — secondary
       '2949:31400', // Fonts
-      '2949:31506', // Fonts — detail
       '2949:31634', // Brand Elements — Graphics
       '2949:31757', // Brand Elements — Graphics composition
       '2949:30250', // Illustrations
