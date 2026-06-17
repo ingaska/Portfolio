@@ -333,7 +333,12 @@ export const cases: Case[] = [
       '2949:31212', // Design Principles — 2
       '2949:31380', // Design Principles — 3
       '2949:31390', // Design Principles — 4
-      '2949:31199', // Tone of Voice
+      '2949:31199', // Tone of Voice — intro
+      '2949:31281', // Tone of Voice — definition
+      '2949:31316', // Tone of Voice — UX influence
+      '2949:31324', // Tone of Voice — 3
+      '2949:31332', // Tone of Voice — 4
+      '2949:31349', // Tone of Voice — Do's
       '2949:31612', // Logo — naming & concept
       '2949:31623', // Logo — usage on backgrounds
       '2949:31136', // Colors — palette overview
