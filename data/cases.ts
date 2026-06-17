@@ -339,6 +339,7 @@ export const cases: Case[] = [
       '2949:31324', // Tone of Voice — 3
       '2949:31332', // Tone of Voice — 4
       '2949:31349', // Tone of Voice — Do's
+      '2949:31357', // Tone of Voice — 6
       '2949:31612', // Logo — naming & concept
       '2949:31623', // Logo — usage on backgrounds
       '2949:31136', // Colors — palette overview
