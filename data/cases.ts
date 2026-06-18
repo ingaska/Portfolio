@@ -360,6 +360,8 @@ export const cases: Case[] = [
       '2949:29636', // Infographic — 6
       '2949:29649', // Infographic — 7
       '2949:29662', // Infographic — 8
+      '2949:29774', // Infographic — 9
+      '2949:30161', // Infographic — 10
       '2949:28342', // In use — Text and Picture
       '2949:28327', // In use — Photo guidelines
     ],
