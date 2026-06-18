@@ -352,6 +352,7 @@ export const cases: Case[] = [
       '2949:30243', // Photos — People
       '2949:30236', // Photos — 2
       '2949:30817', // Photos — Relationship and Pregnancy
+      '2949:30652', // Infographic
       '2949:28342', // In use — Text and Picture
       '2949:28327', // In use — Photo guidelines
     ],
