@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TradingView · Onboarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ---- Design tokens (from Figma file) ---- */
+  --bg:#131722;
+  --on-surface:#131722;
+  --on-surface-2:#787b86;   /* muted */
+  --on-surface-3:#b2b5be;
+  --surface-light:#f0f3fa;  /* pressed selector bg */
+  --separator-light:#e0e3eb;
+  --separator-dark:#2a2e39;
+  --primary:#2962ff;
+  --on-primary:#ffffff;
+  --buy:#089981;
+  --sell:#f23645;
+  --blue-glow:#2388ff;
+  --white:#ffffff;
+  /* typography */
+  --display:700 40px/52px 'Inter';
+  --headline:700 28px/36px 'Inter';
+  --title1:600 22px/28px 'Inter';
+  --label:600 17px/22px 'Inter';
+  --body:400 15px/20px 'Inter';
+  --caption:400 12px/16px 'Inter';
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  font-family:'Inter',-apple-system,'SF Pro Text',sans-serif;
+  background:radial-gradient(ellipse at 50% -10%,#1d2436 0%,#0a0d14 70%);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  overscroll-behavior:none;color:var(--white);
+}
+
+/* ---- DEVICE ---- */
+.device{
+  width:393px;height:852px;border-radius:46px;overflow:hidden;position:relative;
+  background:var(--bg);flex-shrink:0;
+  box-shadow:0 0 0 10px #1a1d24,0 0 0 11px #2a2e39,0 40px 120px rgba(0,0,0,.8);
+}
+.viewport{position:absolute;inset:0;overflow:hidden;}
+
+/* ---- SCREEN ---- */
+.screen{
+  position:absolute;inset:0;background:var(--bg);overflow:hidden;
+  transform:translateX(100%);transition:transform .4s cubic-bezier(.32,.72,0,1);
+  will-change:transform;
+}
+.screen.active{transform:translateX(0);}
+.screen.prev{transform:translateX(-26%);}
+/* shared blue glow background */
+.screen::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(120% 70% at 90% 100%, rgba(35,136,255,.16) 0%, transparent 55%),
+    radial-gradient(90% 50% at 10% 0%, rgba(35,136,255,.10) 0%, transparent 60%);
+}
+.screen.dark-screen{background:#000;}
+.screen.dark-screen::before{display:none;}
+.screen>*{position:relative;z-index:1;}
+
+/* ---- STATUS BAR ---- */
+.statusbar{height:54px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 24px 8px;position:relative;}
+.statusbar .time{font:600 17px/20px 'Inter';letter-spacing:.2px;color:#fff;min-width:54px;}
+.statusbar .island{position:absolute;left:50%;top:11px;transform:translateX(-50%);width:125px;height:36px;background:#000;border-radius:20px;}
+.statusbar .sysicons{display:flex;align-items:center;gap:7px;}
+
+/* ---- NAV BAR ---- */
+.navbar{display:flex;align-items:center;gap:16px;padding:28px 16px 0;}
+.backbtn{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.35);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;background:transparent;}
+.backbtn:active{opacity:.6;}
+.progress{flex:1;position:relative;display:flex;align-items:center;}
+.progress .steplabel{position:absolute;bottom:calc(100% + 5px);left:0;font:var(--caption);white-space:nowrap;}
+.progress .steplabel b{color:#fff;font-weight:400;}
+.progress .steplabel span{color:var(--on-surface-2);}
+.track{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.16);overflow:hidden;}
+.q4-scroll{scrollbar-width:none;padding-bottom:12px;}
+.q4-scroll::-webkit-scrollbar{display:none;}
+.track .fill{height:100%;background:#fff;border-radius:2px;transition:width .4s ease;}
+.skip{font:400 15px/20px 'Inter';color:var(--on-surface-2);cursor:pointer;flex-shrink:0;}
+.skip:active{opacity:.6;}
+
+/* ---- VISUAL STRIP ---- */
+.visual{position:absolute;left:0;width:526px;pointer-events:none;}
+
+/* ---- TYPO ---- */
+.title{font:var(--headline);color:#fff;letter-spacing:-.2px;}
+.h-display{font:var(--display);letter-spacing:-.5px;}
+.subtle{color:var(--on-surface-2);}
+
+/* ---- SELECTOR (single) ---- */
+.selectors{display:flex;flex-direction:column;gap:12px;padding:0 24px;}
+.selector{
+  height:60px;flex-shrink:0;border-radius:20px;border:1px solid var(--separator-dark);
+  background:transparent;display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;cursor:pointer;transition:background .15s,border-color .15s;
+}
+.selector .lbl{font:var(--label);color:#fff;}
+.selector .chev{width:20px;height:20px;color:#fff;flex-shrink:0;}
+.selector.selected{background:var(--surface-light);border-color:var(--separator-light);}
+.selector.selected .lbl{color:var(--on-surface);}
+.selector.selected .chev{color:var(--on-surface);}
+/* multi checkbox */
+.selector .chk{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--on-surface-2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.selector .chk svg{display:none;}
+.selector.selected .chk{background:#131722;border-color:#131722;}
+.selector.selected .chk svg{display:block;}
+
+/* ---- BUTTONS ---- */
+.btn{height:56px;border-radius:16px;border:none;width:100%;cursor:pointer;
+  font:var(--label);display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .15s,transform .1s;}
+.btn:active{transform:scale(.99);}
+.btn-primary{background:var(--primary);color:#fff;}
+.btn-primary:disabled{background:#d1d4dc;color:#8a8d96;cursor:default;}
+.btn-ghost{background:transparent;color:#fff;font:400 12px/18px 'Inter';height:auto;padding:8px;}
+.btn-secondary{background:transparent;border:1px solid var(--separator-dark);color:#fff;}
+.bottombar{position:absolute;left:0;right:0;bottom:0;padding:12px 16px 28px;display:flex;flex-direction:column;gap:6px;}
+
+/* ---- WATCHLIST ---- */
+.searchbar{margin:0 16px;height:48px;border-radius:24px;border:1px solid var(--separator-dark);
+  display:flex;align-items:center;gap:10px;padding:0 16px;color:var(--on-surface-2);font:400 15px/20px 'Inter';}
+.filters{display:flex;gap:10px;padding:0 16px;overflow-x:auto;scrollbar-width:none;}
+.filters::-webkit-scrollbar{display:none;}
+.chip{flex-shrink:0;padding:9px 18px;border-radius:20px;border:1px solid var(--separator-dark);
+  background:transparent;color:#fff;font:500 14px/18px 'Inter';cursor:pointer;white-space:nowrap;}
+.chip.active{background:#fff;color:#131722;border-color:#fff;}
+.stockgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:16px;}
+.stockcard{border:1px solid var(--separator-dark);border-radius:16px;padding:14px;cursor:pointer;
+  background:rgba(255,255,255,.015);transition:border-color .15s;}
+.stockcard.selected{border-color:#fff;border-width:1.5px;}
+.stockcard .avatar{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font:700 13px/16px 'Inter';color:#fff;margin-bottom:10px;}
+.stockcard .tk{font:700 16px/20px 'Inter';color:#fff;}
+.stockcard .nm{font:var(--caption);color:var(--on-surface-2);margin-bottom:10px;}
+.stockcard .divider{height:1px;background:var(--separator-dark);margin:0 0 10px;}
+.stockcard .pr{font:600 15px/20px 'Inter';color:#fff;}
+.stockcard .chg{font:500 12px/16px 'Inter';margin-top:2px;}
+.selcount{text-align:center;color:var(--on-surface-2);font:var(--body);margin-bottom:12px;}
+
+/* ---- NOTIFICATION ---- */
+.notif-card{margin:0 16px;background:rgba(255,255,255,.04);border-radius:24px;padding:14px;display:flex;flex-direction:column;gap:14px;}
+/* iOS permission alert overlay */
+.ios-alert{position:absolute;inset:0;z-index:40;display:none;align-items:flex-start;justify-content:center;padding-top:262px;background:rgba(0,0,0,.25);}
+.ios-alert.show{display:flex;animation:alertFade .25s ease;}
+@keyframes alertFade{from{opacity:0;}to{opacity:1;}}
+.ios-alert-box{width:300px;border-radius:22px;overflow:hidden;padding:20px 18px 16px;
+  background:rgba(232,232,237,.62);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);animation:alertPop .3s cubic-bezier(.2,1.1,.5,1);}
+@keyframes alertPop{from{transform:scale(.85);opacity:0;}to{transform:scale(1);opacity:1;}}
+.ios-alert-text{margin-bottom:18px;}
+.ios-alert-text h4{font:600 16px/21px 'Inter';color:#0a0a0c;margin-bottom:9px;}
+.ios-alert-text p{font:400 14px/19px 'Inter';color:#1c1c1f;}
+.ios-alert-btns{display:flex;gap:10px;}
+.ios-alert-btns button{flex:1;border:none;border-radius:15px;padding:11px;cursor:pointer;
+  background:rgba(255,255,255,.45);font:500 15px 'Inter';color:#0a0a0c;}
+.ios-alert-btns button:active{background:rgba(255,255,255,.65);}
+.alert{background:rgba(58,62,74,.55);backdrop-filter:blur(20px);border-radius:18px;overflow:hidden;}
+.alert .body{padding:20px 20px 16px;text-align:left;}
+.alert h4{font:600 15px/20px 'Inter';color:#fff;margin-bottom:8px;}
+.alert p{font:400 14px/19px 'Inter';color:rgba(255,255,255,.82);}
+.alert .row{display:flex;border-top:1px solid rgba(255,255,255,.16);}
+.alert .row button{flex:1;background:transparent;border:none;color:#fff;padding:13px;font:400 16px/20px 'Inter';cursor:pointer;}
+.alert .row button.bold{font-weight:600;}
+.alert .row button:first-child{border-right:1px solid rgba(255,255,255,.16);}
+.notif-preview{display:flex;gap:12px;align-items:flex-start;padding:14px;background:rgba(255,255,255,.04);border-radius:16px;}
+.notif-preview .ic{width:38px;height:38px;border-radius:9px;background:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.notif-preview .tx h5{font:600 14px/18px 'Inter';color:#fff;display:flex;justify-content:space-between;}
+.notif-preview .tx h5 span{color:var(--on-surface-2);font-weight:400;font-size:12px;}
+.notif-preview .tx p{font:400 13px/18px 'Inter';color:var(--on-surface-3);margin-top:2px;}
+
+/* ---- CHART (task) ---- */
+.chart-header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 0;}
+.chart-sym{display:flex;align-items:center;gap:10px;}
+.chart-sym .dot{width:24px;height:24px;border-radius:50%;background:#fff;}
+.chart-sym .nm{font:500 17px/22px 'Inter';color:#fff;}
+.chart-price{padding:6px 16px 0;display:flex;align-items:baseline;gap:12px;}
+.chart-price .p{font:500 26px/30px 'JetBrains Mono';color:var(--buy);}
+.chart-price .c{font:500 15px/20px 'JetBrains Mono';color:var(--buy);}
+/* trendline task */
+.chart-wrap{position:relative;margin-top:8px;}
+.chart-svg{display:block;width:100%;cursor:pointer;user-select:none;}
+.vol-svg{display:block;width:100%;}
+.coach{position:absolute;background:#fff;color:#0d0f16;border-radius:10px;padding:11px 14px;
+  font:500 13px/1.45 'Inter';max-width:240px;box-shadow:0 8px 24px rgba(0,0,0,.45);z-index:20;
+  opacity:0;transform:translateY(-6px);transition:all .3s ease;pointer-events:none;}
+.coach.show{opacity:1;transform:translateY(0);}
+.coach::after{content:"";position:absolute;left:24px;bottom:-7px;width:14px;height:14px;background:#fff;transform:rotate(45deg);box-shadow:2px 2px 4px rgba(0,0,0,.15);}
+.coach b{color:var(--buy);}
+.coach .caveat{display:block;color:var(--on-surface-2);font:400 11px/1.4 'Inter';margin-top:5px;}
+.toast{position:absolute;top:8px;left:50%;transform:translateX(-50%) translateY(-8px);
+  background:rgba(20,20,22,.95);border:1px solid var(--separator-dark);color:#fff;font:400 12px 'Inter';
+  padding:8px 14px;border-radius:20px;opacity:0;transition:all .25s ease;z-index:25;white-space:nowrap;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.badge-unlock{position:absolute;top:8px;left:50%;transform:translateX(-50%) scale(.85);
+  background:#F7A823;color:#1a1200;font:700 11px 'JetBrains Mono';padding:6px 12px;border-radius:16px;opacity:0;transition:all .35s ease;z-index:25;}
+.badge-unlock.show{opacity:1;transform:translateX(-50%) scale(1);}
+.cta-float{position:absolute;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--primary);color:#fff;font:700 14px 'Inter';border:none;padding:13px 24px;border-radius:24px;
+  box-shadow:0 8px 20px rgba(41,98,255,.4);opacity:0;pointer-events:none;transition:all .35s ease;z-index:30;cursor:pointer;}
+.cta-float.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto;}
+.toolbar-row{display:flex;align-items:center;gap:14px;padding:12px 16px;border-top:1px solid #1a1a1a;}
+.toolbar-row .tf-tag{font:600 15px 'Inter';color:#fff;}
+.toolbar-row .interval-tag{font:400 13px 'Inter';color:var(--on-surface-2);}
+.toolbar-row .tool-icons{display:flex;gap:18px;margin-left:auto;color:var(--on-surface-2);}
+.toolbar-row .tool-icons .active{color:#fff;}
+.point-core{animation:popIn .25s ease-out;transform-origin:center;}
+@keyframes popIn{from{transform:scale(0);}to{transform:scale(1);}}
+.point-ping{animation:pingExpand .6s ease-out forwards;transform-origin:center;}
+@keyframes pingExpand{from{r:4.5;opacity:.8;}to{r:14;opacity:0;}}
+.coachmark{position:absolute;left:16px;top:230px;width:270px;background:#fff;color:#131722;border-radius:18px;padding:18px 20px;font:400 16px/22px 'Inter';z-index:5;box-shadow:0 10px 40px rgba(0,0,0,.4);}
+.coachmark b{color:var(--buy);}
+.tap-target{position:absolute;width:46px;height:46px;border-radius:50%;border:2px solid var(--primary);
+  background:rgba(41,98,255,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:6;
+  animation:pulse 1.6s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(41,98,255,.4);}50%{box-shadow:0 0 0 10px rgba(41,98,255,0);}}
+.tap-target.done{border-color:var(--buy);background:rgba(8,153,129,.2);animation:none;}
+.success{position:absolute;inset:0;background:rgba(0,0,0,.88);display:none;flex-direction:column;align-items:center;justify-content:center;padding:0 40px;text-align:center;z-index:20;}
+.success.show{display:flex;}
+.success .circle{width:88px;height:88px;border-radius:50%;background:rgba(8,153,129,.16);display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
+.success h3{font:var(--headline);color:#fff;margin-bottom:10px;}
+.success p{font:var(--body);color:var(--on-surface-3);margin-bottom:32px;}
+
+/* achievement chips */
+.ach-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:0 16px;}
+.ach{display:flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid var(--separator-dark);border-radius:20px;font:500 13px/16px 'Inter';color:var(--on-surface-3);}
+.ach svg{color:var(--buy);}
+/* social-proof animated chart */
+.sp-chart{width:358px;margin:20px auto 0;background:#161a26;border-radius:18px;overflow:hidden;}
+.sp-chart svg{display:block;width:100%;height:auto;}
+.sp-dot{opacity:0;}
+#spTip{opacity:0;}
+
+/* landing placeholder */
+.landing{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:48px;}
+.landing div{font:var(--headline);color:#fff;}
+
+.divider-h{height:1px;background:var(--separator-dark);margin:14px 0;}
+</style>
+</head>
+<body>
+<div class="device">
+ <div class="viewport">
+
+  <!-- ════════ WELCOME ════════ -->
+  <section class="screen active" id="s-welcome" style="background:#0c0f16;">
+    <div style="position:absolute;inset:0;z-index:0;background:url('assets/welcome-hero.png') center top/cover no-repeat;"></div>
+    <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(19,23,34,.15) 0%,rgba(19,23,34,0) 32%,rgba(19,23,34,.7) 62%,#131722 86%);"></div>
+    <div style="position:relative;z-index:2;height:100%;display:flex;flex-direction:column;">
+      <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons" id="sysi"></div></div>
+      <div style="padding:10px 24px 0;">
+        <img src="assets/tv-logo.svg" alt="TradingView" style="height:24px;width:auto;display:block;">
+      </div>
+      <div style="margin-top:auto;padding:0 16px 24px;">
+        <div style="padding:0 8px;">
+          <div style="font:700 24px/30px 'Inter';color:#fff;margin-bottom:6px;">#1 Charting app</div>
+          <div class="h-display" style="color:#fff;margin-bottom:24px;">Trusted by<br>100M+ traders<br>worldwide</div>
+        </div>
+        <button class="btn btn-primary" onclick="go('s-q1')">Continue</button>
+        <button class="btn btn-ghost" style="margin-top:8px;" onclick="go('s-q1')">I already have an account</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ Q1 ════════ -->
+  <section class="screen" id="s-q1">
+    <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons"></div></div>
+    <div class="navbar">
+      <button class="backbtn" onclick="back()">__CHEV_LEFT__</button>
+      <div class="progress"><div class="steplabel"><b>1</b> <span>/ 6</span></div><div class="track"><div class="fill" style="width:16.6%"></div></div></div>
+      <span class="skip" onclick="go('s-q5')">Skip</span>
+    </div>
+    <img class="visual" src="assets/visual-q1.png" style="top:126px;">
+    <h1 class="title" style="position:absolute;top:310px;left:24px;right:24px;">What brings you to<br>TradingView?</h1>
+    <div class="selectors" style="position:absolute;top:438px;left:0;right:0;">
+      __SEL__Just learning|s-q2__
+      __SEL__Find ideas to follow|s-q2__
+      __SEL__Track a few stocks|s-q2__
+      __SEL__Trade actively|s-q2__
+    </div>
+  </section>
+
+  <!-- ════════ Q2 ════════ -->
+  <section class="screen" id="s-q2">
+    <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons"></div></div>
+    <div class="navbar">
+      <button class="backbtn" onclick="back()">__CHEV_LEFT__</button>
+      <div class="progress"><div class="steplabel"><b>2</b> <span>/ 6</span></div><div class="track"><div class="fill" style="width:33.3%"></div></div></div>
+      <span class="skip" onclick="go('s-q5')">Skip</span>
+    </div>
+    <img class="visual" src="assets/visual-q2.png" style="top:126px;">
+    <h1 class="title" style="position:absolute;top:310px;left:24px;right:24px;">How long you’ve been<br>trading?</h1>
+    <div class="selectors" style="position:absolute;top:438px;left:0;right:0;">
+      __SEL__Less than 6 months|s-q3__
+      __SEL__6-12 months|s-q3__
+      __SEL__1-2 years|s-q3__
+      __SEL__Over 2 years|s-q3__
+    </div>
+  </section>
+
+  <!-- ════════ Q3 ════════ -->
+  <section class="screen" id="s-q3">
+    <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons"></div></div>
+    <div class="navbar">
+      <button class="backbtn" onclick="back()">__CHEV_LEFT__</button>
+      <div class="progress"><div class="steplabel"><b>3</b> <span>/ 6</span></div><div class="track"><div class="fill" style="width:50%"></div></div></div>
+      <span class="skip" onclick="go('s-q5')">Skip</span>
+    </div>
+    <img class="visual" src="assets/visual-q3.png" style="top:126px;">
+    <h1 class="title" style="position:absolute;top:310px;left:24px;right:24px;">Do you already have a<br>brokerage account?</h1>
+    <div class="selectors" style="position:absolute;top:438px;left:0;right:0;">
+      __SEL__Yes|s-q4__
+      __SEL__No|s-q4__
+    </div>
+  </section>
+
+  <!-- ════════ Q4 (multi) ════════ -->
+  <section class="screen" id="s-q4">
+    <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons"></div></div>
+    <div class="navbar">
+      <button class="backbtn" onclick="back()">__CHEV_LEFT__</button>
+      <div class="progress"><div class="steplabel"><b>4</b> <span>/ 6</span></div><div class="track"><div class="fill" style="width:66.6%"></div></div></div>
+      <span class="skip" onclick="go('s-q5')">Skip</span>
+    </div>
+    <img class="visual" src="assets/visual-q4.png" style="top:126px;">
+    <h1 class="title" style="position:absolute;top:310px;left:24px;right:24px;">Which assets do you<br>want to follow?</h1>
+    <div class="selectors q4-scroll" id="q4sel" style="position:absolute;top:438px;left:0;right:0;bottom:96px;overflow-y:auto;">
+      __MSEL__Stock|0__
+      __MSEL__Crypto|0__
+      __MSEL__Futures|0__
+      __MSEL__Forex|0__
+      __MSEL__ETFs|0__
+    </div>
+    <div class="bottombar" style="background:linear-gradient(180deg,rgba(19,23,34,0),#131722 28%);padding-top:20px;"><button class="btn btn-primary" id="q4-cta" disabled onclick="go('s-q5')">Continue</button></div>
+  </section>
+
+  <!-- ════════ Q5 WATCHLIST ════════ -->
+  <section class="screen" id="s-q5">
+    <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons"></div></div>
+    <div class="navbar">
+      <button class="backbtn" onclick="back()">__CHEV_LEFT__</button>
+      <div class="progress"><div class="steplabel"><b>5</b> <span>/ 6</span></div><div class="track"><div class="fill" style="width:83%"></div></div></div>
+      <span class="skip" onclick="go('s-notif')">Skip</span>
+    </div>
+    <h1 class="title" style="padding:0 20px;margin:8px 0 18px;">Build your watchlist</h1>
+    <div class="searchbar">__SEARCH_IC__<span>Search symbols...</span></div>
+    <div class="filters" style="margin-top:16px;">
+      <button class="chip" onclick="this.classList.toggle('active')">Stocks</button>
+      <button class="chip" onclick="this.classList.toggle('active')">Crypto</button>
+      <button class="chip" onclick="this.classList.toggle('active')">Futures</button>
+      <button class="chip" onclick="this.classList.toggle('active')">Forex</button>
+      <button class="chip" onclick="this.classList.toggle('active')">Bonds</button>
+    </div>
+    <div class="stockgrid" id="stockgrid"></div>
+    <div class="bottombar" style="background:linear-gradient(180deg,rgba(19,23,34,0),#131722 30%);">
+      <div class="selcount" id="selcount">0 selected</div>
+      <button class="btn btn-primary" id="wl-cta" disabled onclick="go('s-notif')">Choose at list 3</button>
+    </div>
+  </section>
+
+  <!-- ════════ NOTIFICATION · PERMISSION (122:84) ════════ -->
+  <section class="screen" id="s-notif">
+    <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons"></div></div>
+    <div style="padding:26px 24px 0;">
+      <h1 class="title">We'll tell you the<br>moment your alert hits.</h1>
+      <p class="subtle" style="font:400 17px/24px 'Inter';margin-top:16px;">Set a price once. We'll notify you the instant it's true — so you don't have to <b style="color:#fff;font-weight:600;">keep checking</b>.</p>
+    </div>
+    <img src="assets/lockscreen-122.png" alt="Lock screen alert" style="display:block;width:350px;margin:24px auto 0;">
+    <div class="bottombar" id="notifBottom">
+      <button class="btn btn-primary" onclick="showNotifAlert()">Continue</button>
+      <button class="btn" style="background:transparent;color:var(--on-surface-2);" onclick="go('s-invite')">Not now</button>
+    </div>
+    <!-- iOS permission alert (124:755) -->
+    <div class="ios-alert" id="notifAlert">
+      <div class="ios-alert-box">
+        <div class="ios-alert-text">
+          <h4>Trading View would like to send you notifications.</h4>
+          <p>Notifications may include alerts, sounds and icon badges. These can be configured in Settings.</p>
+        </div>
+        <div class="ios-alert-btns">
+          <button onclick="go('s-invite')">Don't Allow</button>
+          <button onclick="go('s-invite')">Allow</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TASK INVITE ════════ -->
+  <section class="screen" id="s-invite">
+    <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons"></div></div>
+    <div class="navbar">
+      <button class="backbtn" onclick="back()">__CHEV_LEFT__</button>
+      <div class="progress"><div class="steplabel"><b>1</b> <span>/ 5</span></div><div class="track"><div class="fill" style="width:18%"></div></div></div>
+      <span class="skip" onclick="go('s-selling')">Skip</span>
+    </div>
+    <img class="visual" src="assets/visual-task.png" style="top:126px;">
+    <h1 class="h-display" style="font-size:40px;line-height:48px;position:absolute;top:323px;left:24px;right:24px;">Let's draw your<br>first trendline</h1>
+    <p class="subtle" style="font:400 17px/24px 'Inter';position:absolute;top:440px;left:24px;right:24px;">This is easy. In just two taps.</p>
+    <div class="bottombar">
+      <button class="btn btn-primary" onclick="go('s-task')">Let's go</button>
+      <button class="btn btn-ghost" style="font:400 15px/20px 'Inter';color:var(--on-surface-2);" onclick="go('s-selling')">Skip</button>
+    </div>
+  </section>
+
+  <!-- ════════ TASK SPOT THE TREND ════════ -->
+  <section class="screen dark-screen" id="s-task">
+    <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons"></div></div>
+    <div class="chart-header">
+      <div class="chart-sym"><div class="dot"></div><span class="nm">Apple Inc</span></div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <div style="width:48px;height:28px;border-radius:14px;background:#1e222d;position:relative;"><div style="position:absolute;right:3px;top:3px;width:22px;height:22px;border-radius:50%;background:var(--buy);"></div></div>
+        <div style="width:36px;height:28px;border-radius:8px;background:rgba(242,54,69,.18);display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v6l3 2" stroke="#f23645" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="7" r="5.5" stroke="#f23645" stroke-width="1.5"/></svg></div>
+      </div>
+    </div>
+    <div class="chart-price"><span class="p" id="headerPrice">283.00</span><span class="c" id="headerChg">+0.70 (+0.24%)</span></div>
+    <div class="chart-wrap" id="chartWrap">
+      <svg class="chart-svg" id="priceChart" viewBox="0 0 380 380"></svg>
+      <svg class="vol-svg" id="volChart" viewBox="0 0 380 70"></svg>
+      <div class="coach" id="coach1" style="top:24px;left:18px;">Can you spot where buyers stepped in — <b>twice</b>? Tap both dips.</div>
+      <div class="coach" id="coach2" style="top:170px;left:60px;"><b>You called it.</b> Price bounced right where buyers stepped in — twice.<span class="caveat">One real example — markets don't always cooperate this nicely.</span></div>
+      <div class="toast" id="hintToast">⚠ Try tapping right at the bottom of a wick</div>
+      <div class="badge-unlock" id="unlockBadge">🔓 TRENDLINE TOOL UNLOCKED</div>
+    </div>
+    <div class="bottombar" id="taskCta" style="opacity:0;pointer-events:none;transition:opacity .4s ease;background:linear-gradient(180deg,rgba(0,0,0,0),#000 45%);z-index:30;">
+      <button class="btn btn-primary" onclick="go('s-selling')">Continue</button>
+    </div>
+    <div class="toolbar-row">
+      <span class="tf-tag">AAPL</span><span class="interval-tag">1D</span>
+      <div class="tool-icons">
+        <span class="active"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l4-4 4 4 4-8 6 6"/></svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ SELLING POINTS ════════ -->
+  <section class="screen" id="s-selling">
+    <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons"></div></div>
+    <h1 class="title" style="text-align:center;padding:14px 20px 0;font-size:24px;line-height:31px;"><span style="color:var(--buy);">52%</span> of people on your path have placed their first real trade by Week&nbsp;3.</h1>
+    <div class="sp-chart" id="spChart">
+      <svg viewBox="0 0 358 250" width="358" height="250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="spAreaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2962ff" stop-opacity="0.35"/>
+            <stop offset="1" stop-color="#2962ff" stop-opacity="0.02"/>
+          </linearGradient>
+        </defs>
+        <rect x="238" y="0" width="120" height="222" fill="#26a69a" opacity="0.07"/>
+        <path id="spArea" d="M42,170 C92,170 90,128 140,128 C190,128 188,85 238,85 C282,85 295,62 325,62 L325,205 L42,205 Z" fill="url(#spAreaGrad)" opacity="0"/>
+        <line id="spDash" x1="238" y1="72" x2="238" y2="205" stroke="#26a69a" stroke-width="1.5" stroke-dasharray="4,4" opacity="0"/>
+        <path id="spLine" d="M42,170 C92,170 90,128 140,128 C190,128 188,85 238,85 C282,85 295,62 325,62" fill="none" stroke="#4d9fff" stroke-width="3" stroke-linecap="round"/>
+        <g class="sp-dot">
+          <circle cx="42" cy="170" r="9" fill="#4d9fff" opacity="0.25"/>
+          <circle cx="42" cy="170" r="5" fill="#fff" stroke="#4d9fff" stroke-width="2.5"/>
+          <text x="30" y="193" font-size="13" fill="#4d9fff" font-weight="600" font-family="Inter">17%</text>
+        </g>
+        <g class="sp-dot">
+          <circle cx="140" cy="128" r="9" fill="#4d9fff" opacity="0.25"/>
+          <circle cx="140" cy="128" r="5" fill="#fff" stroke="#4d9fff" stroke-width="2.5"/>
+          <text x="150" y="150" font-size="13" fill="#4d9fff" font-weight="600" font-family="Inter">33%</text>
+        </g>
+        <g class="sp-dot">
+          <circle cx="238" cy="85" r="9" fill="#26a69a" opacity="0.3"/>
+          <circle cx="238" cy="85" r="5" fill="#fff" stroke="#26a69a" stroke-width="2.5"/>
+          <text x="250" y="108" font-size="13" fill="#26a69a" font-weight="600" font-family="Inter">52%</text>
+        </g>
+        <g class="sp-dot">
+          <circle cx="325" cy="62" r="11" fill="#26a69a" opacity="0.25"/>
+          <circle cx="325" cy="62" r="7" fill="#fff" stroke="#26a69a" stroke-width="2.5"/>
+        </g>
+        <g id="spTip" opacity="0">
+          <rect x="173" y="30" width="130" height="30" rx="15" fill="#2bb98a"/>
+          <text x="238" y="50" text-anchor="middle" font-size="14" fill="#fff" font-weight="600" font-family="Inter">First real trade</text>
+          <path d="M232,60 L244,60 L238,68 Z" fill="#2bb98a"/>
+        </g>
+        <text x="42" y="234" text-anchor="middle" font-size="10" fill="#5a6072" letter-spacing="1" font-family="'JetBrains Mono',monospace">WEEK 1</text>
+        <text x="140" y="234" text-anchor="middle" font-size="10" fill="#5a6072" letter-spacing="1" font-family="'JetBrains Mono',monospace">WEEK 2</text>
+        <text x="238" y="234" text-anchor="middle" font-size="10" fill="#5a6072" letter-spacing="1" font-family="'JetBrains Mono',monospace">WEEK3</text>
+        <text x="325" y="234" text-anchor="middle" font-size="10" fill="#5a6072" letter-spacing="1" font-family="'JetBrains Mono',monospace">WEEK4</text>
+      </svg>
+    </div>
+    <div class="ach-row" style="margin-top:18px;">
+      <div class="ach">__CHECK__ Read a chart</div>
+      <div class="ach">__CHECK__ Set an alert</div>
+      <div class="ach">__CHECK__ Traded</div>
+    </div>
+    <p class="subtle" style="font:400 16px/22px 'Inter';padding:18px 24px 0;">This is the <b style="color:#fff;font-weight:600;">typical pace</b> for people with your goal and experience level — not a promise about your own timeline. Some people get there in days. Others take longer, or stick with paper trading altogether. Both are completely normal.</p>
+    <p style="font:400 12px/17px 'Inter';color:#4a4e5a;padding:14px 24px 0;">Based on completion data from users with a similar goal and experience level. Reflects typical pace, not a personal prediction or performance forecast.</p>
+    <div class="bottombar"><button class="btn btn-primary" onclick="go('s-signup')">Continue</button></div>
+  </section>
+
+  <!-- ════════ SIGN UP ════════ -->
+  <section class="screen" id="s-signup">
+    <div class="statusbar"><span class="time">9:41</span><div class="island"></div><div class="sysicons"></div></div>
+    <div style="display:flex;justify-content:flex-end;padding:22px 20px 0;"><span class="skip" onclick="go('s-landing')">Skip</span></div>
+    <img class="visual" src="assets/visual-signup.png" style="top:126px;">
+    <h1 class="title" style="position:absolute;top:323px;left:24px;right:24px;">Create your<br>Trading View account<br>to save your progress</h1>
+    <div class="bottombar" style="gap:12px;">
+      <button class="btn btn-secondary" onclick="go('s-landing')">__APPLE__ Continue with Apple</button>
+      <button class="btn btn-secondary" onclick="go('s-landing')">__GOOGLE__ Continue with Google</button>
+      <button class="btn btn-secondary" onclick="go('s-landing')">__MAIL__ Continue with Email</button>
+      <button class="btn btn-ghost" style="font:400 13px/18px 'Inter';color:var(--on-surface-2);" onclick="go('s-landing')">I already have an account</button>
+    </div>
+  </section>
+
+  <!-- ════════ LANDING ════════ -->
+  <section class="screen" id="s-landing">
+    <div class="landing">
+      <div>App</div><div>or</div><div>Payment</div>
+      <button class="btn btn-primary" style="width:200px;position:absolute;bottom:40px;" onclick="go('s-welcome')">Restart</button>
+    </div>
+  </section>
+
+ </div>
+</div>
+
+<script>
+// ---- inline svg snippets ----
+const CHEV_LEFT='<svg width="9" height="15" viewBox="0 0 9 15" fill="none"><path d="M8 1L1.5 7.5L8 14" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CHEV_RIGHT='<svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M7.5 4L13.5 10L7.5 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CHECK_CIRCLE='<svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5L4.5 8.5L12 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const PLUS='<svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 4v12M4 10h12" stroke="#2962ff" stroke-width="2" stroke-linecap="round"/></svg>';
+const CHECK='<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5L5.5 11L12 3" stroke="#089981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const SEARCH_IC='<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#787b86" stroke-width="1.6"/><line x1="12.5" y1="12.5" x2="16" y2="16" stroke="#787b86" stroke-width="1.6" stroke-linecap="round"/></svg>';
+const APPLE='<svg width="18" height="20" viewBox="0 0 18 20" fill="#fff"><path d="M14.6 10.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.15-2.8.85-3.5.85-.7 0-1.85-.83-3-.81-1.55.02-3 .9-3.8 2.3-1.62 2.8-.42 7 1.16 9.3.77 1.13 1.7 2.4 2.9 2.35 1.16-.05 1.6-.75 3-.75s1.8.75 3 .73c1.24-.02 2.02-1.15 2.78-2.28.87-1.3 1.23-2.57 1.25-2.63-.03-.01-2.4-.92-2.42-3.64zM12.3 3.8c.64-.78 1.07-1.86.95-2.94-.92.04-2.03.61-2.69 1.39-.59.69-1.11 1.79-.97 2.85 1.03.08 2.07-.52 2.71-1.3z"/></svg>';
+const GOOGLE='<svg width="18" height="18" viewBox="0 0 18 18"><path d="M17.6 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 01-1.8 2.72v2.26h2.9c1.7-1.57 2.68-3.88 2.68-6.62z" fill="#4285F4"/><path d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.94v2.33A9 9 0 009 18z" fill="#34A853"/><path d="M3.95 10.7a5.4 5.4 0 010-3.42V4.96H.94a9 9 0 000 8.08l3.01-2.34z" fill="#FBBC05"/><path d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 00.94 4.96l3.01 2.33C4.66 5.16 6.65 3.58 9 3.58z" fill="#EA4335"/></svg>';
+const MAIL='<svg width="18" height="16" viewBox="0 0 18 16" fill="none"><rect x="1" y="2" width="16" height="12" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M2 4l7 5 7-5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>';
+const SYSICONS='<svg width="18" height="12" viewBox="0 0 18 12" fill="#fff"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="5" width="3" height="7" rx="1"/><rect x="9" y="2.5" width="3" height="9.5" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/></svg><svg width="17" height="12" viewBox="0 0 17 12" fill="#fff"><path d="M8.5 2.5C5.6 2.5 3 3.7 1.1 5.6l1.4 1.4C4 5.5 6.1 4.5 8.5 4.5s4.5 1 6 2.5l1.4-1.4C14 3.7 11.4 2.5 8.5 2.5z" opacity=".9"/><path d="M8.5 6.5c-1.4 0-2.7.6-3.6 1.5l1.4 1.4c.6-.6 1.4-.9 2.2-.9s1.6.3 2.2.9l1.4-1.4c-.9-.9-2.2-1.5-3.6-1.5z"/><circle cx="8.5" cy="11" r="1.4"/></svg><svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y="1" width="22" height="11" rx="3" stroke="#fff" stroke-opacity=".5"/><rect x="2" y="2.5" width="18" height="8" rx="1.5" fill="#fff"/><rect x="24" y="4.5" width="2" height="4" rx="1" fill="#fff" fill-opacity=".5"/></svg>';
+
+// ---- hydrate placeholders in markup ----
+document.querySelectorAll('.backbtn').forEach(b=>{ if(b.textContent.includes('__CHEV_LEFT__')) b.innerHTML=CHEV_LEFT; });
+document.body.innerHTML = document.body.innerHTML; // no-op guard
+function hydrate(){
+  document.querySelectorAll('.sysicons').forEach(e=>e.innerHTML=SYSICONS);
+}
+// Build selectors / multiselect by parsing the template tokens left in DOM text
+(function buildTemplates(){
+  // single selectors
+  document.querySelectorAll('.selectors').forEach(group=>{
+    const isMulti = group.id==='q4sel';
+    const raw = group.innerHTML;
+    const tokens = raw.split('\n').map(s=>s.trim()).filter(s=>s.startsWith('__SEL__')||s.startsWith('__MSEL__'));
+    group.innerHTML='';
+    tokens.forEach(tok=>{
+      if(tok.startsWith('__SEL__')){
+        const [label,target]=tok.replace('__SEL__','').replace(/__$/,'').split('|');
+        const el=document.createElement('button');
+        el.className='selector';
+        el.innerHTML=`<span class="lbl">${label}</span>${CHEV_RIGHT}`;
+        el.onclick=()=>selectSingle(el,target);
+        group.appendChild(el);
+      }else{
+        const [label,sel]=tok.replace('__MSEL__','').replace(/__$/,'').split('|');
+        const el=document.createElement('button');
+        el.className='selector'+(sel==='1'?' selected':'');
+        el.innerHTML=`<span class="lbl">${label}</span><span class="chk">${CHECK_CIRCLE}</span>`;
+        el.onclick=()=>{el.classList.toggle('selected');updateQ4Cta();};
+        group.appendChild(el);
+      }
+    });
+  });
+  // chevron-left buttons
+  document.querySelectorAll('.backbtn').forEach(b=>{b.innerHTML=CHEV_LEFT;});
+  // search icon
+  document.querySelectorAll('.searchbar').forEach(s=>{ s.innerHTML=s.innerHTML.replace('__SEARCH_IC__',SEARCH_IC); });
+  // tap target plus
+  document.querySelectorAll('.tap-target').forEach(t=>{ t.innerHTML=PLUS; });
+  // achievement checks
+  document.querySelectorAll('.ach').forEach(a=>{ a.innerHTML=a.innerHTML.replace('__CHECK__',CHECK); });
+  // signup buttons icons
+  document.querySelectorAll('.btn-secondary').forEach(b=>{
+    b.innerHTML=b.innerHTML.replace('__APPLE__',APPLE).replace('__GOOGLE__',GOOGLE).replace('__MAIL__',MAIL);
+  });
+  hydrate();
+})();
+
+function updateQ4Cta(){
+  const n=document.querySelectorAll('#q4sel .selector.selected').length;
+  document.getElementById('q4-cta').disabled = n===0;
+}
+// social-proof chart animation
+function initSelling(){
+  const line=document.getElementById('spLine');
+  const area=document.getElementById('spArea');
+  const dash=document.getElementById('spDash');
+  const tip=document.getElementById('spTip');
+  const dots=[...document.querySelectorAll('#spChart .sp-dot')];
+  const len=line.getTotalLength();
+  // reset
+  line.style.transition='none';line.style.strokeDasharray=len;line.style.strokeDashoffset=len;
+  area.style.transition='none';area.style.opacity=0;
+  dash.style.transition='none';dash.style.opacity=0;
+  tip.style.transition='none';tip.style.opacity=0;tip.style.transform='translateY(6px)';
+  dots.forEach(d=>{d.style.transition='none';d.style.opacity=0;d.style.transform='translateY(8px)';});
+  void line.getBoundingClientRect();
+  // animate
+  line.style.transition='stroke-dashoffset 1.3s cubic-bezier(.4,0,.2,1)';line.style.strokeDashoffset=0;
+  area.style.transition='opacity .9s ease .25s';area.style.opacity=1;
+  dots.forEach((d,i)=>setTimeout(()=>{
+    d.style.transition='opacity .35s ease,transform .4s cubic-bezier(.2,1.3,.5,1)';
+    d.style.opacity=1;d.style.transform='translateY(0)';
+  },350+i*300));
+  setTimeout(()=>{dash.style.transition='opacity .4s';dash.style.opacity=1;},350+2*300);
+  setTimeout(()=>{tip.style.transition='opacity .4s,transform .4s cubic-bezier(.2,1.3,.5,1)';tip.style.opacity=1;tip.style.transform='translateY(0)';},350+3*300);
+}
+// notification permission alert
+function showNotifAlert(){
+  document.getElementById('notifAlert').classList.add('show');
+  document.getElementById('notifBottom').style.visibility='hidden';
+}
+function resetNotif(){
+  document.getElementById('notifAlert').classList.remove('show');
+  document.getElementById('notifBottom').style.visibility='visible';
+}
+// carry Q4 asset choices into watchlist filter tabs
+function applyWatchlistFilters(){
+  const map={Stock:'Stocks',Crypto:'Crypto',Futures:'Futures',Forex:'Forex'};
+  const wanted=new Set([...document.querySelectorAll('#q4sel .selector.selected .lbl')]
+    .map(e=>map[e.textContent.trim()]||e.textContent.trim()));
+  if(wanted.size===0) wanted.add('Stocks'); // fallback if Q4 skipped
+  document.querySelectorAll('#s-q5 .filters .chip').forEach(c=>{
+    c.classList.toggle('active', wanted.has(c.textContent.trim()));
+  });
+}
+
+// ---- watchlist stocks ----
+const STOCKS=[
+  {sym:'AAPL',name:'Apple Inc.',price:'$295.13',chg:'+0.24%',up:1,c:'#455060',ic:'A'},
+  {sym:'TSLA',name:'Tesla, Inc.',price:'$219.56',chg:'-0.31%',up:0,c:'#9b1c1c',ic:'T'},
+  {sym:'NVDA',name:'NVIDIA Corp.',price:'$142.01',chg:'+1.87%',up:1,c:'#1b7a3d',ic:'N'},
+  {sym:'MSFT',name:'Microsoft',price:'$421.66',chg:'+0.55%',up:1,c:'#1565c0',ic:'M'},
+  {sym:'BTC',name:'Bitcoin',price:'$186.56',chg:'-0.18%',up:0,c:'#f7931a',ic:'BTC'},
+  {sym:'ETH',name:'Etherium',price:'$212.39',chg:'+0.33%',up:1,c:'#7b4cd8',ic:'ETH'},
+];
+(function(){
+  const g=document.getElementById('stockgrid');
+  STOCKS.forEach(s=>{
+    const card=document.createElement('div');
+    card.className='stockcard';
+    card.innerHTML=`<div class="avatar" style="background:${s.c};${s.ic.length>1?'font-size:10px;':''}">${s.ic}</div>
+      <div class="tk">${s.sym}</div><div class="nm">${s.name}</div><div class="divider"></div>
+      <div class="pr">${s.price}</div><div class="chg" style="color:${s.up?'var(--buy)':'var(--sell)'}">${s.chg}</div>`;
+    card.onclick=()=>toggleStock(card);
+    g.appendChild(card);
+  });
+})();
+function toggleStock(card){
+  card.classList.toggle('selected');
+  const n=document.querySelectorAll('#stockgrid .stockcard.selected').length;
+  document.getElementById('selcount').textContent=n+' selected';
+  const cta=document.getElementById('wl-cta');
+  if(n>=1){cta.disabled=false;cta.textContent='Continue';}
+  else{cta.disabled=true;cta.textContent='Choose at list 3';}
+}
+
+// ---- navigation ----
+let stack=['s-welcome'];
+function go(id){
+  const cur=document.querySelector('.screen.active');
+  const tgt=document.getElementById(id);
+  if(!tgt||cur===tgt)return;
+  cur.classList.remove('active');cur.classList.add('prev');
+  tgt.classList.add('active');
+  setTimeout(()=>cur.classList.remove('prev'),420);
+  if(stack[stack.length-1]!==id)stack.push(id);
+  if(id==='s-task')resetTask();
+  if(id==='s-notif')resetNotif();
+  if(id==='s-selling')initSelling();
+  if(id==='s-q5')applyWatchlistFilters();
+  if(['s-q1','s-q2','s-q3'].includes(id)) tgt.querySelectorAll('.selector').forEach(s=>s.classList.remove('selected'));
+  if(id==='s-welcome')stack=['s-welcome'];
+}
+function back(){
+  if(stack.length<=1)return;
+  stack.pop();
+  const prev=stack[stack.length-1];
+  const cur=document.querySelector('.screen.active');
+  const tgt=document.getElementById(prev);
+  tgt.classList.remove('prev');
+  cur.style.transition='transform .4s cubic-bezier(.32,.72,0,1)';
+  cur.classList.remove('active');cur.style.transform='translateX(100%)';
+  tgt.classList.add('active');
+  setTimeout(()=>{cur.style.transform='';cur.style.transition='';},420);
+}
+function selectSingle(el,target){
+  el.parentNode.querySelectorAll('.selector').forEach(s=>s.classList.remove('selected'));
+  el.classList.add('selected');
+  setTimeout(()=>go(target),220);
+}
+
+// ---- chart trendline task (SVG) ----
+const TASK={
+  candles:[
+    {o:290,h:293,l:289,c:292},{o:292,h:294,l:290,c:291},{o:291,h:292,l:287,c:288},
+    {o:288,h:289,l:284,c:285},{o:285,h:286,l:281,c:282},{o:282,h:284,l:280,c:281},
+    {o:281,h:283,l:279,c:280},{o:280,h:281,l:277,c:278},{o:278,h:282,l:277,c:281},
+    {o:281,h:285,l:280,c:284},{o:284,h:287,l:282,c:286},{o:286,h:288,l:283,c:285},
+    {o:285,h:287,l:281,c:283},{o:283,h:285,l:279,c:281},{o:281,h:284,l:279,c:283},
+    {o:283,h:286,l:281,c:285},{o:285,h:288,l:283,c:287},{o:287,h:290,l:285,c:289},
+    {o:289,h:292,l:287,c:291},{o:291,h:294,l:289,c:293}
+  ],
+  VISIBLE:13,PAD_L:8,SPACING:15,TOP:10,PLOT_H:350,MINP:250,MAXP:334,
+  svgNS:"http://www.w3.org/2000/svg",hintTimer:null,targets:null
+};
+TASK.priceToY=p=>TASK.TOP+(TASK.MAXP-p)/(TASK.MAXP-TASK.MINP)*TASK.PLOT_H;
+TASK.candleX=i=>TASK.PAD_L+i*TASK.SPACING+TASK.SPACING/2;
+function svgEl(tag,attrs){const e=document.createElementNS(TASK.svgNS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
+
+function initTask(){
+  const priceSvg=document.getElementById('priceChart');
+  const volSvg=document.getElementById('volChart');
+  priceSvg.innerHTML='';volSvg.innerHTML='';
+  // reset coaches / cta / badge
+  document.getElementById('coach2').classList.remove('show');
+  document.getElementById('unlockBadge').classList.remove('show');
+  {const t=document.getElementById('taskCta');t.style.opacity='0';t.style.pointerEvents='none';}
+  document.getElementById('coach1').classList.remove('show');
+  document.getElementById('headerPrice').textContent=TASK.candles[TASK.VISIBLE].c.toFixed(2);
+  document.getElementById('headerPrice').style.color='#26A69A';
+  document.getElementById('headerChg').textContent='+0.70 (+0.24%)';
+  document.getElementById('headerChg').style.color='#26A69A';
+
+  // axis
+  const axis=svgEl('g',{});priceSvg.appendChild(axis);
+  for(let v=332;v>=252;v-=4){const y=TASK.priceToY(v);const bold=(v%20===0);
+    const t=svgEl('text',{x:325,y:y+3,'font-size':bold?'10.5':'9','font-family':"'JetBrains Mono',monospace",fill:bold?'#D1D4DC':'#787B86','font-weight':bold?'700':'400'});
+    t.textContent=v.toFixed(2);axis.appendChild(t);}
+  const candleLayer=svgEl('g',{});const markerLayer=svgEl('g',{});const priceLineLayer=svgEl('g',{});
+  priceSvg.appendChild(candleLayer);priceSvg.appendChild(priceLineLayer);priceSvg.appendChild(markerLayer);
+  TASK._candleLayer=candleLayer;TASK._markerLayer=markerLayer;TASK._priceLineLayer=priceLineLayer;
+
+  TASK.renderCandles=(maxI,animI)=>{
+    while(candleLayer.firstChild)candleLayer.removeChild(candleLayer.firstChild);
+    for(let i=0;i<=maxI;i++){const cd=TASK.candles[i];const x=TASK.candleX(i);const up=cd.c>=cd.o;const color=up?'#26A69A':'#EF5350';
+      const wick=svgEl('line',{x1:x,x2:x,y1:TASK.priceToY(cd.h),y2:TASK.priceToY(cd.l),stroke:color,'stroke-width':1.3});
+      const bt=TASK.priceToY(Math.max(cd.o,cd.c)),bb=TASK.priceToY(Math.min(cd.o,cd.c));
+      const body=svgEl('rect',{x:x-5,y:bt,width:10,height:Math.max(bb-bt,1.3),fill:color,rx:1});
+      if(i===animI){wick.style.opacity=0;wick.style.transition='opacity .4s ease';body.style.opacity=0;body.style.transition='opacity .4s ease';}
+      candleLayer.appendChild(wick);candleLayer.appendChild(body);
+      if(i===animI)setTimeout(()=>{wick.style.opacity=1;body.style.opacity=1;},20);}
+  };
+  TASK.renderPriceTag=(price,up)=>{
+    while(priceLineLayer.firstChild)priceLineLayer.removeChild(priceLineLayer.firstChild);
+    const y=TASK.priceToY(price);const color=up?'#26A69A':'#EF5350';
+    priceLineLayer.appendChild(svgEl('line',{x1:0,x2:380,y1:y,y2:y,stroke:color,'stroke-width':1,'stroke-dasharray':'2,3',opacity:0.7}));
+    priceLineLayer.appendChild(svgEl('rect',{x:312,y:y-9,width:60,height:18,rx:3,fill:color}));
+    const t=svgEl('text',{x:342,y:y+4,'text-anchor':'middle','font-size':10,'font-family':"'JetBrains Mono',monospace",fill:'#fff','font-weight':700});
+    t.textContent=price.toFixed(2);priceLineLayer.appendChild(t);
+  };
+  TASK.renderCandles(TASK.VISIBLE,null);
+  TASK.renderPriceTag(TASK.candles[TASK.VISIBLE].c,true);
+
+  // volume
+  const volH=[22,26,18,30,24,20,16,34,28,22,32,26,20,38,24,18,30,22,26,20];
+  TASK.candles.slice(0,20).forEach((cd,i)=>{const x=TASK.candleX(i);const up=cd.c>=cd.o;
+    volSvg.appendChild(svgEl('rect',{x:x-5,y:70-volH[i],width:10,height:volH[i],fill:up?'#26A69A':'#EF5350',opacity:0.55}));});
+
+  // targets
+  TASK.targets=[
+    {i:7,price:277,x:TASK.candleX(7),y:TASK.priceToY(277),set:false},
+    {i:13,price:279,x:TASK.candleX(13),y:TASK.priceToY(279),set:false}
+  ];
+  setTimeout(()=>document.getElementById('coach1').classList.add('show'),350);
+}
+function addPointMarker(t){
+  TASK._markerLayer.appendChild(svgEl('circle',{cx:t.x,cy:t.y,r:4.5,fill:'none',stroke:'#F7A823','stroke-width':2,class:'point-ping'}));
+  TASK._markerLayer.appendChild(svgEl('circle',{cx:t.x,cy:t.y,r:4.5,fill:'#F7A823',stroke:'#000','stroke-width':1.2,class:'point-core'}));
+}
+function drawTrendline(){
+  document.getElementById('coach1').classList.remove('show');
+  const a=TASK.targets[0],b=TASK.targets[1];const slope=(b.y-a.y)/(b.x-a.x);
+  const x1=a.x-18,y1=a.y-slope*-18,x2=b.x+18,y2=b.y+slope*18;const len=Math.hypot(x2-x1,y2-y1);
+  const line=svgEl('line',{x1,y1,x2,y2,stroke:'#2962FF','stroke-width':2.2,'stroke-dasharray':len,'stroke-dashoffset':len});
+  line.style.transition='stroke-dashoffset .6s ease';TASK._markerLayer.appendChild(line);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>line.setAttribute('stroke-dashoffset',0)));
+  [a,b].forEach(p=>TASK._markerLayer.appendChild(svgEl('rect',{x:p.x-3,y:p.y-3,width:6,height:6,fill:'#fff',stroke:'#2962FF','stroke-width':1.4})));
+  setTimeout(taskReveal,700);
+}
+function taskReveal(){
+  let i=TASK.VISIBLE+1;
+  (function step(){
+    if(i>TASK.candles.length-1){taskFinish();return;}
+    TASK.renderCandles(i,i);const up=TASK.candles[i].c>=TASK.candles[i].o;
+    TASK.renderPriceTag(TASK.candles[i].c,up);
+    const base=TASK.candles[13].c,diff=TASK.candles[i].c-base,pct=diff/base*100;
+    document.getElementById('headerPrice').textContent=TASK.candles[i].c.toFixed(2);
+    document.getElementById('headerPrice').style.color=up?'#26A69A':'#EF5350';
+    document.getElementById('headerChg').style.color=up?'#26A69A':'#EF5350';
+    document.getElementById('headerChg').textContent=(diff>=0?'+':'')+diff.toFixed(2)+' ('+(diff>=0?'+':'')+pct.toFixed(2)+'%)';
+    i++;setTimeout(step,360);
+  })();
+}
+function taskFinish(){
+  const b=TASK.targets[1];
+  const c2=document.getElementById('coach2');
+  c2.style.top=(b.y-6)+'px';c2.style.left=Math.min(b.x-10,140)+'px';c2.classList.add('show');
+  setTimeout(()=>document.getElementById('unlockBadge').classList.add('show'),250);
+  setTimeout(()=>{const t=document.getElementById('taskCta');t.style.opacity='1';t.style.pointerEvents='auto';},450);
+}
+function resetTask(){ initTask(); }
+// chart click handler
+(function(){
+  const priceSvg=document.getElementById('priceChart');
+  priceSvg.addEventListener('click',e=>{
+    if(!TASK.targets||TASK.targets.every(t=>t.set))return;
+    const rect=priceSvg.getBoundingClientRect();
+    const x=(e.clientX-rect.left)*(380/rect.width);
+    const y=(e.clientY-rect.top)*(380/rect.height);
+    let hit=null;
+    for(const t of TASK.targets){if(t.set)continue;if(Math.hypot(x-t.x,y-t.y)<20){hit=t;break;}}
+    if(hit){hit.set=true;addPointMarker(hit);if(TASK.targets.every(t=>t.set))drawTrendline();}
+    else{const toast=document.getElementById('hintToast');toast.classList.add('show');
+      clearTimeout(TASK.hintTimer);TASK.hintTimer=setTimeout(()=>toast.classList.remove('show'),2000);}
+  });
+  initTask();
+})();
+</script>
+</body>
+</html>
