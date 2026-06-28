@@ -281,12 +281,13 @@ body{
     </div>
     <img class="visual" src="assets/visual-q1.png" style="top:126px;">
     <h1 class="title" style="position:absolute;top:310px;left:24px;right:24px;">What brings you to<br>TradingView?</h1>
-    <div class="selectors" style="position:absolute;top:438px;left:0;right:0;">
-      __SEL__Just learning|s-q2__
-      __SEL__Find ideas to follow|s-q2__
-      __SEL__Track a few stocks|s-q2__
-      __SEL__Trade actively|s-q2__
+    <div class="selectors q4-scroll" id="q1sel" data-cta="q1-cta" style="position:absolute;top:438px;left:0;right:0;bottom:96px;overflow-y:auto;">
+      __MSEL__Just learning|0__
+      __MSEL__Find ideas to follow|0__
+      __MSEL__Track a few stocks|0__
+      __MSEL__Trade actively|0__
     </div>
+    <div class="bottombar" style="background:linear-gradient(180deg,rgba(19,23,34,0),#131722 28%);padding-top:20px;"><button class="btn btn-primary" id="q1-cta" disabled onclick="go('s-q2')">Continue</button></div>
   </section>
 
   <!-- ════════ Q2 ════════ -->
@@ -333,7 +334,7 @@ body{
     </div>
     <img class="visual" src="assets/visual-q4.png" style="top:126px;">
     <h1 class="title" style="position:absolute;top:310px;left:24px;right:24px;">Which assets do you<br>want to follow?</h1>
-    <div class="selectors q4-scroll" id="q4sel" style="position:absolute;top:438px;left:0;right:0;bottom:96px;overflow-y:auto;">
+    <div class="selectors q4-scroll" id="q4sel" data-cta="q4-cta" style="position:absolute;top:438px;left:0;right:0;bottom:96px;overflow-y:auto;">
       __MSEL__Stock|0__
       __MSEL__Crypto|0__
       __MSEL__Futures|0__
@@ -564,7 +565,7 @@ function hydrate(){
         const el=document.createElement('button');
         el.className='selector'+(sel==='1'?' selected':'');
         el.innerHTML=`<span class="lbl">${label}</span><span class="chk">${CHECK_CIRCLE}</span>`;
-        el.onclick=()=>{el.classList.toggle('selected');updateQ4Cta();};
+        el.onclick=()=>{el.classList.toggle('selected');updateMulti(group);};
         group.appendChild(el);
       }
     });
@@ -584,13 +585,16 @@ function hydrate(){
   hydrate();
 })();
 
-function updateQ4Cta(){
-  const n=document.querySelectorAll('#q4sel .selector.selected').length;
-  document.getElementById('q4-cta').disabled = n===0;
+function updateMulti(group){
+  const cta=document.getElementById(group.dataset.cta);
+  if(cta) cta.disabled = group.querySelectorAll('.selector.selected').length===0;
 }
-function resetQ4(){
-  document.querySelectorAll('#q4sel .selector').forEach(s=>s.classList.remove('selected'));
-  document.getElementById('q4-cta').disabled=true;
+function resetMulti(id){
+  const g=document.getElementById(id);
+  if(!g) return;
+  g.querySelectorAll('.selector').forEach(s=>s.classList.remove('selected'));
+  const cta=document.getElementById(g.dataset.cta);
+  if(cta) cta.disabled=true;
 }
 function resetWatchlist(){
   document.querySelectorAll('#stockgrid .stockcard').forEach(c=>c.classList.remove('selected'));
@@ -686,9 +690,10 @@ function go(id){
   if(id==='s-task')resetTask();
   if(id==='s-notif')resetNotif();
   if(id==='s-selling')initSelling();
-  if(id==='s-q4')resetQ4();
+  if(id==='s-q1')resetMulti('q1sel');
+  if(id==='s-q4')resetMulti('q4sel');
   if(id==='s-q5'){resetWatchlist();applyWatchlistFilters();}
-  if(['s-q1','s-q2','s-q3'].includes(id)) tgt.querySelectorAll('.selector').forEach(s=>s.classList.remove('selected'));
+  if(['s-q2','s-q3'].includes(id)) tgt.querySelectorAll('.selector').forEach(s=>s.classList.remove('selected'));
   if(id==='s-welcome')stack=['s-welcome'];
 }
 function back(){
