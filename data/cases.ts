@@ -330,6 +330,10 @@ export const cases: Case[] = [
     ],
     mobileMappings: {
       '3013:28012': ['3064:26819', '3064:27498'],
+      '3035:30693': ['mob:slide2-1', 'mob:slide2-2'],
+      '3036:32182': ['mob:slide3-1', 'mob:slide3-2'],
+      '3036:32895': ['mob:slide4-1', 'mob:slide4-2'],
+      '3062:50527': ['mob:slide5-1', 'mob:slide5-2'],
     },
     accentColor: '#5E71CD',
     accordionSections: [
