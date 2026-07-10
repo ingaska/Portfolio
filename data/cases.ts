@@ -310,6 +310,45 @@ export const cases: Case[] = [
     ],
   },
   {
+    slug: 'femia-wrapped',
+    title: 'Femia Wrapped',
+    subtitle: 'Femia · Year in Review',
+    description: "Designed a Spotify Wrapped-style year-in-review experience for Femia users — turning a year of personal health data into a shareable, emotional recap. The feature surfaced cycle patterns, fertility milestones, and health habits in a way that felt personal, celebratory, and distinctly Femia.",
+    role: 'Product Design Lead',
+    year: '2023',
+    platforms: ['iOS', 'Android'],
+    industry: 'Femtech',
+    tags: ['Femtech', 'Feature Design'],
+    figmaNodeId: '3013:31570',
+    detailNodeIds: [
+      '3013:31570', // Title — Your 2023 with Femia
+      '3013:28012', // Slide 1 — Screens overview
+      '3035:30693', // Slide 2
+      '3036:32182', // Slide 3
+      '3036:32895', // Slide 4
+      '3062:50527', // Slide 5
+    ],
+    mobileMappings: {
+      '3013:28012': ['3064:26819', '3064:27498'],
+    },
+    accentColor: '#5E71CD',
+    accordionSections: [
+      {
+        title: 'Challenge',
+        content: "Health data is deeply personal — a year-in-review had to feel meaningful and celebratory, not clinical. The feature needed to surface cycle patterns, fertility milestones, and health habits in a way that resonated emotionally without oversimplifying sensitive information.",
+      },
+      {
+        title: 'Approach',
+        content: "Designed a story-driven format that revealed personal insights one at a time — each screen a moment of recognition. The visual language borrowed from Femia's brand identity: warm, expressive, and distinctly not generic. Interactions were designed to feel rewarding and shareable.",
+      },
+      {
+        title: 'Results',
+        content: "Launched as a seasonal feature for 1.2M+ users · High share rates · Strong engagement across the recap flow",
+      },
+    ],
+    textSections: [],
+  },
+  {
     slug: 'femia-brand',
     title: 'Femia Brand Identity',
     subtitle: 'Femia · Brand Guidelines',
@@ -418,45 +457,6 @@ export const cases: Case[] = [
         ],
       },
     ],
-  },
-  {
-    slug: 'femia-wrapped',
-    title: 'Femia Wrapped',
-    subtitle: 'Femia · Year in Review',
-    description: "Designed a Spotify Wrapped-style year-in-review experience for Femia users — turning a year of personal health data into a shareable, emotional recap. The feature surfaced cycle patterns, fertility milestones, and health habits in a way that felt personal, celebratory, and distinctly Femia.",
-    role: 'Product Design Lead',
-    year: '2023',
-    platforms: ['iOS', 'Android'],
-    industry: 'Femtech',
-    tags: ['Femtech', 'Feature Design'],
-    figmaNodeId: '3013:31570',
-    detailNodeIds: [
-      '3013:31570', // Title — Your 2023 with Femia
-      '3013:28012', // Slide 1 — Screens overview
-      '3035:30693', // Slide 2
-      '3036:32182', // Slide 3
-      '3036:32895', // Slide 4
-      '3062:50527', // Slide 5
-    ],
-    mobileMappings: {
-      '3013:28012': ['3064:26819', '3064:27498'],
-    },
-    accentColor: '#5E71CD',
-    accordionSections: [
-      {
-        title: 'Challenge',
-        content: "Health data is deeply personal — a year-in-review had to feel meaningful and celebratory, not clinical. The feature needed to surface cycle patterns, fertility milestones, and health habits in a way that resonated emotionally without oversimplifying sensitive information.",
-      },
-      {
-        title: 'Approach',
-        content: "Designed a story-driven format that revealed personal insights one at a time — each screen a moment of recognition. The visual language borrowed from Femia's brand identity: warm, expressive, and distinctly not generic. Interactions were designed to feel rewarding and shareable.",
-      },
-      {
-        title: 'Results',
-        content: "Launched as a seasonal feature for 1.2M+ users · High share rates · Strong engagement across the recap flow",
-      },
-    ],
-    textSections: [],
   },
   {
     slug: 'tongo',
