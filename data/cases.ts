@@ -433,6 +433,10 @@ export const cases: Case[] = [
     detailNodeIds: [
       '3013:31570', // Title — Your 2023 with Femia
       '3013:28012', // Slide 1 — Screens overview
+      '3035:30693', // Slide 2
+      '3036:32182', // Slide 3
+      '3036:32895', // Slide 4
+      '3062:50527', // Slide 5
     ],
     mobileMappings: {
       '3013:28012': ['3013:28039', '3013:28017', '3013:28029', '3013:28047'],
