@@ -433,11 +433,10 @@ export const cases: Case[] = [
     detailNodeIds: [
       '3013:31570', // Title — Your 2023 with Femia
       '3013:28012', // Slide 1 — Screens overview
-      '3013:28039', // Screen 1
-      '3013:28017', // Screen 2
-      '3013:28029', // Screen 3
-      '3013:28047', // Screen 4
     ],
+    mobileMappings: {
+      '3013:28012': ['3013:28039', '3013:28017', '3013:28029', '3013:28047'],
+    },
     accentColor: '#5E71CD',
     accordionSections: [
       {
