@@ -843,7 +843,7 @@ export const cases: Case[] = [
   },
   {
     slug: 'immotrack',
-    title: 'IT',
+    title: 'Immo Track',
     subtitle: 'Facility Management Dashboard',
     description: 'Joined an outsourcing engagement to design the core dashboard and several features for a B2B SaaS platform that helps facility service companies digitise their operations — coordinating field workers, tracking task delays, monitoring locations, and documenting job completion across multiple properties.',
     role: 'UX Designer',
