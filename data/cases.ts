@@ -840,4 +840,27 @@ export const cases: Case[] = [
     accordionSections: [],
     textSections: [],
   },
+  {
+    slug: 'immotrack',
+    title: 'IT',
+    subtitle: 'Facility Management Dashboard',
+    description: 'Joined an outsourcing engagement to design the core dashboard and several features for a B2B SaaS platform that helps facility service companies digitise their operations — coordinating field workers, tracking task delays, monitoring locations, and documenting job completion across multiple properties.',
+    role: 'UX Designer',
+    year: '2021',
+    platforms: ['Web'],
+    industry: 'Facility Management',
+    tags: ['B2B', 'SaaS', 'Facility Management'],
+    category: 'dashboards',
+    figmaNodeId: '3080:29457',
+    detailNodeIds: [
+      '3090:32640', // Dashboard – Timeline view
+      '3090:33646', // Dashboard – Board view
+      '3090:34906', // Forecast Settings modal
+      '3080:29457', // Map view
+      '3090:36677', // Tasks table
+    ],
+    accentColor: '#2080FF',
+    accordionSections: [],
+    textSections: [],
+  },
 ]
