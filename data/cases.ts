@@ -819,33 +819,25 @@ export const cases: Case[] = [
   {
     slug: 'navigator',
     title: 'Navigator',
-    subtitle: 'Risk Monitoring Dashboard · Deutsche Bank',
-    description: "Designed a complex B2B risk monitoring platform for trading desks at Deutsche Bank — making dense regulatory data legible, actionable, and fast. The product replaced spreadsheet workflows with a real-time dashboard covering VaR breaches, P&L metrics, and desk-level compliance tracking across global regions.",
+    subtitle: 'Risk Monitoring Dashboard · European Bank',
+    description: "B2B risk monitoring dashboard for trading desks at a major European bank. Designed to make dense regulatory data legible and actionable — combining a radial risk visualisation with detailed drill-down views across desks, regions, and compliance metrics.",
     role: 'Product Designer',
     year: '2015',
-    platforms: ['Web'],
+    platforms: ['Web', 'iPad'],
     industry: 'Financial Services',
     tags: ['B2B', 'Enterprise', 'Data Visualisation'],
     category: 'dashboards',
     figmaNodeId: '3078:27423',
     detailNodeIds: [
-      '3078:27423',
+      '3079:29231', // Navigator 6
+      '3078:28329', // Navigator 1
+      '3078:28334', // Navigator 2
+      '3078:28322', // Navigator 3
+      '3078:28315', // Navigator 4
+      '3078:28298', // Navigator 5
     ],
     accentColor: '#1B6FBF',
-    accordionSections: [
-      {
-        title: 'Challenge',
-        content: "Trading desk risk officers were managing regulatory compliance through a patchwork of spreadsheets and disconnected reports. The core problem: critical breach signals were buried in data, decisions were delayed, and there was no unified view across desks, regions, and business lines.",
-      },
-      {
-        title: 'Approach',
-        content: "Designed a multi-view dashboard combining a radial 'Wheel' visualisation for at-a-glance risk exposure with detailed tabular drill-down. Invested heavily in information hierarchy — surfacing breach severity, trend direction, and desk-level comparisons at a glance, while giving analysts a path to granular data without losing context.",
-      },
-      {
-        title: 'Results',
-        content: "Replaced manual reporting workflows across global trading desks. The Wheel visualisation became the primary tool for morning risk reviews, reducing time-to-decision on breach escalation.",
-      },
-    ],
+    accordionSections: [],
     textSections: [],
   },
 ]
