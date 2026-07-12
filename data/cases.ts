@@ -17,6 +17,8 @@ export interface TextSection {
   afterImageIndex?: number  // which image index to inject after (default 0)
 }
 
+export type CaseCategory = 'apps' | 'dashboards'
+
 export interface Case {
   slug: string
   title: string
@@ -28,6 +30,7 @@ export interface Case {
   platforms: string[]
   industry: string
   tags: string[]
+  category?: CaseCategory
   figmaNodeId: string       // cover frame
   detailNodeIds: string[]   // visual screen frames for right column (desktop)
   mobileMappings?: Record<string, string[]>  // desktop nodeId → mobile frame(s) to show instead
@@ -72,6 +75,7 @@ export const cases: Case[] = [
       '2322:5732':  ['2595:40106'],                // Case 1.17 → 1.19 mob
     },
     metrics: ['Featured by App Store', '4.9 App Store', '4.6 Google Play', 'Retention M1-60%'],
+    category: 'apps',
     accentColor: '#5E71CD',
     accordionSections: [
       {
@@ -226,6 +230,7 @@ export const cases: Case[] = [
       '2896:27700', // Slide 10 — Art Library: Characters
       '2896:29713', // Slide 11 — Art Library: Daily Life
     ],
+    category: 'apps',
     accentColor: '#5E71CD',
     accordionSections: [
       {
@@ -335,6 +340,7 @@ export const cases: Case[] = [
       '3036:32895': ['3073:32822', '3073:32926'],
       '3062:50527': ['3073:33365', '3073:33446'],
     },
+    category: 'apps',
     accentColor: '#5E71CD',
     accordionSections: [
       {
@@ -412,6 +418,7 @@ export const cases: Case[] = [
       '2949:29441', // Infographic — 14
       '2949:28342', // In use — Text and Picture
     ],
+    category: 'apps',
     accentColor: '#4C61C7',
     accordionSections: [
       {
@@ -485,6 +492,7 @@ export const cases: Case[] = [
       '12:9861':  ['2605:23074', '2605:24634'],  // Case 2.2 → mobile frames
       '12:21256': ['2605:26198', '2605:26721'],  // Case 2.6 → mobile frames
     },
+    category: 'apps',
     accentColor: '#9333EA',
     textSections: [
       {
@@ -581,6 +589,7 @@ export const cases: Case[] = [
       '13:7439',   // Cases 3.4
       '2329:8408', // Cases 3.5
     ],
+    category: 'apps',
     accentColor: '#2D0A5E',
     textSections: [
       {
@@ -652,6 +661,7 @@ export const cases: Case[] = [
       '18:1099', // Cases 3.7
       '204:43',  // Cases 3.8
     ],
+    category: 'apps',
     accentColor: '#111827',
     textSections: [
       {
@@ -708,6 +718,7 @@ export const cases: Case[] = [
     mobileMappings: {
       '7:199': ['2615:29906', '2617:29943'],  // Cases 3.10 → mobile frames
     },
+    category: 'apps',
     accentColor: '#3B4FCD',
     textSections: [
       {
@@ -765,6 +776,7 @@ export const cases: Case[] = [
     detailNodeIds: [
       '2356:7298', // Cases 3.11 detail
     ],
+    category: 'apps',
     accentColor: '#7C3AED',
     textSections: [
       {
@@ -803,5 +815,37 @@ export const cases: Case[] = [
         content: "Created the name, visual identity, mascot character, and complete UI system. Designed every screen around the core flow — instant scan, plant profile, care guide — with the mascot providing guidance and personality throughout. Built all marketing assets and App Store materials from the same creative direction.",
       },
     ],
+  },
+  {
+    slug: 'navigator',
+    title: 'Navigator',
+    subtitle: 'Risk Monitoring Dashboard · Deutsche Bank',
+    description: "Designed a complex B2B risk monitoring platform for trading desks at Deutsche Bank — making dense regulatory data legible, actionable, and fast. The product replaced spreadsheet workflows with a real-time dashboard covering VaR breaches, P&L metrics, and desk-level compliance tracking across global regions.",
+    role: 'Product Designer',
+    year: '2015',
+    platforms: ['Web'],
+    industry: 'Financial Services',
+    tags: ['B2B', 'Enterprise', 'Data Visualisation'],
+    category: 'dashboards',
+    figmaNodeId: '3078:27423',
+    detailNodeIds: [
+      '3078:27423',
+    ],
+    accentColor: '#1B6FBF',
+    accordionSections: [
+      {
+        title: 'Challenge',
+        content: "Trading desk risk officers were managing regulatory compliance through a patchwork of spreadsheets and disconnected reports. The core problem: critical breach signals were buried in data, decisions were delayed, and there was no unified view across desks, regions, and business lines.",
+      },
+      {
+        title: 'Approach',
+        content: "Designed a multi-view dashboard combining a radial 'Wheel' visualisation for at-a-glance risk exposure with detailed tabular drill-down. Invested heavily in information hierarchy — surfacing breach severity, trend direction, and desk-level comparisons at a glance, while giving analysts a path to granular data without losing context.",
+      },
+      {
+        title: 'Results',
+        content: "Replaced manual reporting workflows across global trading desks. The Wheel visualisation became the primary tool for morning risk reviews, reducing time-to-decision on breach escalation.",
+      },
+    ],
+    textSections: [],
   },
 ]

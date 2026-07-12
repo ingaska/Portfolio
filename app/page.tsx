@@ -1,6 +1,6 @@
 import { cases } from '@/data/cases'
 import { getFigmaImageUrls } from '@/lib/figma'
-import CaseCard from '@/components/CaseCard'
+import WorkGrid from '@/components/WorkGrid'
 import AboutSection from '@/components/AboutSection'
 
 export default async function HomePage() {
@@ -21,16 +21,7 @@ export default async function HomePage() {
 
       {/* Cases grid */}
       <section className="px-6 md:px-12 pb-16 md:pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-10 md:gap-y-14">
-          {cases.map((c, i) => (
-            <CaseCard
-              key={c.slug}
-              case_={c}
-              imageUrl={imageUrls[c.figmaNodeId] ?? ''}
-              index={i}
-            />
-          ))}
-        </div>
+        <WorkGrid cases={cases} imageUrls={imageUrls} />
       </section>
 
       <AboutSection />
