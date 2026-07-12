@@ -37,6 +37,7 @@ export interface Case {
   mobileAppendNodeIds?: string[]             // mobile-only frames appended after all desktop frames
   metrics?: string[]
   accentColor: string
+  cardBorder?: string
   accordionSections: AccordionSection[]
   textSections?: TextSection[]  // optional text blocks shown before images in right panel
 }
@@ -860,6 +861,7 @@ export const cases: Case[] = [
       '3090:36677', // Tasks table
     ],
     accentColor: '#2080FF',
+    cardBorder: '1px solid #E5E5E5',
     accordionSections: [],
     textSections: [],
   },

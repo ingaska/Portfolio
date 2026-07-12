@@ -19,7 +19,7 @@ export default function CaseCard({ case_, imageUrl, index }: CaseCardProps) {
       transition={{ duration: 0.5, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
     >
       <Link href={`/work/${case_.slug}`} className="group block">
-        <div className="relative overflow-hidden bg-gray-100 aspect-[16/10] rounded-2xl">
+        <div className="relative overflow-hidden bg-gray-100 aspect-[16/10] rounded-2xl" style={case_.cardBorder ? { border: case_.cardBorder } : undefined}>
           {imageUrl ? (
             <Image
               src={imageUrl}

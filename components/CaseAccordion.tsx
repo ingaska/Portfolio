@@ -46,7 +46,7 @@ export default function CaseAccordion({ sections }: Props) {
           </div>
         )
       })}
-      <div className="border-t border-[#1a1a1a]/10" />
+      {sections.length > 0 && <div className="border-t border-[#1a1a1a]/10" />}
     </div>
   )
 }
