@@ -2,7 +2,7 @@
  * Prebuild script: downloads all Figma frames as PNGs to /public/figma-cache/
  * Never crashes the build — all failures are warnings, not errors.
  */
-import { readFileSync, mkdirSync, existsSync } from 'fs'
+import { readFileSync, mkdirSync, existsSync, readdirSync } from 'fs'
 import { writeFile } from 'fs/promises'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -34,10 +34,11 @@ if (!FILE_ID || !TOKEN) {
 
 mkdirSync(OUT, { recursive: true })
 
-// Extract Figma node IDs from cases.ts
+// Extract Figma node IDs from cases.ts, skip already-cached files
+const cached = new Set(readdirSync(OUT).map(f => f.replace(/-/g, ':').replace('.png', '')))
 const src = readFileSync(join(ROOT, 'data', 'cases.ts'), 'utf-8')
-const nodeIds = [...new Set([...src.matchAll(/'(\d+:\d+)'/g)].map(m => m[1]))]
-console.log(`[figma] ${nodeIds.length} node IDs found`)
+const nodeIds = [...new Set([...src.matchAll(/'(\d+:\d+)'/g)].map(m => m[1]))].filter(id => !cached.has(id))
+console.log(`[figma] ${nodeIds.length} node IDs to download (skipping already-cached)`)
 
 // Fetch Figma image URLs — batch of 2 at scale=1 to avoid render timeouts
 const BATCH = 2
