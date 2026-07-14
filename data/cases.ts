@@ -865,4 +865,34 @@ export const cases: Case[] = [
     accordionSections: [],
     textSections: [],
   },
+  {
+    slug: 'immotrack-route-planner',
+    title: 'Route Planner',
+    subtitle: 'Facility Management · Immo Track',
+    description: 'Joined the Immo Track product family to design a route planning tool for facility service companies — 0 to 1, from approved proof of concept to shipped MVP. The feature lets managers build optimised weekly routes across workers, locations, and tasks — then visualise assignments on a map or calendar view.',
+    role: 'UX Designer',
+    year: '2021',
+    platforms: ['Web'],
+    industry: 'Facility Management',
+    tags: ['B2B', 'SaaS', 'Route Planning'],
+    category: 'dashboards',
+    figmaNodeId: '3091:37620',
+    detailNodeIds: [
+      '3095:41450', // Step 1 – Choose Workers
+      '3095:42317', // Step 2 – Choose Locations
+      '3095:42601', // Step 3 – Choose Tasks
+      '3095:42852', // Step 4 – Create Route Plan
+      '3094:39076', // Step 4.1 – Processing
+      '3091:37620', // Map view
+      '3094:39698', // Calendar view
+      '3094:40502', // Timeline / Gantt
+      '3094:39878', // Map + calendar
+      '3094:40056', // Calendar (week)
+      '3105:29625', // Sign-up
+    ],
+    accentColor: '#2080FF',
+    cardBorder: '1px solid #E5E5E5',
+    accordionSections: [],
+    textSections: [],
+  },
 ]
