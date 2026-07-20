@@ -767,7 +767,7 @@ export const cases: Case[] = [
     slug: 'plamfy',
     title: 'Plamfy',
     subtitle: 'Live Streaming Platform',
-    description: 'Consumer live streaming platform — similar to Tango — built 0 to 1. Owned brand identity, visual language, design system, and all product screens for the first launch. Covers live streaming with real-time chat and virtual gifts, creator profiles, a coin economy, and leaderboards.',
+    description: 'Consumer live streaming platform — built 0 to 1. Owned brand identity, visual language, design system, and all product screens for the first launch. Covers live streaming with real-time chat and virtual gifts, creator profiles, a coin economy, and leaderboards.',
     role: 'Design Lead',
     year: '2021',
     platforms: ['Web', 'Mobile Web'],
