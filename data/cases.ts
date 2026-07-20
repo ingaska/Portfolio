@@ -764,6 +764,31 @@ export const cases: Case[] = [
     ],
   },
   {
+    slug: 'plamfy',
+    title: 'Plamfy',
+    subtitle: 'Live Streaming Platform',
+    description: 'Consumer live streaming platform — similar to Tango — built 0 to 1. Owned brand identity, visual language, design system, and all product screens for the first launch. Covers live streaming with real-time chat and virtual gifts, creator profiles, a coin economy, and leaderboards.',
+    role: 'Design Lead',
+    year: '2021',
+    platforms: ['Web', 'Mobile Web'],
+    industry: 'Entertainment',
+    tags: ['Consumer', 'Streaming', 'Design System'],
+    category: 'apps',
+    figmaNodeId: '3154:23871',
+    detailNodeIds: [
+      '3159:55377', // Core product experience
+      '3161:60929', // Stream watchers view
+      '3161:67294', // Main page web + mobile
+      '3161:73338', // Navigation
+      '3161:76201', // Chat web + mobile
+      '3165:19710', // Design system components
+      '3165:26262', // Design system components 2
+    ],
+    accentColor: '#1B8FFF',
+    accordionSections: [],
+    textSections: [],
+  },
+  {
     slug: 'lily-plant',
     title: 'Lily Plant',
     subtitle: 'Plant Identifier',
