@@ -418,6 +418,8 @@ export const cases: Case[] = [
       '2949:28967', // Infographic — 13
       '2949:29441', // Infographic — 14
       '2949:28342', // In use — Text and Picture
+      '943:1020',
+      '909:1012',
     ],
     category: 'apps',
     accentColor: '#4C61C7',
