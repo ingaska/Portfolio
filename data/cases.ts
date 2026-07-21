@@ -791,6 +791,7 @@ export const cases: Case[] = [
       '3161:73338', // Navigation
       '3161:76201', // Chat web + mobile
       '3165:19710', // Design system components
+      '3195:24312',
       '3165:26262', // Design system components 2
     ],
     accentColor: '#1B8FFF',
