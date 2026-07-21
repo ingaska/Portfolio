@@ -793,6 +793,7 @@ export const cases: Case[] = [
       '3165:19710', // Design system components
       '3195:24312',
       '3165:26262', // Design system components 2
+      '3196:21807',
     ],
     accentColor: '#1B8FFF',
     accordionSections: [],
