@@ -65,6 +65,9 @@ export const cases: Case[] = [
       '323:21773', // Case 1.11 — A system built to scale
       '325:6402',  // Case 1.14
       '2410:9909', // Case 1.15
+      '3213:23870', // Case 1.15.1 web + mob
+      '3215:29412', // Case 1.15.1 mob
+      '3215:29746', // Case 1.15.1 mob
       '2322:5732', // Case 1.17
     ],
     mobileMappings: {
