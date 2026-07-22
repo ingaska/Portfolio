@@ -63,9 +63,9 @@ export const cases: Case[] = [
       '2376:8118', // Case 1.6
       '321:11601', // Case 1.8 — The Femia world
       '323:21773', // Case 1.11 — A system built to scale
+      '2412:24499', // Case 1.15 — In-app subscription funnel
       '325:6402',  // Case 1.17
       '2410:9909', // Case 1.14 (renumbered)
-      '2412:24499', // Case 1.15
       '3213:23870', // Case 1.16 — In-app funnel
       '2322:5732', // Case 1.17
     ],
@@ -189,7 +189,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Femia.health: a web platform designed to attract, educate, and convert',
-        afterImageIndex: 8,
+        afterImageIndex: 9,
         paragraphs: [
           "The mobile app wasn't the only entry point — we designed femia.health as a full acquisition, content, and brand trust channel in its own right.",
           "To drive organic traffic and support conversion, we built a suite of functional tools — pregnancy, IVF, implantation, and hCG calculators — that delivered immediate value to users before they ever downloaded the app. Each tool was designed to guide users naturally into web onboarding or app install.",
