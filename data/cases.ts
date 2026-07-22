@@ -64,9 +64,9 @@ export const cases: Case[] = [
       '321:11601', // Case 1.8 — The Femia world
       '323:21773', // Case 1.11 — A system built to scale
       '325:6402',  // Case 1.14
-      '2410:9909', // Case 1.15
-      '2412:24499', // Case 1.15 cont
-      '3213:23870', // Case 1.15.1 — In-app funnel
+      '2410:9909', // Case 1.14 (renumbered)
+      '2412:24499', // Case 1.15
+      '3213:23870', // Case 1.16 — In-app funnel
       '2322:5732', // Case 1.17
     ],
     mobileMappings: {
