@@ -858,6 +858,35 @@ export const cases: Case[] = [
     ],
   },
   {
+    slug: 'tradingview',
+    title: 'TradingView',
+    subtitle: 'Onboarding Concept',
+    description: "A test-task concept for TradingView's mobile onboarding — designed to personalise the experience from the first screen, segment users by goal and experience, activate them on a core feature, and convert them to registered accounts.",
+    role: 'Product Designer',
+    platforms: ['iOS'],
+    industry: 'Fintech',
+    tags: ['Fintech', 'Onboarding'],
+    figmaNodeId: '3223:97818',
+    detailNodeIds: [
+      '3223:138565', // Welcome, segmentation
+      '3225:6596',   // Personalisation, engagement
+      '3226:6789',   // Activation, social proof, sign up
+    ],
+    category: 'apps',
+    accentColor: '#2962FF',
+    accordionSections: [
+      {
+        title: 'Brief',
+        content: 'Design an onboarding flow for TradingView mobile that segments users by intent, personalises the product experience, and drives sign-up — without adding unnecessary friction for users who already know what they want.',
+      },
+      {
+        title: 'Approach',
+        content: 'Structured the flow in three phases: segmentation (goal + experience questions), personalisation (asset classes, watchlist), and activation (trendline drawing tutorial, social proof, sign-up). Each screen earns the next by delivering value before asking for commitment.',
+      },
+    ],
+    textSections: [],
+  },
+  {
     slug: 'navigator',
     title: 'Navigator',
     subtitle: 'Risk Monitoring Dashboard · European Bank',
