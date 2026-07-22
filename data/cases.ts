@@ -65,9 +65,8 @@ export const cases: Case[] = [
       '323:21773', // Case 1.11 — A system built to scale
       '325:6402',  // Case 1.14
       '2410:9909', // Case 1.15
-      '3213:23870', // Case 1.15.1 web + mob
-      '3215:29412', // Case 1.15.1 mob
-      '3215:29746', // Case 1.15.1 mob
+      '2412:24499', // Case 1.15 cont
+      '3213:23870', // Case 1.15.1 — In-app funnel
       '2322:5732', // Case 1.17
     ],
     mobileMappings: {
@@ -77,6 +76,7 @@ export const cases: Case[] = [
       '2376:8118':  ['2722:23412', '2722:24708'],    // Case 1.6  → mobile frames
       '321:11601':  ['2668:23143', '2668:29788'],    // Case 1.8  → mobile frames
       '2322:5732':  ['2595:40106'],                // Case 1.17 → 1.19 mob
+      '3213:23870': ['3215:29412', '3215:29746'], // Case 1.15.1 → mobile frames
     },
     metrics: ['Featured by App Store', '4.9 App Store', '4.6 Google Play', 'Retention M1-60%'],
     category: 'apps',
