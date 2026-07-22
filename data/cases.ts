@@ -59,14 +59,14 @@ export const cases: Case[] = [
       '318:6883',  // Case 1.2
       'local:case-images/femia-retention.png', // Retention chart
       '2563:19919', // Case 1.4 — Data-driven personalisation & health monitoring
-      '321:5652',  // Case 1.5
+      '321:5652',  // Case 1.5 — Onboarding
+      '2412:24499', // Case 1.15 — In-app subscription funnel
+      '3213:23870', // Case 1.16 — In-app funnel
       '2376:8118', // Case 1.6
       '321:11601', // Case 1.8 — The Femia world
       '323:21773', // Case 1.11 — A system built to scale
-      '2412:24499', // Case 1.15 — In-app subscription funnel
       '325:6402',  // Case 1.17
       '2410:9909', // Case 1.14 (renumbered)
-      '3213:23870', // Case 1.16 — In-app funnel
       '2322:5732', // Case 1.17
     ],
     mobileMappings: {
@@ -143,7 +143,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Design system & product operations',
-        afterImageIndex: 5,
+        afterImageIndex: 7,
         paragraphs: [
           "Building across iOS, Android, and Web required a design system that could scale without breaking. I built it from scratch to ensure consistency, speed up production, and give the team a shared language to work from.",
         ],
@@ -180,7 +180,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Marketing & user acquisition',
-        afterImageIndex: 6,
+        afterImageIndex: 8,
         paragraphs: [
           "I was responsible for making sure the visual and UX foundation held together across every acquisition and onboarding touchpoint, from marketing creatives to App Store assets to the first screen a new user sees.",
           "To support continuous growth testing, I built a unified design system covering all acquisition surfaces. This let the team iterate fast on hypotheses without sacrificing visual consistency or brand coherence.",
@@ -189,7 +189,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Femia.health: a web platform designed to attract, educate, and convert',
-        afterImageIndex: 9,
+        afterImageIndex: 10,
         paragraphs: [
           "The mobile app wasn't the only entry point — we designed femia.health as a full acquisition, content, and brand trust channel in its own right.",
           "To drive organic traffic and support conversion, we built a suite of functional tools — pregnancy, IVF, implantation, and hCG calculators — that delivered immediate value to users before they ever downloaded the app. Each tool was designed to guide users naturally into web onboarding or app install.",
@@ -198,7 +198,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Brand identity & emotional positioning',
-        afterImageIndex: 4,
+        afterImageIndex: 6,
         paragraphs: [
           "I named the product — Femia — and led the development of its full brand identity, from visual language to emotional positioning.",
           "The brief was clear: stand apart from the sea of pink or clinical period trackers and build something women actually want to be seen using.",
