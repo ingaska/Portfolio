@@ -876,10 +876,6 @@ export const cases: Case[] = [
     accentColor: '#2962FF',
     accordionSections: [
       {
-        title: 'Brief',
-        content: 'Design an onboarding flow for TradingView mobile that segments users by intent, personalises the product experience, and drives sign-up — without adding unnecessary friction for users who already know what they want.',
-      },
-      {
         title: 'Approach',
         content: 'Structured the flow in three phases: segmentation (goal + experience questions), personalisation (asset classes, watchlist), and activation (trendline drawing tutorial, social proof, sign-up). Each screen earns the next by delivering value before asking for commitment.',
       },
