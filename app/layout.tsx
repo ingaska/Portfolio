@@ -12,12 +12,12 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Inga Sumska — Product Design Lead',
+  title: 'Inga Sumska — Product Designer',
   description:
-    'Product Design Lead — from zero to scale, building products people return to. Portfolio of mobile and web products across health, education, lifestyle and entertainment.',
+    'Product Designer — from zero to scale, building products people return to. Portfolio of mobile and web products across health, education, lifestyle and entertainment.',
   openGraph: {
-    title: 'Inga Sumska — Product Design Lead',
-    description: 'Product Design Lead — from zero to scale, building products people return to.',
+    title: 'Inga Sumska — Product Designer',
+    description: 'Product Designer — from zero to scale, building products people return to.',
     type: 'website',
   },
 }
