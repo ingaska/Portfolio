@@ -229,13 +229,14 @@ export const cases: Case[] = [
       '2860:26419', // Slide 5 — Story title templates
       '2863:26580', // Slide 6 — Infographics
       '2895:28710', // Slide 7 — Lists and text blocks
-      '2898:42495', // Slide 8 — Daily advice (personalised stories)
+      '2898:42495', // Slide 9 — Daily advice (personalised stories)
       '2904:30461', // Slide 10 — Texts and arts
-      '2891:27378', // Slide 9 — Art Library: Objects
-      '2896:27700', // Slide 10 — Art Library: Characters
-      '2896:29713', // Slide 11 — Art Library: Daily Life
-      '3267:30484',
-      '3270:9742',
+      '3267:30484', // Slide 11 — Articles
+      '3270:9742',  // Slide 12 — Shorts
+      '3270:10884', // Slide 13 — Chat-bot
+      '2891:27378', // Slide 14 — Art Library: Objects
+      '2896:27700', // Slide 15 — Art Library: Characters
+      '2896:29713', // Slide 16 — Art Library: Daily Life
     ],
     category: 'apps',
     accentColor: '#5E71CD',
@@ -314,7 +315,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Art library',
-        afterImageIndex: 10,
+        afterImageIndex: 13,
         paragraphs: [
           "To support the content system, I built a dedicated art library of object illustrations covering health topics, lifestyle, food, body, and wellness. These assets gave the content team a shared visual vocabulary — so any story could be illustrated quickly without starting from scratch, while staying consistent with the Femia visual identity.",
         ],
