@@ -234,6 +234,7 @@ export const cases: Case[] = [
       '2891:27378', // Slide 9 — Art Library: Objects
       '2896:27700', // Slide 10 — Art Library: Characters
       '2896:29713', // Slide 11 — Art Library: Daily Life
+      '3267:30484',
     ],
     category: 'apps',
     accentColor: '#5E71CD',
