@@ -17,8 +17,8 @@ export default async function HomePage() {
             from zero to scale, building products people return to
           </span>
         </h1>
-        <p className="mt-2 text-sm md:text-base text-[#1a1a1a]/45 font-light">
-          Mobile · Web · AI-built products · Design systems · 0→1
+        <p className="mt-2 text-sm md:text-base text-[#1a1a1a]/65 font-light">
+          Product Design · Mobile · Web · AI-built products · Design systems · 0→1
         </p>
       </section>
 
