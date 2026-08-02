@@ -11,7 +11,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="px-6 md:px-12 pt-28 pb-12 md:pt-44 md:pb-20">
+      <section className="px-6 md:px-12 pt-20 pb-10 md:pt-36 md:pb-16">
         <h1 className="text-[#1a1a1a] text-xl md:text-2xl font-light leading-snug max-w-xl">
           Product Design Lead —{' '}
           <span className="text-[#1a1a1a]/40">
