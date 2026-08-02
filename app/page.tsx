@@ -12,9 +12,12 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="px-6 md:px-12 pt-28 pb-12 md:pt-44 md:pb-20">
         <h1 className="text-[#1a1a1a] text-xl md:text-2xl font-light leading-snug max-w-xl">
-          Product Design Lead
+          Product Design Lead —{' '}
+          <span className="text-[#1a1a1a]/40">
+            from zero to scale, building products people return to
+          </span>
         </h1>
-        <p className="mt-1 text-sm md:text-base text-[#1a1a1a]/45 font-light">
+        <p className="mt-2 text-sm md:text-base text-[#1a1a1a]/45 font-light">
           Mobile · Web · AI-built products · Design systems · 0→1
         </p>
       </section>
