@@ -1,8 +1,8 @@
 export default function AboutSection() {
   return (
-    <section id="about" className="px-6 md:px-12 py-24 md:py-32">
+    <section id="about" className="px-4 md:px-12 pt-10 pb-12 md:pt-14 md:pb-20">
       <div className="max-w-2xl">
-        <p className="text-xs uppercase tracking-widest text-[#1a1a1a]/40 mb-8">
+        <p className="text-xs uppercase tracking-widest text-[#1a1a1a]/40 mb-6">
           About
         </p>
         <div className="space-y-5 text-[#1a1a1a] text-base leading-relaxed">

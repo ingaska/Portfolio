@@ -2,6 +2,7 @@ import { cases } from '@/data/cases'
 import { getFigmaImageUrls } from '@/lib/figma'
 import WorkGrid from '@/components/WorkGrid'
 import AboutSection from '@/components/AboutSection'
+import SkillsSection from '@/components/SkillsSection'
 
 export default async function HomePage() {
   const nodeIds = cases.map((c) => c.figmaNodeId)
@@ -27,6 +28,7 @@ export default async function HomePage() {
         <WorkGrid cases={cases} imageUrls={imageUrls} />
       </section>
 
+      <SkillsSection />
       <AboutSection />
     </>
   )
