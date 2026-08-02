@@ -39,7 +39,7 @@ export default function SkillsSection() {
               {s.category}
             </span>
             <div className="flex flex-col gap-1.5">
-              <p className="text-sm font-medium text-[#1a1a1a] leading-snug">{s.title}</p>
+              <p className="text-base font-medium text-[#1a1a1a] leading-snug">{s.title}</p>
               <p className="text-sm text-[#1a1a1a]/55 leading-relaxed">{s.body}</p>
             </div>
           </div>
