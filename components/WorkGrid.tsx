@@ -23,7 +23,7 @@ export default function WorkGrid({ cases, imageUrls }: WorkGridProps) {
   return (
     <>
       {/* Filter chips */}
-      <div className="flex gap-2 mb-4 md:mb-10">
+      <div className="flex gap-2 mb-6 md:mb-10">
         {FILTERS.map(({ label, value }) => (
           <button
             key={value}
@@ -41,7 +41,7 @@ export default function WorkGrid({ cases, imageUrls }: WorkGridProps) {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 md:gap-y-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 md:gap-y-14 -mx-2 md:mx-0">
         {visible.map((c, i) => (
           <CaseCard
             key={c.slug}
