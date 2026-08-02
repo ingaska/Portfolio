@@ -6,12 +6,12 @@ const skills: { category: string; title: string; body: ReactNode }[] = [
   { category: 'Product types', title: 'I work with mobile and web.', body: 'Shipped iOS, Android apps, marketing sites, B2B dashboards.' },
   { category: 'Fields', title: 'Experience across many fields.', body: 'Femtech, fitness, fintech, healthcare, streaming, education, utilities, iGaming.' },
   { category: 'Experience', title: '10+ years in the craft.', body: 'Shipped real products across brand, product, and motion design.' },
+  { category: 'Team lead', title: "I've led teams.", body: '5 designers in the team. Hiring, onboarding, feedback, one-on-ones — in parallel with an IC role.' },
   { category: 'User research', title: 'I check before I design.', body: 'Interviews, usability testing, market research, A/B tests, looking at the numbers.' },
   { category: 'Design systems', title: 'I build design systems.', body: 'Built from scratch. Managed one used by 25+ UX designers, 200+ brand designers, 250+ products.' },
   { category: 'Branding & identity', title: 'I do brand work.', body: 'Built branding for products from scratch: naming, logo, style, brand guidelines.' },
   { category: 'Motion & AE', title: 'I animate.', body: 'After Effects, UI micro-interactions, onboarding, brand animation.' },
   { category: 'Frontend literacy', title: 'Background in dev.', body: 'HTML and CSS from my early career. I can talk to developers in their language.' },
-  { category: 'Team lead', title: "I've led teams.", body: '5 designers in the team. Hiring, onboarding, feedback, one-on-ones — in parallel with an IC role.' },
   {
     category: 'Own project',
     title: 'Learning AI by doing.',
