@@ -916,35 +916,6 @@ export const cases: Case[] = [
     textSections: [],
   },
   {
-    slug: 'partnering-one',
-    title: 'partneringONE',
-    subtitle: 'B2B Matchmaking Platform',
-    description: "partneringONE is the gold standard events platform used by delegates worldwide to contact other participants and schedule 1-to-1 meetings. First created in 2006 to automate scheduling for EBD Group — the pioneer in international biopharma partnering events — and evolved into the best partnering experience in the industry.",
-    role: 'Product Designer',
-    year: '2017',
-    platforms: ['Web'],
-    industry: 'B2B / Events',
-    tags: ['B2B', 'Enterprise', 'Events'],
-    category: 'dashboards',
-    figmaNodeId: '3299:41352',
-    detailNodeIds: [
-      '3080:29236',
-    ],
-    accentColor: '#6B21D6',
-    cardBorder: '1px solid #E5E5E5',
-    accordionSections: [
-      {
-        title: 'About',
-        content: "partneringONE was first created in 2006 to automate the scheduling of meetings for EBD Group, the pioneer in international biopharma business development and partnering events. Since then, the platform has evolved to provide what is universally agreed to be the best partnering experience for events.",
-      },
-      {
-        title: 'Approach',
-        content: "Redesigned the full platform experience — profiles, meeting scheduling, company discovery, and delegate management — with a focus on clarity and efficiency for busy event professionals. Worked across the full product surface: information architecture, interaction design, and a scalable component library.",
-      },
-    ],
-    textSections: [],
-  },
-  {
     slug: 'immotrack',
     title: 'Immo Track',
     subtitle: 'Facility Management Dashboard',
