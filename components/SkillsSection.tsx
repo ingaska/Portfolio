@@ -13,9 +13,9 @@ const skills: { category: string; title: string; body: ReactNode }[] = [
   { category: 'Motion & AE', title: 'I animate.', body: 'After Effects, UI micro-interactions, onboarding, brand animation.' },
   { category: 'Frontend literacy', title: 'Background in dev.', body: 'HTML and CSS from my early career. I can talk to developers in their language.' },
   {
-    category: 'Own project',
+    category: 'AI stack',
     title: 'Learning AI by doing.',
-    body: <>Created design, frontend, backend, admin panel for my pet project: <a href="https://rideenduro.cy" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-70">rideenduro.cy</a></>,
+    body: 'AI-powered workflow: Claude, Figma agents, image and video generation — across the full design process.',
   },
 ]
 
