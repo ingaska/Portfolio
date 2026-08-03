@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="bg-[#f7f7f5] border-t border-[#1a1a1a]/8">
 
       {/* Main footer grid */}
-      <div className="px-8 md:px-12 pt-14 pb-10 grid grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="px-8 md:px-12 pt-14 pb-10 grid grid-cols-2 md:grid-cols-5 gap-10">
 
         {/* Brand col */}
         <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
@@ -16,18 +16,20 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Work col */}
-        <div className="flex flex-col gap-3">
+        {/* Work col — 2-column grid to keep it compact */}
+        <div className="col-span-2 md:col-span-2 flex flex-col gap-3">
           <span className="text-[10px] uppercase tracking-widest text-[#1a1a1a]/35 mb-1">Products</span>
-          {cases.map((c) => (
-            <Link
-              key={c.slug}
-              href={`/work/${c.slug}`}
-              className="text-sm text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors"
-            >
-              {c.title}
-            </Link>
-          ))}
+          <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+            {cases.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/work/${c.slug}`}
+                className="text-sm text-[#1a1a1a]/60 hover:text-[#1a1a1a] transition-colors"
+              >
+                {c.title}
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Pages col */}

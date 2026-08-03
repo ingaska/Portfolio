@@ -916,6 +916,44 @@ export const cases: Case[] = [
     textSections: [],
   },
   {
+    slug: 'partnering-one',
+    title: 'partneringONE',
+    subtitle: 'Event Partnering Platform · Informa',
+    description: "End-to-end redesign of the platform that powers 1-to-1 meeting scheduling at major life sciences and biopharma partnering events worldwide. Used by thousands of delegates to find, contact, and book meetings with relevant partners across 30+ annual events run by Informa Connect.",
+    role: 'Product Designer',
+    year: '2017',
+    platforms: ['Web'],
+    industry: 'B2B / Events',
+    tags: ['B2B', 'Enterprise', 'Events'],
+    category: 'dashboards',
+    figmaNodeId: '3299:41352',
+    detailNodeIds: [
+      '3297:32925', // 1
+      '3297:32883', // 2
+      '3297:32890', // 3
+      '3299:8367',  // 4
+      '3297:32918', // 5
+      '3297:32897', // 5.1
+      '3297:32904', // 5.2
+      '3297:32894', // 6
+      '3297:32887', // 7
+      '3297:32912', // 8
+      '3297:32913', // 8.1
+      '3297:32902', // 8.2
+      '3297:32889', // 9
+      '3297:32907', // 10
+      '3297:32891', // 11
+      '3297:32893', // 12
+      '3297:32930', // style guide 1
+      '3297:32926', // style guide 2
+      '3297:32927', // style guide 3
+    ],
+    accentColor: '#6B21D6',
+    cardBorder: '1px solid #E5E5E5',
+    accordionSections: [],
+    textSections: [],
+  },
+  {
     slug: 'immotrack',
     title: 'Immo Track',
     subtitle: 'Facility Management Dashboard',
