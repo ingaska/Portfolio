@@ -14,7 +14,7 @@ const skills: { category: string; title: string; body: ReactNode }[] = [
   { category: 'Frontend literacy', title: 'Background in dev.', body: 'HTML and CSS from my early career. I can talk to developers in their language.' },
   {
     category: 'AI stack',
-    title: 'Learning AI by doing.',
+    title: 'AI in my workflow.',
     body: 'AI-powered workflow: Claude, Figma agents, image and video generation — across the full design process.',
   },
 ]
