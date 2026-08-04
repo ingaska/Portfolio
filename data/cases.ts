@@ -172,7 +172,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Personalised content as a core retention engine',
-        afterImageIndex: 3,
+        afterImageIndex: 2,
         paragraphs: [
           "From early on, content was treated not as an addition to the product but as a core retention driver. The goal was to build a digital companion that gives users something genuinely useful every single day, not just when they open the app to log something.",
           "We built a continuous delivery system that adapted to each user's cycle phase, fertility goals, and logged symptoms.",
@@ -488,7 +488,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Original soundpacks & visual identity',
-        afterImageIndex: 0,
+        afterImageIndex: 1,
         paragraphs: [
           "Every soundpack in Groovy Loops was original — crafted from scratch by a professional sound producer specifically for the app. No stock samples, no recycled kits. Each pack had its own genre, mood, and personality, giving users a curated palette that felt premium from the first beat.",
           "To match the quality of the audio, the design team created original cover artwork for every soundpack — each with a distinct visual style that reflected the genre and energy of the sounds inside. The covers became part of the browsing experience, making discovery feel like flipping through a record collection rather than scrolling a list.",
