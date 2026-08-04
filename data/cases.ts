@@ -285,7 +285,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Content creation workflow',
-        afterImageIndex: 4,
+        afterImageIndex: 3,
         paragraphs: [
           "The system wasn't just design assets — it was a production process. Content managers worked from templated wireframes to draft stories. Visual designers used design system components to bring them to life. Every piece then went through a structured review: medical experts checked accuracy, colleagues reviewed tone, and the design lead and content lead signed off before publishing to Contentful.",
           "This workflow meant quality didn't depend on individual effort — it was built into how the system worked.",
