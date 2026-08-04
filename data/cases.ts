@@ -494,6 +494,188 @@ export const cases: Case[] = [
     ],
   },
   {
+    slug: 'amazing-piano',
+    title: 'Amazing Piano',
+    subtitle: 'Piano Learning App',
+    description: "Full ownership of a piano learning app for iPad — brand, two playing modes (gamified playground and structured practice), music theory content, motion design, and monetisation.",
+    role: 'Product Design Lead',
+    year: '2020',
+    platforms: ['iPad'],
+    industry: 'Music Education',
+    tags: ['Music', 'Education'],
+    figmaNodeId: '3316:25692',
+    detailNodeIds: [
+      '18:1099',     // index 0 — overview
+      '3316:26809',  // index 1 — Playground mode
+      '3316:27054',  // index 2 — Playground mode 2
+      '3317:54213',  // index 3 — Practice mode
+      '3318:33734',  // index 4 — Practice mode 2
+      '3318:33897',  // index 5 — Practice mode 3
+      '3319:39708',  // index 6 — music theory 1
+      '3319:39946',  // index 7 — music theory 2
+      '3319:40253',  // index 8 — music theory 3
+      '204:43',      // index 9 — visual language
+    ],
+    category: 'apps',
+    accentColor: '#111827',
+    textSections: [
+      {
+        title: 'Music theory, built in',
+        afterImageIndex: 5,
+        paragraphs: [
+          "Most piano apps skip music theory entirely or bury it in separate lessons. Amazing Piano treats it as part of the playing experience — woven into the flow, not bolted on.",
+          "I designed and illustrated a full set of theory slides covering the foundations: notes and their positions on the staff, rhythmic values, key signatures, scales, and chord construction. The visual style was created from scratch — custom illustrations that make abstract concepts feel tactile and immediate.",
+          "The result is a player who doesn't just follow the notes — they start to understand why they work.",
+        ],
+      },
+      {
+        title: 'Motion, interaction & celebration',
+        afterImageIndex: 8,
+        paragraphs: [
+          "Three areas where motion and interaction design carried the most weight.",
+        ],
+        items: [
+          {
+            label: 'Motion design',
+            description: 'Every transition, note animation, and onboarding flow was choreographed to feel responsive and alive — reinforcing the sense that the app reacts to the player, not the other way around.',
+          },
+          {
+            label: 'Interactive playground',
+            description: 'The falling-tile experience was designed to be immediately playable and visually clear — colour-coded keys, smooth timing, and instant feedback that makes a complete beginner feel like they can actually play.',
+          },
+          {
+            label: 'Congratulation screens',
+            description: 'Completion moments were treated as full design beats — illustrated, animated, and emotionally rewarding. Turning the end of a session into something worth coming back for.',
+          },
+        ],
+      },
+      {
+        title: 'Two ways to play',
+        afterImageIndex: 0,
+        paragraphs: [
+          "Amazing Piano is built around two distinct experiences — each designed for a different mood and intention, but both engineered to keep users coming back.",
+        ],
+        items: [
+          {
+            label: 'Playground Mode',
+            description: "Gamified and designed for pure fun. Coloured tiles fall in time with the music — tap them as they hit the keys. No pressure, no wrong moves, just the satisfaction of playing along to real songs from the first session. It's the hook that gets beginners past the intimidation of a piano.",
+          },
+          {
+            label: 'Practice Mode',
+            description: "Structured for real learning. Users read notation, follow guided exercises, and build muscle memory through repetition — with real-time feedback on accuracy and timing. It's where engagement becomes skill.",
+          },
+        ],
+      },
+    ],
+    accordionSections: [
+      {
+        title: 'Challenge',
+        content: "Most piano apps assume some prior knowledge. Amazing Piano needed to meet complete beginners at first touch and carry them to playing real songs — without overwhelming them or losing them after the opening session.",
+      },
+      {
+        title: 'Approach',
+        content: "Designed the full lesson and progression system: animated note guides, finger placement feedback, a song library structured by difficulty, and a gamification layer that rewarded consistency. Owned the visual identity and motion design end-to-end, and shaped the monetisation flow to convert engaged beginners into subscribers.",
+      },
+    ],
+    videos: [
+      {
+        src: '/videos/amazing-piano-performance.mp4',
+        caption: 'Performance Mode — real-time note guidance with finger placement feedback',
+        afterImageIndex: 2,
+      },
+      {
+        src: '/videos/amazing-piano-lessons-transition.mp4',
+        caption: 'Lesson transitions — animated flow between practice stages',
+        afterImageIndex: 8,
+      },
+      {
+        src: '/videos/amazing-piano-score.mp4',
+        caption: 'Congratulations screen — score reveal after completing a practice session',
+        afterImageIndex: 8,
+      },
+    ],
+  },
+  {
+    slug: 'groovy-loops',
+    title: 'Groovy Loops',
+    subtitle: 'Beat Maker',
+    description: "Took full ownership from concept to launch — naming, branding, UI system, motion design, and App Store go-to-market, all solo.",
+    role: 'Product Design Lead',
+    year: '2020',
+    platforms: ['iOS'],
+    industry: 'Music',
+    tags: ['Music', 'Entertainment'],
+    figmaNodeId: '2578:27098',
+    detailNodeIds: [
+      '10:3',      // Cases 3.2
+      '12:28704',  // Cases 3.3
+      '13:7439',   // Cases 3.4
+      '2329:8408', // Cases 3.5
+    ],
+    mobileMappings: {
+      '10:3':       ['2820:30300', '2820:30328'],
+      '12:28704':   ['3294:32796', '3294:32821'],
+      '13:7439':    ['3297:33083', '3297:33621'],
+      '2329:8408':  ['3297:34361', '3297:40789'],
+    },
+    category: 'apps',
+    accentColor: '#2D0A5E',
+    textSections: [
+      {
+        title: 'Core experience & creative mechanics',
+        afterImageIndex: 0,
+        paragraphs: [
+          "Every design decision was built around one idea: make music creation feel like play, not production. The interface had to remove every barrier between a first tap and a finished beat.",
+        ],
+        items: [
+          {
+            label: 'Beat grid',
+            description: 'A visual, tap-based sequencer that lets users build rhythms intuitively — no musical knowledge required.',
+          },
+          {
+            label: 'Curated soundpacks',
+            description: 'Original instrument kits across genres, giving users creative variety while keeping choices focused and non-overwhelming.',
+          },
+          {
+            label: 'Real-time effects',
+            description: 'Instant audio manipulation — filters, reverb, tempo — so every session feels like experimentation, not configuration.',
+          },
+          {
+            label: 'Loop layering',
+            description: 'A simple stacking system that turns individual sounds into full compositions, building complexity without adding friction.',
+          },
+          {
+            label: 'Share & export',
+            description: 'One-tap sharing that turned personal creations into social content — the mechanic that made the product go viral on YouTube.',
+          },
+        ],
+      },
+      {
+        title: 'Original soundpacks & visual identity',
+        afterImageIndex: 0,
+        paragraphs: [
+          "Every soundpack in Groovy Loops was original — crafted from scratch by a professional sound producer specifically for the app. No stock samples, no recycled kits. Each pack had its own genre, mood, and personality, giving users a curated palette that felt premium from the first beat.",
+          "To match the quality of the audio, the design team created original cover artwork for every soundpack — each with a distinct visual style that reflected the genre and energy of the sounds inside. The covers became part of the browsing experience, making discovery feel like flipping through a record collection rather than scrolling a list.",
+          "The result was a product where sound and visuals were inseparable — every pack felt like a complete creative world to explore.",
+        ],
+      },
+    ],
+    accordionSections: [
+      {
+        title: 'Challenge',
+        content: "Music creation tools are intimidating — and most people quit before they make anything. Groovy Loops needed to feel like immersive play from the first tap, not a DAW. The challenge was designing an experience that pulled users in through engagement and gamification, gave them original soundpacks to build with, and made creating feel so effortless they'd keep coming back just to see what they could make next.",
+      },
+      {
+        title: 'Approach',
+        content: "Built everything from scratch: name, brand identity, logo, colour system, and the full UI. Designed each core screen — beat grid, instrument selector, effects panel — around instant gratification. Created motion design for transitions and sound feedback, and produced all App Store marketing assets and go-to-market materials.",
+      },
+      {
+        title: 'Results',
+        content: "iOS · App Store launch · Users shared their tracks on YouTube, making the product go viral organically.",
+      },
+    ],
+  },
+  {
     slug: 'tongo',
     title: 'Tongo',
     subtitle: 'English Learning App',
@@ -593,158 +775,6 @@ export const cases: Case[] = [
       {
         title: 'Results',
         content: "3M+ users · iOS, Android & Web · Led a team of 2 designers",
-      },
-    ],
-  },
-  {
-    slug: 'groovy-loops',
-    title: 'Groovy Loops',
-    subtitle: 'Beat Maker',
-    description: "Took full ownership from concept to launch — naming, branding, UI system, motion design, and App Store go-to-market, all solo.",
-    role: 'Product Design Lead',
-    year: '2020',
-    platforms: ['iOS'],
-    industry: 'Music',
-    tags: ['Music', 'Entertainment'],
-    figmaNodeId: '2578:27098',
-    detailNodeIds: [
-      '10:3',      // Cases 3.2
-      '12:28704',  // Cases 3.3
-      '13:7439',   // Cases 3.4
-      '2329:8408', // Cases 3.5
-    ],
-    mobileMappings: {
-      '10:3':       ['2820:30300', '2820:30328'],
-      '12:28704':   ['3294:32796', '3294:32821'],
-      '13:7439':    ['3297:33083', '3297:33621'],
-      '2329:8408':  ['3297:34361', '3297:40789'],
-    },
-    category: 'apps',
-    accentColor: '#2D0A5E',
-    textSections: [
-      {
-        title: 'Core experience & creative mechanics',
-        afterImageIndex: 0,
-        paragraphs: [
-          "Every design decision was built around one idea: make music creation feel like play, not production. The interface had to remove every barrier between a first tap and a finished beat.",
-        ],
-        items: [
-          {
-            label: 'Beat grid',
-            description: 'A visual, tap-based sequencer that lets users build rhythms intuitively — no musical knowledge required.',
-          },
-          {
-            label: 'Curated soundpacks',
-            description: 'Original instrument kits across genres, giving users creative variety while keeping choices focused and non-overwhelming.',
-          },
-          {
-            label: 'Real-time effects',
-            description: 'Instant audio manipulation — filters, reverb, tempo — so every session feels like experimentation, not configuration.',
-          },
-          {
-            label: 'Loop layering',
-            description: 'A simple stacking system that turns individual sounds into full compositions, building complexity without adding friction.',
-          },
-          {
-            label: 'Share & export',
-            description: 'One-tap sharing that turned personal creations into social content — the mechanic that made the product go viral on YouTube.',
-          },
-        ],
-      },
-      {
-        title: 'Original soundpacks & visual identity',
-        afterImageIndex: 0,
-        paragraphs: [
-          "Every soundpack in Groovy Loops was original — crafted from scratch by a professional sound producer specifically for the app. No stock samples, no recycled kits. Each pack had its own genre, mood, and personality, giving users a curated palette that felt premium from the first beat.",
-          "To match the quality of the audio, the design team created original cover artwork for every soundpack — each with a distinct visual style that reflected the genre and energy of the sounds inside. The covers became part of the browsing experience, making discovery feel like flipping through a record collection rather than scrolling a list.",
-          "The result was a product where sound and visuals were inseparable — every pack felt like a complete creative world to explore.",
-        ],
-      },
-    ],
-    accordionSections: [
-      {
-        title: 'Challenge',
-        content: "Music creation tools are intimidating — and most people quit before they make anything. Groovy Loops needed to feel like immersive play from the first tap, not a DAW. The challenge was designing an experience that pulled users in through engagement and gamification, gave them original soundpacks to build with, and made creating feel so effortless they'd keep coming back just to see what they could make next.",
-      },
-      {
-        title: 'Approach',
-        content: "Built everything from scratch: name, brand identity, logo, colour system, and the full UI. Designed each core screen — beat grid, instrument selector, effects panel — around instant gratification. Created motion design for transitions and sound feedback, and produced all App Store marketing assets and go-to-market materials.",
-      },
-      {
-        title: 'Results',
-        content: "iOS · App Store launch · Users shared their tracks on YouTube, making the product go viral organically.",
-      },
-    ],
-  },
-  {
-    slug: 'amazing-piano',
-    title: 'Amazing Piano',
-    subtitle: 'Piano Learning App',
-    description: "Owned the complete product experience — from brand identity and lesson architecture to motion design and monetisation — for a piano learning app built for iPad.",
-    role: 'Product Design Lead',
-    year: '2020',
-    platforms: ['iPad'],
-    industry: 'Music Education',
-    tags: ['Music', 'Education'],
-    figmaNodeId: '2578:27064',
-    detailNodeIds: [
-      '18:1099', // Cases 3.7
-      '204:43',  // Cases 3.8
-    ],
-    category: 'apps',
-    accentColor: '#111827',
-    textSections: [
-      {
-        title: 'Learning system & core mechanics',
-        afterImageIndex: 0,
-        paragraphs: [
-          "The product was designed to take someone who had never touched a piano and guide them to playing real songs — with every mechanic built around making progress feel immediate and visible.",
-        ],
-        items: [
-          {
-            label: 'Guided note system',
-            description: 'Animated falling notes with real-time finger placement feedback, turning sheet music into an intuitive visual language.',
-          },
-          {
-            label: 'Progressive song library',
-            description: 'Songs structured by difficulty — from single-hand melodies to full arrangements — so users always have the right challenge.',
-          },
-          {
-            label: 'Lesson architecture',
-            description: 'Bite-sized lessons that teach technique through playing, not theory — keeping sessions short enough to repeat and rewarding enough to finish.',
-          },
-          {
-            label: 'Practice streaks & rewards',
-            description: 'A gamification layer that turned daily practice into a habit loop, rewarding consistency over perfection.',
-          },
-        ],
-      },
-    ],
-    accordionSections: [
-      {
-        title: 'Challenge',
-        content: "Most piano apps assume some prior knowledge. Amazing Piano needed to meet complete beginners at first touch and carry them to playing real songs — without overwhelming them or losing them after the opening session.",
-      },
-      {
-        title: 'Approach',
-        content: "Designed the full lesson and progression system: animated note guides, finger placement feedback, a song library structured by difficulty, and a gamification layer that rewarded consistency. Owned the visual identity and motion design end-to-end, and shaped the monetisation flow to convert engaged beginners into subscribers.",
-      },
-    ],
-    videos: [
-      {
-        src: '/videos/amazing-piano-performance.mp4',
-        caption: 'Performance Mode — real-time note guidance with finger placement feedback',
-        afterImageIndex: 0,
-      },
-      {
-        src: '/videos/amazing-piano-lessons-transition.mp4',
-        caption: 'Lesson transitions — animated flow between practice stages',
-        afterImageIndex: 0,
-      },
-      {
-        src: '/videos/amazing-piano-score.mp4',
-        caption: 'Congratulations screen — score reveal after completing a practice session',
-        afterImageIndex: 0,
       },
     ],
   },
