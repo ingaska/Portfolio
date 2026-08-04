@@ -147,6 +147,23 @@ export default async function CasePage({ params }: Props) {
                 </div>
               )}
 
+              {/* Videos after this image */}
+              {c.videos?.filter((v) => (v.afterImageIndex ?? Infinity) === i).map((v, j) => (
+                <div key={`video-${i}-${j}`} className="flex flex-col gap-2">
+                  <video
+                    src={v.src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-auto rounded-2xl"
+                  />
+                  {v.caption && (
+                    <p className="text-xs text-[#1a1a1a]/40 px-1">{v.caption}</p>
+                  )}
+                </div>
+              ))}
+
               {/* Text sections — same position on mobile and desktop */}
               {sectionsAfterThis?.map((section, j) => (
                 <div
@@ -192,6 +209,23 @@ export default async function CasePage({ params }: Props) {
             </div>
           )
         })}
+
+        {/* Videos with no afterImageIndex — appended after all images */}
+        {c.videos?.filter((v) => v.afterImageIndex === undefined).map((v, i) => (
+          <div key={`video-end-${i}`} className="flex flex-col gap-2">
+            <video
+              src={v.src}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-auto rounded-2xl"
+            />
+            {v.caption && (
+              <p className="text-xs text-[#1a1a1a]/40 px-1">{v.caption}</p>
+            )}
+          </div>
+        ))}
 
         {/* Mobile-only frames appended after all main content */}
         {mobileAppendIds.length > 0 && (

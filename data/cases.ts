@@ -19,6 +19,12 @@ export interface TextSection {
 
 export type CaseCategory = 'apps' | 'dashboards'
 
+export interface CaseVideo {
+  src: string       // path under /public, e.g. /videos/foo.mp4
+  caption?: string  // short label shown below the video
+  afterImageIndex?: number  // insert after this image index (default: appended at end)
+}
+
 export interface Case {
   slug: string
   title: string
@@ -40,6 +46,7 @@ export interface Case {
   cardBorder?: string
   accordionSections: AccordionSection[]
   textSections?: TextSection[]  // optional text blocks shown before images in right panel
+  videos?: CaseVideo[]
 }
 
 export const cases: Case[] = [
@@ -127,7 +134,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Data-driven personalisation & health monitoring',
-        afterImageIndex: 1,
+        afterImageIndex: 0,
         paragraphs: [
           "We built a suite of health monitoring tools that turned raw cycle data into clear, personal guidance — fertility window calculations, cycle pattern analysis, ovulation test logging, and a health profile that shaped daily insights and long-term recommendations.",
           "The result was a product that felt like it genuinely understood each user's body, acting like a personalised health companion that got more useful with every cycle logged.",
@@ -543,7 +550,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Product concept, naming & Tongo World',
-        afterImageIndex: 1,
+        afterImageIndex: 0,
         paragraphs: [
           "I named the product Tongo — a playful remix of \"Tongue,\" reflecting the idea of language as a living, everyday skill rather than something you study and forget.",
           "To make learning emotionally memorable, I created the central character: Tongo, an English-speaking corgi who became the product's guide, mascot, and tone of voice all in one.",
@@ -646,7 +653,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Original soundpacks & visual identity',
-        afterImageIndex: 1,
+        afterImageIndex: 0,
         paragraphs: [
           "Every soundpack in Groovy Loops was original — crafted from scratch by a professional sound producer specifically for the app. No stock samples, no recycled kits. Each pack had its own genre, mood, and personality, giving users a curated palette that felt premium from the first beat.",
           "To match the quality of the audio, the design team created original cover artwork for every soundpack — each with a distinct visual style that reflected the genre and energy of the sounds inside. The covers became part of the browsing experience, making discovery feel like flipping through a record collection rather than scrolling a list.",
@@ -721,6 +728,23 @@ export const cases: Case[] = [
       {
         title: 'Approach',
         content: "Designed the full lesson and progression system: animated note guides, finger placement feedback, a song library structured by difficulty, and a gamification layer that rewarded consistency. Owned the visual identity and motion design end-to-end, and shaped the monetisation flow to convert engaged beginners into subscribers.",
+      },
+    ],
+    videos: [
+      {
+        src: '/videos/amazing-piano-performance.mp4',
+        caption: 'Performance Mode — real-time note guidance with finger placement feedback',
+        afterImageIndex: 0,
+      },
+      {
+        src: '/videos/amazing-piano-lessons-transition.mp4',
+        caption: 'Lesson transitions — animated flow between practice stages',
+        afterImageIndex: 0,
+      },
+      {
+        src: '/videos/amazing-piano-score.mp4',
+        caption: 'Congratulations screen — score reveal after completing a practice session',
+        afterImageIndex: 0,
       },
     ],
   },
