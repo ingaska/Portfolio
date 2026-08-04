@@ -350,7 +350,8 @@ export const cases: Case[] = [
       '3319:39708',  // index 6 — music theory 1
       '3319:39946',  // index 7 — music theory 2
       '3319:40253',  // index 8 — music theory 3
-      '204:43',      // index 9 — visual language
+      '3322:80243',  // index 9 — music theory 4
+      '204:43',      // index 10 — visual language
     ],
     category: 'apps',
     accentColor: '#111827',
