@@ -330,170 +330,6 @@ export const cases: Case[] = [
     ],
   },
   {
-    slug: 'femia-wrapped',
-    title: 'Femia Wrapped',
-    subtitle: 'Femia · Year in Review',
-    description: "Designed a Spotify Wrapped-style year-in-review experience for Femia users — turning a year of personal health data into a shareable, emotional recap. The feature surfaced cycle patterns, fertility milestones, and health habits in a way that felt personal, celebratory, and distinctly Femia.",
-    role: 'Product Design Lead',
-    year: '2023',
-    platforms: ['iOS', 'Android'],
-    industry: 'Femtech',
-    tags: ['Femtech', 'Feature Design'],
-    figmaNodeId: '3013:31570',
-    detailNodeIds: [
-      '3013:31570', // Title — Your 2023 with Femia
-      '3013:28012', // Slide 1 — Screens overview
-      '3035:30693', // Slide 2
-      '3036:32182', // Slide 3
-      '3036:32895', // Slide 4
-      '3062:50527', // Slide 5
-    ],
-    mobileMappings: {
-      '3013:28012': ['3064:26819', '3064:27498'],
-      '3035:30693': ['3073:30442', '3073:30801'],
-      '3036:32182': ['3073:31952', '3073:32029'],
-      '3036:32895': ['3073:32822', '3073:32926'],
-      '3062:50527': ['3073:33365', '3073:33446'],
-    },
-    category: 'apps',
-    accentColor: '#5E71CD',
-    accordionSections: [
-      {
-        title: 'Challenge',
-        content: "Health data is deeply personal — a year-in-review had to feel meaningful and celebratory, not clinical. The feature needed to surface cycle patterns, fertility milestones, and health habits in a way that resonated emotionally without oversimplifying sensitive information.",
-      },
-      {
-        title: 'Approach',
-        content: "Designed a story-driven format that revealed personal insights one at a time — each screen a moment of recognition. The visual language borrowed from Femia's brand identity: warm, expressive, and distinctly not generic. Interactions were designed to feel rewarding and shareable.",
-      },
-      {
-        title: 'Results',
-        content: "Launched as a seasonal feature for 1.2M+ users · High share rates · Strong engagement across the recap flow",
-      },
-    ],
-    textSections: [],
-  },
-  {
-    slug: 'femia-brand',
-    title: 'Femia Brand Identity',
-    subtitle: 'Femia · Brand Guidelines',
-    description: "I named the product and built the full brand identity from scratch — visual language, design principles, tone of voice, and a complete illustration system. The brief was to create something women would genuinely want to be seen using: warm, modern, and distinctly not another pink period tracker.",
-    role: 'Brand & Product Design Lead',
-    year: '2022',
-    platforms: ['iOS', 'Android', 'Web'],
-    industry: 'Femtech',
-    tags: ['Femtech', 'Branding'],
-    figmaNodeId: '2949:30834',
-    detailNodeIds: [
-      '2949:31875', // Mission
-      '2949:31890', // Values — Life-time value
-      '2949:31922', // Values — 2
-      '2949:31949', // Values — 3
-      '2949:31960', // Values — 4
-      '2949:31974', // Values — 5
-      '2949:31728', // Who is she — 1
-
-      '2949:31170', // Design Principles — 1
-      '2949:31212', // Design Principles — 2
-      '2949:31380', // Design Principles — 3
-      '2949:31390', // Design Principles — 4
-      '2949:31199', // Tone of Voice — intro
-      '2949:31281', // Tone of Voice — definition
-      '2949:31316', // Tone of Voice — UX influence
-      '2949:31324', // Tone of Voice — 3
-      '2949:31332', // Tone of Voice — 4
-      '2949:31349', // Tone of Voice — Do's
-      '2949:31357', // Tone of Voice — 6
-      '2949:31612', // Logo — naming & concept
-      '2949:31623', // Logo — usage on backgrounds
-      '2949:31136', // Colors — palette overview
-      '2949:30888', // Colors — primary
-      '2949:31021', // Colors — secondary
-      '2949:31400', // Fonts
-      '2949:31634', // Brand Elements — Graphics
-      '2949:31757', // Brand Elements — Graphics composition
-      '2949:30250', // Illustrations
-      '2949:30243', // Photos — People
-      '2949:30236', // Photos — 2
-      '2949:30817', // Photos — Relationship and Pregnancy
-      '2949:30652', // Infographic
-      '2949:30583', // Infographic — 2
-      '2949:28327', // In use — Photo guidelines
-      '2949:29595', // Infographic — 3
-      '2949:29608', // Infographic — 4
-      '2949:29623', // Infographic — 5
-      '2949:29636', // Infographic — 6
-      '2949:29649', // Infographic — 7
-      '2949:29662', // Infographic — 8
-      '2949:29774', // Infographic — 9
-      '2949:30161', // Infographic — 10
-      '2949:29878', // Infographic — 11
-      '2949:28485', // Infographic — 12
-      '2949:28967', // Infographic — 13
-      '2949:29441', // Infographic — 14
-      '2949:28342', // In use — Text and Picture
-      '1346:1837',
-      '1342:1641',
-      '1342:1941',
-      '1346:1640',
-      '1346:1670',
-      '1346:1696',
-      '1346:1751',
-      '1346:1785',
-      '1346:1812',
-    ],
-    category: 'apps',
-    accentColor: '#4C61C7',
-    accordionSections: [
-      {
-        title: 'Challenge',
-        content: "Women's health apps tend to fall into two traps: overly clinical or aggressively pink. Femia needed a brand that felt warm and trustworthy without leaning on either. The identity had to work across a product built for real life — fertility, pregnancy, postpartum — and appeal to women who don't see themselves in the usual femtech aesthetic.",
-      },
-      {
-        title: 'Approach',
-        content: "Started from the name — Femia combines 'Fem' (female) and 'Mia' (mine), making it both universal and personal. Built the full brand system from scratch: mission and values framework, user persona, design principles, tone of voice, logo, colour palette, typography, graphic elements, illustration style, and photography guidelines. Every decision was made to feel approachable without being soft, and confident without being clinical.",
-      },
-      {
-        title: 'Results',
-        content: "A brand system adopted across iOS, Android, and Web — used as the foundation for the full product design system, all marketing materials, and the App Store presence. The illustration style and visual tone were validated through user feedback and became one of the most recognisable parts of the product.",
-      },
-    ],
-    textSections: [
-      {
-        title: 'Brand foundation',
-        afterImageIndex: 0,
-        paragraphs: [
-          "The brand started with a clear mission: improve women's health and wellbeing through accessible technology. Everything else — visual identity, tone, illustration style — was built to serve that intent.",
-          "The target user isn't an abstract demographic. She's active, curious, health-aware, and expects a product that understands her without talking down to her. That profile shaped every design decision from colour to copy.",
-        ],
-      },
-      {
-        title: 'Values & design principles',
-        afterImageIndex: 3,
-        paragraphs: [
-          "The brand values centre on life-time companionship — empowering women to take control of their health at every stage of life, not just at a single moment.",
-          "The design principles reflect this: simple, intuitive, friendly, trustworthy, and universal. The language had to be warm and caring while remaining expert and calm — never preachy, never patronising.",
-        ],
-      },
-      {
-        title: 'Logo & colour system',
-        afterImageIndex: 6,
-        paragraphs: [
-          "The logo is deliberately minimal — a clean wordmark that works at any size and on any background. Simple text logo for maximum recognition and communication clarity.",
-          "The colour palette is built around Bottichelli (a warm periwinkle blue) as the primary brand colour, paired with Carnation for warmth, and supported by secondary palettes — Smoothie, Aqua, and Angel — that give the content system its tonal range.",
-        ],
-      },
-      {
-        title: 'Brand elements & illustration',
-        afterImageIndex: 11,
-        paragraphs: [
-          "A set of organic graphic elements — circles, leaves, drops, rings, seeds — forms the visual texture of the brand. These shapes appear across the product, content, and marketing, giving Femia a recognisable decorative language that feels natural rather than geometric.",
-          "The illustration style was designed to represent real women across life stages and ethnicities — diverse, grounded, and never idealised. Photography guidelines reinforce the same approach: authentic, natural, un-posed people in real life.",
-        ],
-      },
-    ],
-  },
-  {
     slug: 'amazing-piano',
     title: 'Amazing Piano',
     subtitle: 'Piano Learning App',
@@ -672,6 +508,170 @@ export const cases: Case[] = [
       {
         title: 'Results',
         content: "iOS · App Store launch · Users shared their tracks on YouTube, making the product go viral organically.",
+      },
+    ],
+  },
+  {
+    slug: 'femia-wrapped',
+    title: 'Femia Wrapped',
+    subtitle: 'Femia · Year in Review',
+    description: "Designed a Spotify Wrapped-style year-in-review experience for Femia users — turning a year of personal health data into a shareable, emotional recap. The feature surfaced cycle patterns, fertility milestones, and health habits in a way that felt personal, celebratory, and distinctly Femia.",
+    role: 'Product Design Lead',
+    year: '2023',
+    platforms: ['iOS', 'Android'],
+    industry: 'Femtech',
+    tags: ['Femtech', 'Feature Design'],
+    figmaNodeId: '3013:31570',
+    detailNodeIds: [
+      '3013:31570', // Title — Your 2023 with Femia
+      '3013:28012', // Slide 1 — Screens overview
+      '3035:30693', // Slide 2
+      '3036:32182', // Slide 3
+      '3036:32895', // Slide 4
+      '3062:50527', // Slide 5
+    ],
+    mobileMappings: {
+      '3013:28012': ['3064:26819', '3064:27498'],
+      '3035:30693': ['3073:30442', '3073:30801'],
+      '3036:32182': ['3073:31952', '3073:32029'],
+      '3036:32895': ['3073:32822', '3073:32926'],
+      '3062:50527': ['3073:33365', '3073:33446'],
+    },
+    category: 'apps',
+    accentColor: '#5E71CD',
+    accordionSections: [
+      {
+        title: 'Challenge',
+        content: "Health data is deeply personal — a year-in-review had to feel meaningful and celebratory, not clinical. The feature needed to surface cycle patterns, fertility milestones, and health habits in a way that resonated emotionally without oversimplifying sensitive information.",
+      },
+      {
+        title: 'Approach',
+        content: "Designed a story-driven format that revealed personal insights one at a time — each screen a moment of recognition. The visual language borrowed from Femia's brand identity: warm, expressive, and distinctly not generic. Interactions were designed to feel rewarding and shareable.",
+      },
+      {
+        title: 'Results',
+        content: "Launched as a seasonal feature for 1.2M+ users · High share rates · Strong engagement across the recap flow",
+      },
+    ],
+    textSections: [],
+  },
+  {
+    slug: 'femia-brand',
+    title: 'Femia Brand Identity',
+    subtitle: 'Femia · Brand Guidelines',
+    description: "I named the product and built the full brand identity from scratch — visual language, design principles, tone of voice, and a complete illustration system. The brief was to create something women would genuinely want to be seen using: warm, modern, and distinctly not another pink period tracker.",
+    role: 'Brand & Product Design Lead',
+    year: '2022',
+    platforms: ['iOS', 'Android', 'Web'],
+    industry: 'Femtech',
+    tags: ['Femtech', 'Branding'],
+    figmaNodeId: '2949:30834',
+    detailNodeIds: [
+      '2949:31875', // Mission
+      '2949:31890', // Values — Life-time value
+      '2949:31922', // Values — 2
+      '2949:31949', // Values — 3
+      '2949:31960', // Values — 4
+      '2949:31974', // Values — 5
+      '2949:31728', // Who is she — 1
+
+      '2949:31170', // Design Principles — 1
+      '2949:31212', // Design Principles — 2
+      '2949:31380', // Design Principles — 3
+      '2949:31390', // Design Principles — 4
+      '2949:31199', // Tone of Voice — intro
+      '2949:31281', // Tone of Voice — definition
+      '2949:31316', // Tone of Voice — UX influence
+      '2949:31324', // Tone of Voice — 3
+      '2949:31332', // Tone of Voice — 4
+      '2949:31349', // Tone of Voice — Do's
+      '2949:31357', // Tone of Voice — 6
+      '2949:31612', // Logo — naming & concept
+      '2949:31623', // Logo — usage on backgrounds
+      '2949:31136', // Colors — palette overview
+      '2949:30888', // Colors — primary
+      '2949:31021', // Colors — secondary
+      '2949:31400', // Fonts
+      '2949:31634', // Brand Elements — Graphics
+      '2949:31757', // Brand Elements — Graphics composition
+      '2949:30250', // Illustrations
+      '2949:30243', // Photos — People
+      '2949:30236', // Photos — 2
+      '2949:30817', // Photos — Relationship and Pregnancy
+      '2949:30652', // Infographic
+      '2949:30583', // Infographic — 2
+      '2949:28327', // In use — Photo guidelines
+      '2949:29595', // Infographic — 3
+      '2949:29608', // Infographic — 4
+      '2949:29623', // Infographic — 5
+      '2949:29636', // Infographic — 6
+      '2949:29649', // Infographic — 7
+      '2949:29662', // Infographic — 8
+      '2949:29774', // Infographic — 9
+      '2949:30161', // Infographic — 10
+      '2949:29878', // Infographic — 11
+      '2949:28485', // Infographic — 12
+      '2949:28967', // Infographic — 13
+      '2949:29441', // Infographic — 14
+      '2949:28342', // In use — Text and Picture
+      '1346:1837',
+      '1342:1641',
+      '1342:1941',
+      '1346:1640',
+      '1346:1670',
+      '1346:1696',
+      '1346:1751',
+      '1346:1785',
+      '1346:1812',
+    ],
+    category: 'apps',
+    accentColor: '#4C61C7',
+    accordionSections: [
+      {
+        title: 'Challenge',
+        content: "Women's health apps tend to fall into two traps: overly clinical or aggressively pink. Femia needed a brand that felt warm and trustworthy without leaning on either. The identity had to work across a product built for real life — fertility, pregnancy, postpartum — and appeal to women who don't see themselves in the usual femtech aesthetic.",
+      },
+      {
+        title: 'Approach',
+        content: "Started from the name — Femia combines 'Fem' (female) and 'Mia' (mine), making it both universal and personal. Built the full brand system from scratch: mission and values framework, user persona, design principles, tone of voice, logo, colour palette, typography, graphic elements, illustration style, and photography guidelines. Every decision was made to feel approachable without being soft, and confident without being clinical.",
+      },
+      {
+        title: 'Results',
+        content: "A brand system adopted across iOS, Android, and Web — used as the foundation for the full product design system, all marketing materials, and the App Store presence. The illustration style and visual tone were validated through user feedback and became one of the most recognisable parts of the product.",
+      },
+    ],
+    textSections: [
+      {
+        title: 'Brand foundation',
+        afterImageIndex: 0,
+        paragraphs: [
+          "The brand started with a clear mission: improve women's health and wellbeing through accessible technology. Everything else — visual identity, tone, illustration style — was built to serve that intent.",
+          "The target user isn't an abstract demographic. She's active, curious, health-aware, and expects a product that understands her without talking down to her. That profile shaped every design decision from colour to copy.",
+        ],
+      },
+      {
+        title: 'Values & design principles',
+        afterImageIndex: 3,
+        paragraphs: [
+          "The brand values centre on life-time companionship — empowering women to take control of their health at every stage of life, not just at a single moment.",
+          "The design principles reflect this: simple, intuitive, friendly, trustworthy, and universal. The language had to be warm and caring while remaining expert and calm — never preachy, never patronising.",
+        ],
+      },
+      {
+        title: 'Logo & colour system',
+        afterImageIndex: 6,
+        paragraphs: [
+          "The logo is deliberately minimal — a clean wordmark that works at any size and on any background. Simple text logo for maximum recognition and communication clarity.",
+          "The colour palette is built around Bottichelli (a warm periwinkle blue) as the primary brand colour, paired with Carnation for warmth, and supported by secondary palettes — Smoothie, Aqua, and Angel — that give the content system its tonal range.",
+        ],
+      },
+      {
+        title: 'Brand elements & illustration',
+        afterImageIndex: 11,
+        paragraphs: [
+          "A set of organic graphic elements — circles, leaves, drops, rings, seeds — forms the visual texture of the brand. These shapes appear across the product, content, and marketing, giving Femia a recognisable decorative language that feels natural rather than geometric.",
+          "The illustration style was designed to represent real women across life stages and ethnicities — diverse, grounded, and never idealised. Photography guidelines reinforce the same approach: authentic, natural, un-posed people in real life.",
+        ],
       },
     ],
   },
