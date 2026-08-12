@@ -17,7 +17,7 @@ export interface TextSection {
   afterImageIndex?: number  // which image index to inject after (default 0)
 }
 
-export type CaseCategory = 'apps' | 'dashboards'
+export type CaseCategory = 'apps' | 'dashboards' | 'design-systems'
 
 export interface CaseVideo {
   src: string       // path under /public, e.g. /videos/foo.mp4
@@ -226,6 +226,7 @@ export const cases: Case[] = [
     platforms: ['iOS', 'Android'],
     industry: 'Femtech',
     tags: ['Femtech', 'Design System'],
+    category: 'design-systems',
     figmaNodeId: '2835:28644',
     detailNodeIds: [
       '2820:30363', // Slide 1 — Foundation: warm colour palette
@@ -245,7 +246,6 @@ export const cases: Case[] = [
       '2896:27700', // Slide 15 — Art Library: Characters
       '2896:29713', // Slide 16 — Art Library: Daily Life
     ],
-    category: 'apps',
     accentColor: '#5E71CD',
     accordionSections: [
       {
@@ -521,7 +521,7 @@ export const cases: Case[] = [
     platforms: ['Web', 'Mobile'],
     industry: 'iGaming',
     tags: ['Design System', 'iGaming'],
-    category: 'apps',
+    category: 'design-systems',
     figmaNodeId: '3321:56733',
     detailNodeIds: [
       '3321:56733',  // Cover — title & stats

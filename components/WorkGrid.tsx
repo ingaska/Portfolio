@@ -12,6 +12,7 @@ interface WorkGridProps {
 const FILTERS: { label: string; value: CaseCategory | 'all' }[] = [
   { label: 'All', value: 'all' },
   { label: 'Apps', value: 'apps' },
+  { label: 'Design Systems', value: 'design-systems' },
   { label: 'Dashboards', value: 'dashboards' },
 ]
 
