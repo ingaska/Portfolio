@@ -513,6 +513,66 @@ export const cases: Case[] = [
     ],
   },
   {
+    slug: 'lootbox',
+    title: 'Lootbox',
+    subtitle: 'iGaming Design System',
+    description: 'A full design system for an iGaming loot-box platform — 213 components, 713 variants, 244 styles, and 5 responsive breakpoints from 360 to 1920px. Covers atomic assets, core UI, complex gameplay widgets, and complete page layouts.',
+    role: 'Product Design Lead',
+    platforms: ['Web', 'Mobile'],
+    industry: 'iGaming',
+    tags: ['Design System', 'iGaming'],
+    category: 'apps',
+    figmaNodeId: '3321:56733',
+    detailNodeIds: [
+      '3321:56733',  // Cover — title & stats
+      '3388:106313', // Atomic components & customisable assets
+      '3388:107569', // Built for every screen size
+      '3395:135519', // Core UI components
+      '3395:164332', // Complex widgets — battles & leaderboard
+      '3411:121882', // Complex widgets — upgrade & deposit flow
+      '3411:131780', // Pages — box browsing & account
+      '3411:146065', // Pages — battles, tournaments & upgrade
+    ],
+    accentColor: '#4A3FC7',
+    accordionSections: [
+      {
+        title: 'Challenge',
+        content: 'The product needed to scale across a wide range of screen sizes and game modes — loot box browsing, battles, tournaments, upgrades, and deposits — while keeping visual quality consistent. Without a shared system, each feature became a one-off design effort that slowed the team down.',
+      },
+      {
+        title: 'Approach',
+        content: 'I built the design system from atomic principles up — starting with customisable loot box card components and a token-based colour and type system, then composing complex gameplay widgets and full page layouts. The system supports 5 breakpoints and was built to let the team ship new game modes and layouts without starting from scratch.',
+      },
+    ],
+  },
+  {
+    slug: 'plamfy',
+    title: 'Plamfy',
+    subtitle: 'Live Streaming Platform',
+    description: 'Consumer live streaming platform — built 0 to 1. Owned brand identity, visual language, design system, and all product screens for the first launch. Covers live streaming with real-time chat and virtual gifts, creator profiles, a coin economy, and leaderboards.',
+    role: 'Design Lead',
+    year: '2021',
+    platforms: ['Web', 'Mobile Web'],
+    industry: 'Entertainment',
+    tags: ['Consumer', 'Streaming', 'Design System'],
+    category: 'apps',
+    figmaNodeId: '3154:23871',
+    detailNodeIds: [
+      '3159:55377', // Core product experience
+      '3161:60929', // Stream watchers view
+      '3161:67294', // Main page web + mobile
+      '3161:73338', // Navigation
+      '3161:76201', // Chat web + mobile
+      '3165:19710', // Design system components
+      '3195:24312',
+      '3165:26262', // Design system components 2
+      '3196:21807',
+    ],
+    accentColor: '#1B8FFF',
+    accordionSections: [],
+    textSections: [],
+  },
+  {
     slug: 'femia-wrapped',
     title: 'Femia Wrapped',
     subtitle: 'Femia · Year in Review',
@@ -841,30 +901,28 @@ export const cases: Case[] = [
     ],
   },
   {
-    slug: 'plamfy',
-    title: 'Plamfy',
-    subtitle: 'Live Streaming Platform',
-    description: 'Consumer live streaming platform — built 0 to 1. Owned brand identity, visual language, design system, and all product screens for the first launch. Covers live streaming with real-time chat and virtual gifts, creator profiles, a coin economy, and leaderboards.',
-    role: 'Design Lead',
-    year: '2021',
-    platforms: ['Web', 'Mobile Web'],
-    industry: 'Entertainment',
-    tags: ['Consumer', 'Streaming', 'Design System'],
-    category: 'apps',
-    figmaNodeId: '3154:23871',
+    slug: 'tradingview',
+    title: 'TradingView',
+    subtitle: 'Onboarding Concept',
+    description: "A test-task concept for TradingView's mobile onboarding — designed to personalise the experience from the first screen, segment users by goal and experience, activate them on a core feature, and convert them to registered accounts.",
+    role: 'Product Designer',
+    platforms: ['iOS'],
+    industry: 'Fintech',
+    tags: ['Fintech', 'Onboarding'],
+    figmaNodeId: '3223:97818',
     detailNodeIds: [
-      '3159:55377', // Core product experience
-      '3161:60929', // Stream watchers view
-      '3161:67294', // Main page web + mobile
-      '3161:73338', // Navigation
-      '3161:76201', // Chat web + mobile
-      '3165:19710', // Design system components
-      '3195:24312',
-      '3165:26262', // Design system components 2
-      '3196:21807',
+      '3223:138565', // Welcome, segmentation
+      '3225:6596',   // Personalisation, engagement
+      '3226:6789',   // Activation, social proof, sign up
     ],
-    accentColor: '#1B8FFF',
-    accordionSections: [],
+    category: 'apps',
+    accentColor: '#2962FF',
+    accordionSections: [
+      {
+        title: 'Approach',
+        content: 'Structured the flow in three phases: segmentation (goal + experience questions), personalisation (asset classes, watchlist), and activation (trendline drawing tutorial, social proof, sign-up). Each screen earns the next by delivering value before asking for commitment.',
+      },
+    ],
     textSections: [],
   },
   {
@@ -920,31 +978,6 @@ export const cases: Case[] = [
         content: "Created the name, visual identity, mascot character, and complete UI system. Designed every screen around the core flow — instant scan, plant profile, care guide — with the mascot providing guidance and personality throughout. Built all marketing assets and App Store materials from the same creative direction.",
       },
     ],
-  },
-  {
-    slug: 'tradingview',
-    title: 'TradingView',
-    subtitle: 'Onboarding Concept',
-    description: "A test-task concept for TradingView's mobile onboarding — designed to personalise the experience from the first screen, segment users by goal and experience, activate them on a core feature, and convert them to registered accounts.",
-    role: 'Product Designer',
-    platforms: ['iOS'],
-    industry: 'Fintech',
-    tags: ['Fintech', 'Onboarding'],
-    figmaNodeId: '3223:97818',
-    detailNodeIds: [
-      '3223:138565', // Welcome, segmentation
-      '3225:6596',   // Personalisation, engagement
-      '3226:6789',   // Activation, social proof, sign up
-    ],
-    category: 'apps',
-    accentColor: '#2962FF',
-    accordionSections: [
-      {
-        title: 'Approach',
-        content: 'Structured the flow in three phases: segmentation (goal + experience questions), personalisation (asset classes, watchlist), and activation (trendline drawing tutorial, social proof, sign-up). Each screen earns the next by delivering value before asking for commitment.',
-      },
-    ],
-    textSections: [],
   },
   {
     slug: 'navigator',
@@ -1061,5 +1094,5 @@ export const cases: Case[] = [
     cardBorder: '1px solid #E5E5E5',
     accordionSections: [],
     textSections: [],
-  },
+  }
 ]
