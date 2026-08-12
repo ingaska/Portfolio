@@ -536,10 +536,6 @@ export const cases: Case[] = [
     accentColor: '#4A3FC7',
     accordionSections: [
       {
-        title: 'Challenge',
-        content: 'The product needed to scale across a wide range of screen sizes and game modes — loot box browsing, battles, tournaments, upgrades, and deposits — while keeping visual quality consistent. Without a shared system, each feature became a one-off design effort that slowed the team down.',
-      },
-      {
         title: 'Approach',
         content: 'I built the design system from atomic principles up — starting with customisable loot box card components and a token-based colour and type system, then composing complex gameplay widgets and full page layouts. The system supports 5 breakpoints and was built to let the team ship new game modes and layouts without starting from scratch.',
       },
