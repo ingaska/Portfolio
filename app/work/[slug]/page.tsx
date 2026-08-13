@@ -105,6 +105,7 @@ export default async function CasePage({ params }: Props) {
           const desktopUrl = allUrls[nodeId]
           const mobileIds = mobileMappings[nodeId] ?? []
           const hasMobile = mobileIds.length > 0
+          const isDesktopOnly = c.desktopOnlyNodeIds?.includes(nodeId) ?? false
           const sectionsAfterThis = c.textSections?.filter(
             (s) => (s.afterImageIndex ?? 0) === i
           )
@@ -119,7 +120,7 @@ export default async function CasePage({ params }: Props) {
                   alt={`${c.title} — screen ${i + 1}`}
                   width={1200}
                   height={675}
-                  className={`w-full h-auto rounded-2xl${hasMobile ? ' hidden md:block' : ''}`}
+                  className={`w-full h-auto rounded-2xl${hasMobile || isDesktopOnly ? ' hidden md:block' : ''}`}
                   priority={i === 0}
                   sizes="(max-width: 768px) 100vw, 60vw"
                 />

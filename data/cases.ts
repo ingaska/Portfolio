@@ -41,6 +41,7 @@ export interface Case {
   detailNodeIds: string[]   // visual screen frames for right column (desktop)
   mobileMappings?: Record<string, string[]>  // desktop nodeId → mobile frame(s) to show instead
   mobileAppendNodeIds?: string[]             // mobile-only frames appended after all desktop frames
+  desktopOnlyNodeIds?: string[]              // these nodeIds are hidden on mobile (no mobile replacement)
   metrics?: string[]
   accentColor: string
   cardBorder?: string
@@ -78,9 +79,9 @@ export const cases: Case[] = [
       '2410:9909',  // 12 — Case 1.14 (renumbered)
       '2322:5732',  // 13 — Case 1.17
     ],
+    desktopOnlyNodeIds: ['3223:103557', '3223:104026', '3223:104455'],
     mobileMappings: {
       '318:6883':   ['2585:17334', '2585:20671'],  // Case 1.2  → 1.2 mob + 1.2.1 mob
-      '3223:104026': ['2594:29840', '2594:32281'], // Pregnancy slide → mob frames
       '321:5652':   ['2595:36780', '2605:28812'],    // Case 1.5  → mobile frames
       '2376:8118':  ['2722:23412', '2722:24708'],    // Case 1.6  → mobile frames
       '321:11601':  ['2668:23143', '2668:29788'],    // Case 1.8  → mobile frames
