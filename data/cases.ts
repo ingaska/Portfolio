@@ -63,18 +63,21 @@ export const cases: Case[] = [
     tags: ['Femtech', 'Health'],
     figmaNodeId: '2577:16633',
     detailNodeIds: [
-      '318:6883',  // Case 1.2
-      'local:case-images/femia-retention.png', // Retention chart
-      '2563:19919', // Case 1.4 — Data-driven personalisation & health monitoring
-      '321:5652',  // Case 1.5 — Onboarding
-      '2412:24499', // Case 1.15 — In-app subscription funnel
-      '3213:23870', // Case 1.16 — In-app funnel
-      '2376:8118', // Case 1.6
-      '321:11601', // Case 1.8 — The Femia world
-      '323:21773', // Case 1.11 — A system built to scale
-      '325:6402',  // Case 1.17
-      '2410:9909', // Case 1.14 (renumbered)
-      '2322:5732', // Case 1.17
+      '318:6883',   // 0 — Case 1.2
+      '3223:103557', // 1 — Data-driven personalisation & health monitoring (new)
+      'local:case-images/femia-retention.png', // 2 — Retention chart
+      '2563:19919', // 3 — Case 1.4 — personalisation screens
+      '3223:104026', // 4 — Pregnancy mode slide (new)
+      '3223:104455', // 5 — Content slide (new)
+      '321:5652',   // 6 — Case 1.5 — Onboarding
+      '2412:24499', // 7 — Case 1.15 — In-app subscription funnel
+      '3213:23870', // 8 — Case 1.16 — In-app funnel
+      '2376:8118',  // 9 — Case 1.6
+      '321:11601',  // 10 — Case 1.8 — The Femia world
+      '323:21773',  // 11 — Case 1.11 — A system built to scale
+      '325:6402',   // 12 — Case 1.17
+      '2410:9909',  // 13 — Case 1.14 (renumbered)
+      '2322:5732',  // 14 — Case 1.17
     ],
     mobileMappings: {
       '318:6883':   ['2585:17334', '2585:20671'],  // Case 1.2  → 1.2 mob + 1.2.1 mob
@@ -142,7 +145,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Pregnancy mode: supporting users through every life change',
-        afterImageIndex: 2,
+        afterImageIndex: 3,
         paragraphs: [
           "When a user becomes pregnant, her needs change completely — but she shouldn't have to leave the app to get support. Pregnancy mode was designed to make that transition feel seamless, keeping users in a product they already trusted rather than forcing them to start over somewhere else.",
           "We built a dedicated pregnancy experience woven into the same product: week-by-week guidance, tailored health content, and a tone that acknowledged this was a different chapter — not a different app.",
@@ -151,7 +154,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Design system & product operations',
-        afterImageIndex: 7,
+        afterImageIndex: 10,
         paragraphs: [
           "Building across iOS, Android, and Web required a design system that could scale without breaking. I built it from scratch to ensure consistency, speed up production, and give the team a shared language to work from.",
         ],
@@ -172,7 +175,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Personalised content as a core retention engine',
-        afterImageIndex: 2,
+        afterImageIndex: 4,
         paragraphs: [
           "From early on, content was treated not as an addition to the product but as a core retention driver. The goal was to build a digital companion that gives users something genuinely useful every single day, not just when they open the app to log something.",
           "We built a continuous delivery system that adapted to each user's cycle phase, fertility goals, and logged symptoms.",
@@ -188,7 +191,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Marketing & user acquisition',
-        afterImageIndex: 8,
+        afterImageIndex: 11,
         paragraphs: [
           "I was responsible for making sure the visual and UX foundation held together across every acquisition and onboarding touchpoint, from marketing creatives to App Store assets to the first screen a new user sees.",
           "To support continuous growth testing, I built a unified design system covering all acquisition surfaces. This let the team iterate fast on hypotheses without sacrificing visual consistency or brand coherence.",
@@ -197,7 +200,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Femia.health: a web platform designed to attract, educate, and convert',
-        afterImageIndex: 10,
+        afterImageIndex: 13,
         paragraphs: [
           "The mobile app wasn't the only entry point — we designed femia.health as a full acquisition, content, and brand trust channel in its own right.",
           "To drive organic traffic and support conversion, we built a suite of functional tools — pregnancy, IVF, implantation, and hCG calculators — that delivered immediate value to users before they ever downloaded the app. Each tool was designed to guide users naturally into web onboarding or app install.",
@@ -206,7 +209,7 @@ export const cases: Case[] = [
       },
       {
         title: 'Brand identity & emotional positioning',
-        afterImageIndex: 6,
+        afterImageIndex: 9,
         paragraphs: [
           "I named the product — Femia — and led the development of its full brand identity, from visual language to emotional positioning.",
           "The brief was clear: stand apart from the sea of pink or clinical period trackers and build something women actually want to be seen using.",
