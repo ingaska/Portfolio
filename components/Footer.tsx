@@ -12,7 +12,8 @@ export default function Footer() {
         <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
           <span className="text-sm font-medium text-[#1a1a1a]">Inga Sumska</span>
           <p className="text-xs text-[#1a1a1a]/45 leading-relaxed max-w-[200px]">
-            Product Design Lead — building apps people return to.
+            Product Design Lead
+            <br />Mobile · Web · Design systems · 0→1
           </p>
         </div>
 
