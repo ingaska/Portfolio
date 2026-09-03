@@ -188,6 +188,10 @@
   .summary .row .tags{margin:0;justify-content:flex-end}
   .summary .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
   .sent{color:var(--sage-2)}
+  @media (max-width:980px){
+    .flip.flipped .front{position:absolute;inset:0;height:100%;overflow:hidden}
+    .flip.flipped .back{position:relative;inset:auto;min-height:60svh;max-height:calc(100svh - 24px)}
+  }
   @media (max-width:560px){.back{border-radius:28px}.back .top{padding:28px 20px 18px}.back .top .word{font-size:44px}.chat{padding:16px}}
   @keyframes pop{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -344,7 +348,7 @@ const flow=[
 function openBook(){
   st=state(); answers={}; step=0; chat.innerHTML=''; lastFocus=document.activeElement;
   $('mSub').innerHTML=`<span>${st.bikeName}</span><span>·</span>${st.trails.length?tags(st.trails):'<span>coach picks the trail</span>'}`;
-  flip.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'center'});
+  flip.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:matchMedia('(max-width:980px)').matches?'start':'center'});
   flip.classList.add('flipped'); front.inert=true; back.inert=false;
   setTimeout(()=>{$('closeBtn').focus({preventScroll:true}); ask();},flipMs()*0.6);
 }
