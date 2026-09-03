@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ride Bingo · Off-Road Hub</title>
+<meta name="description" content="Build your enduro ride in Cyprus: pick a bike, tap the places that sound fun, and book a day with a coach.">
+<link rel="icon" href="assets/logo.png">
+<meta property="og:title" content="Ride Bingo · Off-Road Hub">
+<meta property="og:description" content="Pick a bike, tap a few places, complete a row — book a ride with a coach in the Cyprus hills.">
+<meta property="og:image" content="https://www.sumska.io/booking/assets/hero-1600.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;900&family=Roboto:wght@500;600;700&family=Russo+One&family=Poppins:wght@300&family=Nanum+Gothic&display=swap">
+<style>
+  :root{
+    --ink:#1B2A1F;--forest:#1E3324;--cream:#F4F1E1;--white:#fff;
+    --sage:#B9D19E;--sage-2:#8FAE72;--mustard:#D5A63B;--mustard-2:#EBD46B;
+    --orange:#FF5A1F;--coal:#0F0F0E;--glass:rgba(37,36,30,.8);--glass-line:rgba(255,255,255,.08);
+    --sea:#8FB5D9;--meadow:#B9D19E;--dust:#C9A47A;
+    --font:'Outfit','Helvetica Neue',Arial,sans-serif;
+  }
+  /* Single visual world (photo-led, dark chrome) — every colour painted explicitly. */
+  *{box-sizing:border-box}
+  html{color-scheme:dark light}
+  body{margin:0;font-family:var(--font);font-weight:500;color:var(--cream);background:var(--coal);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  p,h1,h2,h3{margin:0}
+  button{font:inherit;color:inherit}
+  .micro{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+  :focus-visible{outline:3px solid var(--mustard-2);outline-offset:3px}
+  .wrap{width:min(1280px,94vw);margin:0 auto}
+
+  /* ===== top bar ===== */
+  .topbar{height:142px;background:var(--coal) url("assets/header.jpg") center/cover no-repeat;display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:relative}
+  .topbar img{width:82px;height:82px;display:block}
+  .topbar nav{display:flex;gap:6px;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
+  .topbar nav a{padding:15px 20px;font-family:'Russo One',var(--font);font-weight:400;font-size:24px;color:#FDFDFD;display:flex;align-items:center;gap:8px;border-radius:12px}
+  .topbar nav a:hover{background:rgba(255,255,255,.08)}
+  .topbar nav a.active{color:#FF6401}
+  .topbar nav a svg{width:14px;height:14px;fill:#fff}
+  .cart{background:linear-gradient(180deg,#FF6A2A,#E8480F);box-shadow:0 6px 14px rgba(0,0,0,.35);color:#fff;border-radius:14px;padding:12px 20px;font:700 16px 'Roboto',var(--font);display:flex;gap:14px;align-items:center;position:relative}
+  .cart b{position:absolute;top:-6px;right:12px;background:#fff;color:var(--orange);border-radius:50%;width:16px;height:16px;font-size:10px;display:grid;place-items:center}
+  @media (max-width:960px){.topbar nav{display:none}.topbar{height:96px}.topbar img{width:56px;height:56px}}
+
+  /* ===== hero ===== */
+  .hero{position:relative;background:#2b3124;padding:12px 0 90px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0 0 auto 0;height:39vw;max-height:675px;background:linear-gradient(180deg,#0F0F0F 6%,rgba(0,0,0,0) 100%);z-index:1;pointer-events:none}
+  /* photo placed as the Figma layer: 2627×1751 at (-835,-76) on a 1728-wide frame */
+  .hero .bg{position:absolute;inset:0;background-repeat:no-repeat;background-size:152vw auto;background-position:-47.7vw 3.8vw;opacity:0;transition:opacity .7s ease}
+  @media (max-width:980px){.hero .bg{background-size:cover;background-position:center top}}
+  .hero .bg.show{opacity:1}
+  .hero .dim{position:absolute;inset:0;background:rgba(15,15,14,.5);opacity:0;transition:opacity .7s ease;pointer-events:none}
+  .hero.own .dim{opacity:1}
+  .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:41vw;max-height:708px;z-index:1;background:linear-gradient(0deg,#0F0F0F 6%,rgba(0,0,0,0) 100%);pointer-events:none}
+  .hero .wrap{position:relative;z-index:2}
+  h1{font-family:'Russo One',var(--font);font-weight:400;font-size:clamp(30px,3.3vw,48px);line-height:1.2;letter-spacing:0;text-align:center;color:#fff;text-wrap:balance}
+  .lede{text-align:center;font-size:clamp(15px,1.4vw,20px);font-weight:400;line-height:1.3;max-width:78ch;margin:12px auto 0;color:#fff;text-wrap:balance}
+  .stage{display:flex;justify-content:center;margin-top:30px}
+  .selector{width:684px;max-width:100%}
+  .glass{background:rgba(255,255,255,.6);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-radius:36px;padding:26px;box-shadow:0 40px 60px -30px rgba(30,51,36,.45),inset 0 1px 0 rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.45)}
+
+  /* ===== our perks (below the card) ===== */
+  .perks-head{font-family:'Russo One',var(--font);font-weight:400;font-size:clamp(30px,3vw,44px);line-height:1.2;letter-spacing:0;color:#fff;text-align:center;margin:28px 0 36px}
+  .perks{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+  .perk{display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:center;width:329px;max-width:100%;padding:16px;border-radius:60px;background:rgba(0,0,0,.6);color:#fff}
+  .perk img{width:72px;height:72px;border-radius:50%;display:block;object-fit:cover;background:var(--cream)}
+  .perk h3{font-weight:500;font-size:20px;line-height:1.15;margin-bottom:3px}
+  .perk p{font-weight:300;font-size:16px;line-height:1.35}
+
+  /* ===== selector ===== */
+  .front .micro{display:inline-block;color:#000;background:rgba(255,255,255,.7);border-radius:60px;padding:4px 12px;line-height:17px;margin-left:2px}
+  .bikes{display:flex;gap:8px;margin:12px 0 22px;flex-wrap:wrap}
+  .cell{position:relative;border:0;padding:0;cursor:pointer;text-align:left;overflow:hidden;transition:transform .12s ease,box-shadow .12s ease;color:var(--forest)}
+  .cell:hover{transform:translateY(-2px)}
+  .cell:active{transform:translateY(0)}
+  .cell::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:4;box-shadow:inset 0 0 0 4px #fff;opacity:0;transition:opacity .15s}
+  .cell.on::after{opacity:1}
+  .bike{width:150px;height:194px;border-radius:24px;background:var(--mustard-2) center/cover no-repeat;color:#fff;flex:none}
+  .bike .band{position:absolute;left:0;right:0;bottom:0;height:53px;background:rgba(23,23,21,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+  .bike .n{position:absolute;left:14px;bottom:14px;font-weight:900;font-size:24px;letter-spacing:-.045em;line-height:1}
+  .bike .price{position:absolute;top:11px;right:13px;background:var(--orange);color:#fff;border-radius:20px;padding:3px 7px 4px;font:600 12px/1.2 'Roboto',var(--font)}
+  .bike.own{background:#fff;width:150px;display:flex;flex-direction:column;align-items:center}
+  .bike.own .n{position:static;display:block;width:100%;padding:34px 4px 0;color:var(--forest);font-size:26px;text-align:center;letter-spacing:-.05em;flex:none}
+  .bike.own .q{display:block;text-align:center;font-weight:900;font-size:40px;line-height:1;color:var(--forest);opacity:.35;margin-top:8px;flex:none}
+  .bike.own .m{position:static;margin-top:auto;padding:6px 8px 14px;width:100%;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#686D5E;line-height:1.5;text-align:center}
+  .bike.own .price{right:9px;top:9px}
+  .bike.own.on::after{box-shadow:inset 0 0 0 4px var(--forest)}
+  .bike.own .check{background:var(--forest);color:#fff}
+  .check{position:absolute;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:13px;opacity:0;transform:scale(.6);transition:opacity .15s,transform .15s}
+  .bike .check{top:10px;left:10px;background:#fff;color:var(--forest);z-index:3}
+  .place .check{top:10px;left:10px;background:#fff;color:var(--forest);z-index:3}
+  .on .check{opacity:1;transform:scale(1)}
+
+  .places{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  .place{aspect-ratio:205/177;border-radius:20px;background:var(--dust) center/cover no-repeat;padding:12px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end}
+  .place .band{position:absolute;left:0;right:0;bottom:0;height:52px;background:rgba(23,23,21,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:0}
+  .place .ph{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover;z-index:0;pointer-events:none}
+  .place.coach{align-items:center;justify-content:flex-start}
+  .place.sea{background-color:var(--sea)}.place.meadow{background-color:var(--meadow)}
+  .place .n{position:relative;z-index:2;font-weight:900;font-size:19px;letter-spacing:-.04em;line-height:1;display:block;color:#fff;margin-bottom:4px}
+  .place .m{position:absolute;right:14px;top:14px;z-index:2;font:600 12px/15px 'Roboto',var(--font);letter-spacing:.02em;text-transform:uppercase;color:#fff;border-radius:20px;padding:2px 9px;transition:opacity .15s}
+  .place .m.sea{background:#289DF6}.place .m.trail{background:#689065}.place .m.rocks{background:#5E492D}
+    .place.coach{background:#fff!important;text-align:center}
+  .place.coach .n{color:#333;font-size:26px;text-align:center;padding:14px 14px 0;margin:0}
+  .place.coach .q{display:block;text-align:center;font-weight:900;font-size:40px;line-height:1;color:var(--forest);opacity:.35;margin-top:14px}
+  .place.coach .s{position:static;margin-top:auto;padding-bottom:4px;width:100%;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#686D5E;text-align:center}
+  .place::before{content:"";position:absolute;inset:0;background:var(--forest);opacity:0;transition:opacity .15s;border-radius:inherit;z-index:1}
+  .place.on .n{color:var(--cream)}
+  .place.on .band{opacity:0}
+  .place.on::before{opacity:.72}
+    .win .place.on::after{box-shadow:inset 0 0 0 4px var(--mustard-2)}
+  .win .place.on .n{color:var(--forest)}
+  .place.coach.on .n,.win .place.coach.on .n{color:var(--forest)}
+  .place.coach.on::before{opacity:0}
+  .place.coach.on::after{box-shadow:inset 0 0 0 4px var(--forest)}
+  .win .place.coach.on::after{box-shadow:inset 0 0 0 4px var(--mustard)}
+  .win .place.on::before{background:var(--mustard);opacity:.85}
+  .win .place.on .check{background:var(--mustard-2);color:var(--forest)}
+  .win .bike.on::after{box-shadow:inset 0 0 0 4px var(--mustard-2)}
+  .win .bike .check{background:var(--mustard-2)}
+
+  .res{margin-top:28px;background:#fff;color:var(--ink);border-radius:22px;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}
+  .res b{display:block;font-weight:900;font-size:24px;letter-spacing:-.03em;color:var(--forest);line-height:1.5}
+  .res p{font-size:14px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .tags:empty{display:none}
+  .tag{background:var(--sage);color:var(--forest);border-radius:999px;padding:3px 9px;font-size:11px;font-weight:600;letter-spacing:.02em;line-height:14px}
+  .btn{border:0;border-radius:999px;padding:14px 26px;font-weight:600;font-size:15px;letter-spacing:.02em;cursor:pointer;background:var(--forest);color:var(--cream);transition:background .15s,opacity .15s}
+  .btn:hover{background:#2a4632}
+  .btn.light{background:var(--cream);color:var(--forest)}
+  .btn.orange{background:var(--orange);color:#fff}
+  .btn.orange:hover{background:#E84E14}
+  .btn.light:hover{background:#e9e4cc}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn:disabled:hover{background:var(--forest)}
+  .btn.orange:disabled,.btn.orange:disabled:hover{background:var(--orange)}
+  .res .actions{display:flex;align-items:center;gap:14px}
+  .link{background:none;border:0;padding:6px 2px;font-weight:600;font-size:14px;color:var(--forest);opacity:.7;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+  .link:hover{opacity:1}
+  .link[hidden]{display:none}
+  @media (max-width:560px){
+    .glass{padding:18px;border-radius:28px}
+    .bike{width:calc(50% - 4px);height:170px}.bike.own{width:calc(50% - 4px)}
+    .perk{width:100%}
+    .places{gap:7px}.place{padding:9px;border-radius:16px}.place .n{font-size:15px}.place .m{right:9px;top:9px;font-size:10px;padding:2px 7px}
+    .bike .n{font-size:20px}.bike.own .n{font-size:20px;padding-top:24px}.bike.own .q{font-size:30px;margin-top:6px}.bike.own .m{font-size:9px;padding-bottom:10px}
+    .place.coach .n{font-size:15px;padding-top:12px;letter-spacing:-.03em}.place.coach .q{font-size:22px;margin-top:2px}.place.coach .s{font-size:7px;letter-spacing:.08em;padding-bottom:2px}
+    .check{width:20px;height:20px;font-size:11px}.bike .check,.place .check{top:12px;left:12px}
+    .place .band{height:40px}
+    .res{grid-template-columns:1fr}.res .actions{justify-content:space-between}.res .btn{flex:1}
+  }
+
+  /* ===== footer ===== */
+  footer{background:var(--coal);color:#D9D6CC;padding:60px 40px;font-family:'Poppins',var(--font);font-weight:300;display:grid;grid-template-columns:1.2fr 1fr 1.1fr;gap:40px}
+  footer .micro{color:#fff;margin-bottom:22px;font:400 16px 'Nanum Gothic',var(--font);text-transform:uppercase;letter-spacing:.06em}
+  footer p{font-size:14px;line-height:1.6;max-width:32ch;opacity:.85}
+  footer ul{list-style:none;margin:0 0 20px;padding:0;font-size:15px;line-height:1.6}
+  .wa{display:inline-block;background:#2FC968;color:#fff;font:500 15px 'Roboto',var(--font);padding:26px 30px;border-radius:12px;margin-top:8px}
+  .news{display:flex;gap:16px;align-items:flex-end;margin-top:22px}
+  .news label{flex:1;border-bottom:1px solid rgba(255,255,255,.35);padding:8px 0;font-size:12px;letter-spacing:.06em;opacity:.7}
+  .news .sub{font:400 14px 'Nanum Gothic',var(--font);letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.35);padding:8px 0;background:none;border-top:0;border-left:0;border-right:0;cursor:pointer;color:#fff}
+  @media (max-width:820px){footer{grid-template-columns:1fr;padding:44px 24px}}
+
+  /* ===== the card flips: booking chat lives on its back ===== */
+  .selector{perspective:2200px}
+  .flip{position:relative;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.35,0,.15,1)}
+  .flip.flipped{transform:rotateY(180deg)}
+  .face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+  .back{position:absolute;inset:0;transform:rotateY(180deg);background:var(--cream);color:var(--ink);border-radius:36px;overflow:auto;display:flex;flex-direction:column;box-shadow:0 60px 80px -40px rgba(0,0,0,.45)}
+  .back .top{padding:34px 26px 24px;text-align:center;border-bottom:1px solid rgba(27,42,31,.12);position:relative;flex:none}
+  .back .top .word{font-weight:900;font-size:56px;letter-spacing:-.045em;line-height:.95;color:var(--forest);margin:6px 0 10px}
+  .back .top .sub{font-size:15px;display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap}
+  .back .close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:0;background:#fff;color:var(--forest);cursor:pointer;font-weight:900;font-size:14px;box-shadow:0 2px 8px rgba(27,42,31,.12)}
+  .back .close:hover{background:#ECEBE4}
+  .chat{padding:22px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .msg{max-width:86%;padding:12px 16px;border-radius:20px;font-size:15px;animation:pop .25s cubic-bezier(.2,.8,.2,1)}
+  .msg.coach{align-self:flex-start;background:#fff;border-bottom-left-radius:4px}
+  .msg.me{align-self:flex-end;background:var(--forest);color:var(--cream);border-bottom-right-radius:4px;font-weight:600}
+  .msg.typing{width:70px;letter-spacing:3px;font-weight:900;color:#999}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;align-self:flex-start;animation:pop .25s}
+  .chip{font-weight:600;font-size:14px;background:var(--sage);color:var(--forest);border:0;border-radius:999px;padding:9px 15px;cursor:pointer;transition:background .12s}
+  .chip:hover{background:var(--mustard-2)}
+  .summary{align-self:stretch;padding:20px;border-radius:24px;background:#fff;animation:pop .3s}
+  .summary b{font-weight:900;font-size:26px;letter-spacing:-.04em;display:block;margin-bottom:10px;color:var(--forest);line-height:1.2}
+  .summary .row{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:8px 0;border-top:1px solid rgba(27,42,31,.12)}
+  .summary .row .micro{opacity:.7;padding-top:2px;flex:none}
+  .summary .row span:last-child{text-align:right}
+  .summary .row .tags{margin:0;justify-content:flex-end}
+  .summary .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
+  .sent{color:var(--sage-2)}
+  @media (max-width:560px){.back{border-radius:28px}.back .top{padding:28px 20px 18px}.back .top .word{font-size:44px}.chat{padding:16px}}
+  @keyframes pop{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<header class="topbar">
+  <img src="assets/logo.png" alt="Off-Road Hub">
+  <nav aria-label="Site">
+    <a href="#">Rider gear <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4z"/></svg></a>
+    <a href="#">Bike Parts <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4z"/></svg></a>
+    <a href="#">Workshop</a>
+    <a href="#" aria-current="page" class="active">Riding bingo</a>
+  </nav>
+  <a class="cart" href="#" aria-label="Cart, 0 items, €0.00">€0.00 <span aria-hidden="true">🛒</span><b aria-hidden="true">0</b></a>
+</header>
+
+<main class="hero" id="top">
+  <div class="bg show" id="bgA" style="background-image:url('assets/hero-1600.jpg')"></div>
+  <div class="bg" id="bgB"></div>
+  <div class="dim"></div>
+  <div class="wrap">
+    <h1>Build your ride and have fun</h1>
+    <p class="lede">We LOVE to ride and want to share this thrilling experience with you! Come here and you'll leave dusty and happy. That's the whole plan.</p>
+
+    <div class="stage">
+      <section class="selector" aria-label="Build your ride">
+        <div class="flip" id="flip">
+          <div class="face front glass" id="front">
+            <p class="micro">Bike · pick one</p>
+            <div class="bikes" id="bikes" role="group" aria-label="Bike"></div>
+            <p class="micro">Places · tap what sounds fun</p>
+            <div class="places" id="places" role="group" aria-label="Places"></div>
+            <div class="res" id="res" aria-live="polite"></div>
+          </div>
+          <div class="face back" id="back" role="dialog" aria-labelledby="mTitle" inert>
+            <div class="top">
+              <button class="close" id="closeBtn" aria-label="Back to the card">✕</button>
+              <p class="micro">Bingo!</p>
+              <div class="word" id="mTitle">Your card</div>
+              <div class="sub" id="mSub"></div>
+            </div>
+            <div class="chat" id="chat" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <h2 class="perks-head">Our perks</h2>
+    <div class="perks">
+      <div class="perk"><img src="assets/perk-varg.png" alt=""><div><h3>Stark Vargs, only here</h3><p>Electric, silent, and stupidly quick. Nobody else rents them.</p></div></div>
+      <div class="perk"><img src="assets/perk-trails.png" alt=""><div><h3>Hidden trails</h3><p>We know every goat track around Paphos and beyond.</p></div></div>
+      <div class="perk"><img src="assets/perk-support.png" alt=""><div><h3>Full support</h3><p>Full gear and a sweet coach voice in your ear over intercom.</p></div></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div><p>Premium hard enduro parts, tyres, mousses and rider gear for riders across Cyprus and Europe.</p></div>
+  <div>
+    <p class="micro">Contact us</p>
+    <ul><li>+357 99822199</li><li>info@orh31.com</li></ul>
+    <a class="wa" href="#">WhatsApp</a>
+  </div>
+  <div>
+    <p class="micro">Join the group</p>
+    <p>Get updates on special offers and events.</p>
+    <form class="news" onsubmit="event.preventDefault()"><label>EMAIL</label><button class="sub" type="submit">SUBSCRIBE</button></form>
+  </div>
+</footer>
+
+
+<script>
+/* ---------- data ---------- */
+const ASSETS = {
+  hero:"assets/hero-1600.jpg", heroVargec:"assets/hero-vargec.jpg", heroKtm:"assets/hero-ktm.jpg",
+  vargmx:"assets/bike-vargmx.png", vargec:"assets/bike-vargec.png", ktm:"assets/bike-ktm.png",
+  akamas:"assets/place-akamas.png", fonikas:"assets/place-fonikas.png", kathikas:"assets/place-kathikas.png",
+  kykkos:"assets/place-kykkos.png", troodos:"assets/place-troodos.png"
+};
+const bikes=[
+  {id:'vargmx',n:'Varg MX',full:'Stark Varg MX',price:'€140'},
+  {id:'vargec',n:'Varg EX',full:'Stark Varg EX',price:'€140'},
+  {id:'ktm',n:'KTM',full:'KTM 300 EXC',price:'€120'},
+  {id:'own',n:'your bike',full:'Your own bike',price:'€40',own:true}
+];
+const places=[
+  {id:'akamas',n:'Akamas',m:'Sea',tag:'sea',cls:'sea'},{id:'fonikas',n:'Fonikas',m:'Trail',tag:'trail',cls:'meadow'},{id:'kathikas',n:'Kathikas',m:'Rocks',tag:'rocks'},
+  {id:'kykkos',n:'Kykkos',m:'Trail',tag:'trail'},{id:'troodos',n:'Troodos',m:'Rocks',tag:'rocks'},{id:'coach',n:'Coach picks',short:'Coach’s pick',coach:true}
+];
+const lines=[[0,1,2],[3,4,5]], lineNames=['coast','mountain'];
+let bike=null; const picks=new Set();
+const $=id=>document.getElementById(id);
+const bikesEl=$('bikes'), placesEl=$('places'), res=$('res'), selector=document.querySelector('.selector');
+
+/* ---------- card ---------- */
+function build(){
+  bikesEl.innerHTML=bikes.map(b=>b.own
+    ? `<button class="cell bike own" data-bike="${b.id}" aria-pressed="false"><span class="price">${b.price}</span><span class="n">${b.n}</span><span class="q" aria-hidden="true">?</span><span class="m">bring it<br>coach only</span><span class="check" aria-hidden="true">✓</span></button>`
+    : `<button class="cell bike" data-bike="${b.id}" aria-pressed="false" style="background-image:url('${ASSETS[b.id]}')"><span class="band"></span><span class="price">${b.price}</span><span class="n">${b.n}</span><span class="check" aria-hidden="true">✓</span></button>`).join('');
+  placesEl.innerHTML=places.map((p,i)=>p.coach
+    ? `<button class="cell place coach" data-i="${i}" aria-pressed="false"><span class="n">${p.n}</span><span class="q" aria-hidden="true">?</span><span class="s">Surprise me</span><span class="check" aria-hidden="true">✓</span></button>`
+    : `<button class="cell place ${p.cls||''}" data-i="${i}" aria-pressed="false" ><img class="ph" src="${ASSETS[p.id]}" alt=""><span class="band"></span><span class="n">${p.n}</span>${p.m?`<span class="m ${p.tag}">${p.m}</span>`:''}<span class="check" aria-hidden="true">✓</span></button>`).join('');
+  bikesEl.querySelectorAll('.bike').forEach(b=>b.onclick=()=>{bike=bike===b.dataset.bike?null:b.dataset.bike;sync();});
+  placesEl.querySelectorAll('.place').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;picks.has(i)?picks.delete(i):picks.add(i);sync();});
+  sync();
+}
+const names=a=>a.map(i=>places[i].short||places[i].n);
+const tags=a=>a.length?`<div class="tags">${a.map(n=>`<span class="tag">${n}</span>`).join('')}</div>`:'';
+function state(){
+  const arr=[...picks].sort((a,b)=>a-b), n=arr.length;
+  const line=lines.findIndex(l=>l.every(i=>picks.has(i)));
+  const bikeName=bike?bikes.find(x=>x.id===bike).full:null;
+  if(line>-1) return {win:true,bike,bikeName,trails:names(arr),length:'Full day',label:`Bingo — a ${lineNames[line]} day`,detail:'Full day · one loop, coast to summit'};
+  if(!bike&&!n) return {win:false,bike:null,bikeName:null,trails:[],length:null,label:'Empty card',detail:'Tap a bike and a couple of places. Or leave it and Andreas picks.'};
+  return {win:false,bike,bikeName,trails:names(arr),length:n>2?'Full day':n?'Half day (4 h)':null,
+    label:`${bikeName||'No bike yet'}${n?` · ${n} spot${n>1?'s':''}`:''}`,
+    detail:!n?'No places yet · Andreas picks the trail':(n===1&&picks.has(5))?'Half day (4 h) · Andreas picks the trail on the day':n<3?'Half day (4 h) · one more in the same row makes a full day':'Full day · Andreas links them into one loop'};
+}
+const HERO={vargmx:ASSETS.hero,vargec:ASSETS.heroVargec,ktm:ASSETS.heroKtm,own:ASSETS.hero};
+let bgCur=ASSETS.hero, bgLayer=0;
+function setBg(key){
+  const hero=document.querySelector('.hero'); hero.classList.toggle('own',key==='own');
+  const url=HERO[key]||ASSETS.hero; if(url===bgCur) return;
+  const layers=[$('bgA'),$('bgB')]; const next=layers[1-bgLayer];
+  next.style.backgroundImage=`url('${url}')`; next.classList.add('show'); layers[bgLayer].classList.remove('show');
+  bgLayer=1-bgLayer; bgCur=url;
+}
+function sync(){
+  const st=state(); setBg(st.bike);
+  selector.classList.toggle('win',st.win);
+  bikesEl.querySelectorAll('.bike').forEach(c=>{const on=c.dataset.bike===st.bike;c.classList.toggle('on',on);c.setAttribute('aria-pressed',on);});
+  placesEl.querySelectorAll('.place').forEach(c=>{const on=picks.has(+c.dataset.i);c.classList.toggle('on',on);c.setAttribute('aria-pressed',on);});
+  const dirty=!!st.bike||picks.size>0;
+  res.innerHTML=`<div><b>${st.label}</b><p>${st.detail}</p>${tags(st.trails)}</div><div class="actions"><button class="link" id="resetBtn" ${dirty?'':'hidden'}>Reset</button><button class="btn orange" id="bookBtn" ${st.bike?'':'disabled'}>Book</button></div>`;
+  $('bookBtn').onclick=openBook;
+  $('resetBtn').onclick=()=>{bike=null;picks.clear();sync();};
+}
+build();
+
+/* ---------- booking chat (on the back of the card) ---------- */
+const flip=$('flip'), front=$('front'), back=$('back'), chat=$('chat');
+let answers={}, step=0, st=null, lastFocus=null;
+const flipped=()=>flip.classList.contains('flipped');
+const flipMs=()=>matchMedia('(prefers-reduced-motion:reduce)').matches?0:800;
+const flow=[
+  {key:'when',q:()=>st.bike==='own'?'Bringing your own bike, nice. When do you want to ride?':`The ${st.bikeName} likes you too. When do you want to ride?`,chips:['This Saturday','This Sunday','Next week','I’ll suggest a date']},
+  {key:'length',q:()=>st.win?'A full line, so that’s a full day. Sound right?':'How long do you want to be out?',
+    chips:()=>st.win?['Full day','Make it a half day']:['2 h taster','Half day (4 h)','Full day']},
+  {key:'level',q:()=>'Honestly — where are you with off-road?',chips:['Never done it','Rode a bit','I race, I want to get better']},
+];
+function openBook(){
+  st=state(); answers={}; step=0; chat.innerHTML=''; lastFocus=document.activeElement;
+  $('mSub').innerHTML=`<span>${st.bikeName}</span><span>·</span>${st.trails.length?tags(st.trails):'<span>coach picks the trail</span>'}`;
+  flip.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'center'});
+  flip.classList.add('flipped'); front.inert=true; back.inert=false;
+  setTimeout(()=>{$('closeBtn').focus({preventScroll:true}); ask();},flipMs()*0.6);
+}
+function closeBook(){
+  flip.classList.remove('flipped'); back.inert=true; front.inert=false;
+  setTimeout(()=>{ (lastFocus&&lastFocus!==document.body&&document.contains(lastFocus)?lastFocus:$('bookBtn')).focus({preventScroll:true}); },flipMs()*0.6);
+}
+$('closeBtn').onclick=closeBook;
+document.addEventListener('keydown',e=>{
+  if(!flipped()) return;
+  if(e.key==='Escape') return closeBook();
+  if(e.key==='Tab'){ // keep focus on the back of the card while it is showing
+    const f=[...back.querySelectorAll('button:not([disabled])')]; if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault();}
+    else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault();}
+  }
+});
+function bubble(t,who){const m=document.createElement('div');m.className=`msg ${who}`;m.textContent=t;chat.appendChild(m);back.scrollTop=back.scrollHeight;return m;}
+function ask(){
+  const s=flow[step]; if(!s) return summary();
+  const t=bubble('•••','coach typing');
+  setTimeout(()=>{t.classList.remove('typing');t.textContent=s.q();
+    const chips=typeof s.chips==='function'?s.chips():s.chips;const row=document.createElement('div');row.className='chips';
+    chips.forEach(c=>{const b=document.createElement('button');b.className='chip';b.textContent=c;
+      b.onclick=()=>{answers[s.key]=c==='Make it a half day'?'Half day (4 h)':c;row.remove();bubble(c,'me');step++;setTimeout(ask,350);};row.appendChild(b);});
+    chat.appendChild(row);back.scrollTop=back.scrollHeight;row.querySelector('.chip').focus();},600);
+}
+function summary(){
+  const t=bubble('•••','coach typing');
+  setTimeout(()=>{t.classList.remove('typing');t.textContent='That’s everything. Send it over and I’ll confirm on WhatsApp within a few hours.';
+    const price=(bikes.find(b=>b.id===st.bike)||{}).price||'€140'; // same price as on the bike card
+    const s=document.createElement('div');s.className='summary';
+    s.innerHTML=`<b>${st.bikeName} · ${answers.length}</b>
+      <div class="row"><span class="micro">Where</span>${st.trails.length?tags(st.trails):'<span>coach picks</span>'}</div>
+      <div class="row"><span class="micro">When</span><span>${answers.when}</span></div>
+      <div class="row"><span class="micro">Level</span><span>${answers.level}</span></div>
+      <div class="row"><span class="micro">Meeting</span><span>pin sent the day before</span></div>
+      <div class="row"><span class="micro">Includes</span><span>bike, gear, coach, fuel or charge</span></div>
+      <div class="row"><span class="micro">Price</span><span><strong>${price}</strong></span></div>
+      <div class="actions"><button class="btn orange" id="sendBtn">Send to Coach</button><button class="btn light" id="editBtn">Edit card</button></div>`;
+    chat.appendChild(s);back.scrollTop=back.scrollHeight;
+    $('sendBtn').onclick=sent; $('editBtn').onclick=closeBook; $('sendBtn').focus();},600);
+}
+function sent(){
+  chat.querySelector('.summary .actions').innerHTML='<span class="micro sent">Sent ✓</span>';
+  setTimeout(()=>{bubble('Got it. Go drink water, I’ll message you the pin tomorrow evening.','coach');
+    const row=document.createElement('div');row.className='chips';const b=document.createElement('button');b.className='chip';b.textContent='Done';b.onclick=closeBook;row.appendChild(b);chat.appendChild(row);back.scrollTop=back.scrollHeight;b.focus();},700);
+}
+</script>
+
+</body>
+</html>
