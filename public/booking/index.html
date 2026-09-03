@@ -19,7 +19,7 @@
     --sea:#8FB5D9;--meadow:#B9D19E;--dust:#C9A47A;
     --font:'Outfit','Helvetica Neue',Arial,sans-serif;
   }
-  /* Single visual world (photo-led, dark chrome) — every colour painted explicitly. */
+  /* Single visual world (photo-led, dark chrome): every colour painted explicitly. */
   *{box-sizing:border-box}
   html{color-scheme:dark light}
   body{margin:0;font-family:var(--font);font-weight:500;color:var(--cream);background:var(--coal);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -311,7 +311,7 @@ function state(){
   const arr=[...picks].sort((a,b)=>a-b), n=arr.length;
   const line=lines.findIndex(l=>l.every(i=>picks.has(i)));
   const bikeName=bike?bikes.find(x=>x.id===bike).full:null;
-  if(line>-1) return {win:true,bike,bikeName,trails:names(arr),length:'Full day',label:`Bingo — a ${lineNames[line]} day`,detail:'Full day · one loop, coast to summit'};
+  if(line>-1) return {win:true,bike,bikeName,trails:names(arr),length:'Full day',label:`Bingo! A ${lineNames[line]} day`,detail:'Full day · one loop, coast to summit'};
   if(!bike&&!n) return {win:false,bike:null,bikeName:null,trails:[],length:null,label:'Empty card',detail:'Tap a bike and a couple of places. Or leave it and Andreas picks.'};
   return {win:false,bike,bikeName,trails:names(arr),length:n>2?'Full day':n?'Half day (4 h)':null,
     label:`${bikeName||'No bike yet'}${n?` · ${n} spot${n>1?'s':''}`:''}`,
@@ -347,7 +347,7 @@ const flow=[
   {key:'when',q:()=>st.bike==='own'?'Bringing your own bike, nice. When do you want to ride?':`The ${st.bikeName} likes you too. When do you want to ride?`,chips:['This Saturday','This Sunday','Next week','I’ll suggest a date']},
   {key:'length',q:()=>st.win?'A full line, so that’s a full day. Sound right?':'How long do you want to be out?',
     chips:()=>st.win?['Full day','Make it a half day']:['2 h taster','Half day (4 h)','Full day']},
-  {key:'level',q:()=>'Honestly — where are you with off-road?',chips:['Never done it','Rode a bit','I race, I want to get better']},
+  {key:'level',q:()=>'Honestly, where are you with off-road?',chips:['Never done it','Rode a bit','I race, I want to get better']},
   {key:'channel',q:()=>'Where should I send the confirmation?',chips:['WhatsApp','Telegram','Email']},
   {key:'contact',input:true,q:()=>({WhatsApp:'Your WhatsApp number?',Telegram:'Your Telegram handle?',Email:'Your email?'})[answers.channel],
     field:()=>({WhatsApp:{type:'tel',ph:'+357 99 123 456'},Telegram:{type:'text',ph:'@handle'},Email:{type:'email',ph:'you@example.com'}})[answers.channel]},
@@ -410,7 +410,7 @@ function summary(){
 }
 function sent(){
   chat.querySelector('.summary .actions').innerHTML='<span class="micro sent">Sent ✓</span>';
-  setTimeout(()=>{bubble('Got it! Go drink some water, rest those arms — I’ll text you right away. Can’t wait to ride with you 😘','coach');
+  setTimeout(()=>{bubble('Got it! Go drink some water, rest those arms. I’ll text you right away. Can’t wait to ride with you 😘','coach');
     const row=document.createElement('div');row.className='chips';const b=document.createElement('button');b.className='chip';b.textContent='Done';b.onclick=closeBook;row.appendChild(b);chat.appendChild(row);back.scrollTop=back.scrollHeight;b.focus();},700);
 }
 </script>
