@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ride Bingo · Off-Road Hub</title>
 <meta name="description" content="Build your enduro ride in Cyprus: pick a bike, tap the places that sound fun, and book a day with a coach.">
-<link rel="icon" href="assets/logo.png">
+<link rel="icon" href="/booking/assets/logo.png">
 <meta property="og:title" content="Ride Bingo · Off-Road Hub">
 <meta property="og:description" content="Pick a bike, tap a few places, complete a row — book a ride with a coach in the Cyprus hills.">
 <meta property="og:image" content="https://www.sumska.io/booking/assets/hero-1600.jpg">
@@ -31,7 +31,7 @@
   .wrap{width:min(1280px,94vw);margin:0 auto}
 
   /* ===== top bar ===== */
-  .topbar{height:142px;background:var(--coal) url("assets/header.jpg") center/cover no-repeat;display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:relative}
+  .topbar{height:142px;background:var(--coal) url("/booking/assets/header.jpg") center/cover no-repeat;display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:relative}
   .topbar img{width:82px;height:82px;display:block}
   .topbar nav{display:flex;gap:6px;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
   .topbar nav a{padding:15px 20px;font-family:'Russo One',var(--font);font-weight:400;font-size:24px;color:#FDFDFD;display:flex;align-items:center;gap:8px;border-radius:12px}
@@ -197,7 +197,7 @@
 
 
 <header class="topbar">
-  <img src="assets/logo.png" alt="Off-Road Hub">
+  <img src="/booking/assets/logo.png" alt="Off-Road Hub">
   <nav aria-label="Site">
     <a href="#">Rider gear <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4z"/></svg></a>
     <a href="#">Bike Parts <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4z"/></svg></a>
@@ -208,7 +208,7 @@
 </header>
 
 <main class="hero" id="top">
-  <div class="bg show" id="bgA" style="background-image:url('assets/hero-1600.jpg')"></div>
+  <div class="bg show" id="bgA" style="background-image:url('/booking/assets/hero-1600.jpg')"></div>
   <div class="bg" id="bgB"></div>
   <div class="dim"></div>
   <div class="wrap">
@@ -240,9 +240,9 @@
 
     <h2 class="perks-head">Our perks</h2>
     <div class="perks">
-      <div class="perk"><img src="assets/perk-varg.png" alt=""><div><h3>Stark Vargs, only here</h3><p>Electric, silent, and stupidly quick. Nobody else rents them.</p></div></div>
-      <div class="perk"><img src="assets/perk-trails.png" alt=""><div><h3>Hidden trails</h3><p>We know every goat track around Paphos and beyond.</p></div></div>
-      <div class="perk"><img src="assets/perk-support.png" alt=""><div><h3>Full support</h3><p>Full gear and a sweet coach voice in your ear over intercom.</p></div></div>
+      <div class="perk"><img src="/booking/assets/perk-varg.png" alt=""><div><h3>Stark Vargs, only here</h3><p>Electric, silent, and stupidly quick. Nobody else rents them.</p></div></div>
+      <div class="perk"><img src="/booking/assets/perk-trails.png" alt=""><div><h3>Hidden trails</h3><p>We know every goat track around Paphos and beyond.</p></div></div>
+      <div class="perk"><img src="/booking/assets/perk-support.png" alt=""><div><h3>Full support</h3><p>Full gear and a sweet coach voice in your ear over intercom.</p></div></div>
     </div>
   </div>
 </main>
@@ -265,10 +265,10 @@
 <script>
 /* ---------- data ---------- */
 const ASSETS = {
-  hero:"assets/hero-1600.jpg", heroVargec:"assets/hero-vargec.jpg", heroKtm:"assets/hero-ktm.jpg",
-  vargmx:"assets/bike-vargmx.png", vargec:"assets/bike-vargec.png", ktm:"assets/bike-ktm.png",
-  akamas:"assets/place-akamas.png", fonikas:"assets/place-fonikas.png", kathikas:"assets/place-kathikas.png",
-  kykkos:"assets/place-kykkos.png", troodos:"assets/place-troodos.png"
+  hero:"/booking/assets/hero-1600.jpg", heroVargec:"/booking/assets/hero-vargec.jpg", heroKtm:"/booking/assets/hero-ktm.jpg",
+  vargmx:"/booking/assets/bike-vargmx.png", vargec:"/booking/assets/bike-vargec.png", ktm:"/booking/assets/bike-ktm.png",
+  akamas:"/booking/assets/place-akamas.png", fonikas:"/booking/assets/place-fonikas.png", kathikas:"/booking/assets/place-kathikas.png",
+  kykkos:"/booking/assets/place-kykkos.png", troodos:"/booking/assets/place-troodos.png"
 };
 const bikes=[
   {id:'vargmx',n:'Varg MX',full:'Stark Varg MX',price:'€140'},
