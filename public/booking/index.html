@@ -395,7 +395,7 @@ function summary(){
 }
 function sent(){
   chat.querySelector('.summary .actions').innerHTML='<span class="micro sent">Sent ✓</span>';
-  setTimeout(()=>{bubble('Got it. Go drink water, I’ll message you the pin tomorrow evening.','coach');
+  setTimeout(()=>{bubble('Got it! Go drink some water and rest those arms — I’ll message you the pin tomorrow evening. Can’t wait to ride with you 😘','coach');
     const row=document.createElement('div');row.className='chips';const b=document.createElement('button');b.className='chip';b.textContent='Done';b.onclick=closeBook;row.appendChild(b);chat.appendChild(row);back.scrollTop=back.scrollHeight;b.focus();},700);
 }
 </script>
