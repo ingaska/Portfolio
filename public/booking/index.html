@@ -81,8 +81,8 @@
   .bike .price{position:absolute;top:11px;right:13px;background:var(--orange);color:#fff;border-radius:20px;padding:3px 7px 4px;font:600 12px/1.2 'Roboto',var(--font)}
   .bike.own{background:#fff;width:150px;display:flex;flex-direction:column;align-items:center}
   .bike.own .n{position:static;display:block;width:100%;padding:34px 4px 0;color:var(--forest);font-size:26px;text-align:center;letter-spacing:-.05em;flex:none}
-  .bike.own .q{display:block;text-align:center;font-weight:900;font-size:40px;line-height:1;color:var(--forest);opacity:.35;margin-top:8px;flex:none}
-  .bike.own .m{position:static;margin-top:auto;padding:6px 8px 14px;width:100%;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#686D5E;line-height:1.5;text-align:center}
+  .bike.own .q{display:block;text-align:center;font-weight:900;font-size:40px;line-height:1;color:var(--forest);opacity:.35;margin:auto 0;flex:none}
+  .bike.own .m{position:static;margin-top:0;padding:6px 8px 14px;width:100%;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#686D5E;line-height:1.5;text-align:center}
   .bike.own .price{right:9px;top:9px}
   .bike.own.on::after{box-shadow:inset 0 0 0 4px var(--forest)}
   .bike.own .check{background:var(--forest);color:#fff}
@@ -101,9 +101,9 @@
   .place .m{position:absolute;right:14px;top:14px;z-index:2;font:600 12px/15px 'Roboto',var(--font);letter-spacing:.02em;text-transform:uppercase;color:#fff;border-radius:20px;padding:2px 9px;transition:opacity .15s}
   .place .m.sea{background:#289DF6}.place .m.trail{background:#689065}.place .m.rocks{background:#5E492D}
     .place.coach{background:#fff!important;text-align:center}
-  .place.coach .n{color:#333;font-size:26px;text-align:center;padding:14px 14px 0;margin:0}
-  .place.coach .q{display:block;text-align:center;font-weight:900;font-size:40px;line-height:1;color:var(--forest);opacity:.35;margin-top:14px}
-  .place.coach .s{position:static;margin-top:auto;padding-bottom:4px;width:100%;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#686D5E;text-align:center}
+  .place.coach .n{color:#333;font-size:clamp(14px,4vw,26px);white-space:nowrap;text-align:center;padding:14px 8px 0;margin:0}
+  .place.coach .q{display:block;text-align:center;font-weight:900;font-size:clamp(24px,7vw,40px);line-height:1;color:var(--forest);opacity:.35;margin:auto 0}
+  .place.coach .s{position:static;margin-top:0;padding-bottom:4px;width:100%;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#686D5E;text-align:center}
   .place::before{content:"";position:absolute;inset:0;background:var(--forest);opacity:0;transition:opacity .15s;border-radius:inherit;z-index:1}
   .place.on .n{color:var(--cream)}
   .place.on .band{opacity:0}
@@ -143,8 +143,8 @@
     .bike{width:calc(50% - 4px);height:170px}.bike.own{width:calc(50% - 4px)}
     .perk{width:100%}
     .places{gap:7px}.place{padding:9px;border-radius:16px}.place .n{font-size:15px}.place .m{right:9px;top:9px;font-size:10px;padding:2px 7px}
-    .bike .n{font-size:20px}.bike.own .n{font-size:20px;padding-top:24px}.bike.own .q{font-size:30px;margin-top:6px}.bike.own .m{font-size:9px;padding-bottom:10px}
-    .place.coach .n{font-size:15px;padding-top:12px;letter-spacing:-.03em}.place.coach .q{font-size:22px;margin-top:2px}.place.coach .s{font-size:7px;letter-spacing:.08em;padding-bottom:2px}
+    .bike .n{font-size:20px}.bike.own .n{font-size:20px;padding-top:24px}.bike.own .q{font-size:30px}.bike.own .m{font-size:9px;padding-bottom:10px}
+    .place.coach .n{padding-top:10px;letter-spacing:-.03em}.place.coach .s{font-size:7px;letter-spacing:.08em;padding-bottom:2px}
     .check{width:20px;height:20px;font-size:11px}.bike .check,.place .check{top:12px;left:12px}
     .place .band{height:40px}
     .res{grid-template-columns:1fr}.res .actions{justify-content:space-between}.res .btn{flex:1}
