@@ -192,6 +192,8 @@
   .summary .row .tags{margin:0;justify-content:flex-end}
   .summary .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
   .sent{color:var(--sage-2)}
+  .summary .consent{margin-top:12px;font-size:12px;line-height:1.4;color:#6E7A70}
+  .btn.busy{opacity:.6;cursor:progress}
   @media (max-width:980px){
     .flip.flipped .front{position:absolute;inset:0;height:100%;overflow:hidden}
     .flip.flipped .back{position:relative;inset:auto;min-height:60svh;max-height:calc(100svh - 24px)}
@@ -271,6 +273,15 @@
 
 
 <script>
+/* ---------- storage (Supabase, public anon key + insert-only RLS) ---------- */
+const SUPABASE={url:'',anonKey:''};
+async function saveBooking(rec){
+  if(!SUPABASE.url||!SUPABASE.anonKey) return {ok:true,demo:true};
+  try{
+    const r=await fetch(`${SUPABASE.url}/rest/v1/bookings`,{method:'POST',headers:{'Content-Type':'application/json',apikey:SUPABASE.anonKey,Authorization:`Bearer ${SUPABASE.anonKey}`,Prefer:'return=minimal'},body:JSON.stringify(rec)});
+    return {ok:r.ok,status:r.status};
+  }catch(e){ return {ok:false,error:String(e)}; }
+}
 /* ---------- data ---------- */
 const ASSETS = {
   hero:"/booking/assets/hero-1600.jpg", heroVargec:"/booking/assets/hero-vargec.jpg", heroKtm:"/booking/assets/hero-ktm.jpg",
@@ -404,11 +415,20 @@ function summary(){
       <div class="row"><span class="micro">Meeting</span><span>pin sent the day before</span></div>
       <div class="row"><span class="micro">Includes</span><span>bike, gear, coach, fuel or charge</span></div>
       <div class="row"><span class="micro">Price</span><span><strong>${price}</strong></span></div>
-      <div class="actions"><button class="btn orange" id="sendBtn">Send to Coach</button><button class="btn light" id="editBtn">Edit card</button></div>`;
+      <div class="actions"><button class="btn orange" id="sendBtn">Send to Coach</button><button class="btn light" id="editBtn">Edit card</button></div>
+      <p class="consent">We only use your contact to confirm this ride. No newsletters, no sharing.</p>`;
     chat.appendChild(s);back.scrollTop=back.scrollHeight;
     $('sendBtn').onclick=sent; $('editBtn').onclick=closeBook; $('sendBtn').focus();},600);
 }
-function sent(){
+async function sent(){
+  const btn=$('sendBtn'); btn.disabled=true; btn.classList.add('busy'); btn.textContent='Sending…';
+  const rec={bike:st.bikeName,places:st.trails,bingo:!!st.win,length:answers.length||null,ride_when:answers.when||null,level:answers.level||null,
+    channel:answers.channel||null,contact:answers.contact||null,price:(bikes.find(b=>b.id===st.bike)||{}).price||null,page:location.href,user_agent:navigator.userAgent};
+  const res=await saveBooking(rec);
+  if(!res.ok){
+    btn.disabled=false; btn.classList.remove('busy'); btn.textContent='Send to Coach';
+    bubble('Hmm, that didn’t go through. Give it another try, or message me on WhatsApp: +357 99822199.','coach'); back.scrollTop=back.scrollHeight; btn.focus(); return;
+  }
   chat.querySelector('.summary .actions').innerHTML='<span class="micro sent">Sent ✓</span>';
   setTimeout(()=>{bubble('Got it! Go drink some water, rest those arms. I’ll text you right away. Can’t wait to ride with you 😘','coach');
     const row=document.createElement('div');row.className='chips';const b=document.createElement('button');b.className='chip';b.textContent='Done';b.onclick=closeBook;row.appendChild(b);chat.appendChild(row);back.scrollTop=back.scrollHeight;b.focus();},700);
