@@ -180,6 +180,10 @@
   .chips{display:flex;gap:8px;flex-wrap:wrap;align-self:flex-start;animation:pop .25s}
   .chip{font-weight:600;font-size:14px;background:var(--sage);color:var(--forest);border:0;border-radius:999px;padding:9px 15px;cursor:pointer;transition:background .12s}
   .chip:hover{background:var(--mustard-2)}
+  .askrow{display:flex;gap:8px;align-self:stretch;animation:pop .25s}
+  .askrow input{flex:1;min-width:0;font:inherit;font-size:15px;padding:12px 16px;border-radius:999px;border:1px solid rgba(27,42,31,.2);background:#fff;color:var(--ink)}
+  .askrow input::placeholder{color:#8a9088}
+  .askrow .btn{padding:12px 20px;flex:none}
   .summary{align-self:stretch;padding:20px;border-radius:24px;background:#fff;animation:pop .3s}
   .summary b{font-weight:900;font-size:26px;letter-spacing:-.04em;display:block;margin-bottom:10px;color:var(--forest);line-height:1.2}
   .summary .row{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:8px 0;border-top:1px solid rgba(27,42,31,.12)}
@@ -344,7 +348,11 @@ const flow=[
   {key:'length',q:()=>st.win?'A full line, so that’s a full day. Sound right?':'How long do you want to be out?',
     chips:()=>st.win?['Full day','Make it a half day']:['2 h taster','Half day (4 h)','Full day']},
   {key:'level',q:()=>'Honestly — where are you with off-road?',chips:['Never done it','Rode a bit','I race, I want to get better']},
+  {key:'channel',q:()=>'Where should I send the confirmation?',chips:['WhatsApp','Telegram','Email']},
+  {key:'contact',input:true,q:()=>({WhatsApp:'Your WhatsApp number?',Telegram:'Your Telegram handle?',Email:'Your email?'})[answers.channel],
+    field:()=>({WhatsApp:{type:'tel',ph:'+357 99 123 456'},Telegram:{type:'text',ph:'@handle'},Email:{type:'email',ph:'you@example.com'}})[answers.channel]},
 ];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 function openBook(){
   st=state(); answers={}; step=0; chat.innerHTML=''; lastFocus=document.activeElement;
   $('mSub').innerHTML=`<span>${st.bikeName}</span><span>·</span>${st.trails.length?tags(st.trails):'<span>coach picks the trail</span>'}`;
@@ -361,7 +369,7 @@ document.addEventListener('keydown',e=>{
   if(!flipped()) return;
   if(e.key==='Escape') return closeBook();
   if(e.key==='Tab'){ // keep focus on the back of the card while it is showing
-    const f=[...back.querySelectorAll('button:not([disabled])')]; if(!f.length) return;
+    const f=[...back.querySelectorAll('button:not([disabled]),input')]; if(!f.length) return;
     const first=f[0], last=f[f.length-1];
     if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault();}
     else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault();}
@@ -372,6 +380,12 @@ function ask(){
   const s=flow[step]; if(!s) return summary();
   const t=bubble('•••','coach typing');
   setTimeout(()=>{t.classList.remove('typing');t.textContent=s.q();
+    if(s.input){
+      const f=s.field(); const row=document.createElement('form'); row.className='askrow';
+      row.innerHTML=`<input type="${f.type}" placeholder="${f.ph}" aria-label="${s.q()}" required autocomplete="${f.type==='tel'?'tel':f.type==='email'?'email':'off'}"><button class="btn" type="submit">Send</button>`;
+      row.onsubmit=e=>{e.preventDefault();const v=row.querySelector('input').value.trim();if(!v)return;answers[s.key]=v;row.remove();bubble(v,'me');step++;setTimeout(ask,350);};
+      chat.appendChild(row);back.scrollTop=back.scrollHeight;row.querySelector('input').focus();return;
+    }
     const chips=typeof s.chips==='function'?s.chips():s.chips;const row=document.createElement('div');row.className='chips';
     chips.forEach(c=>{const b=document.createElement('button');b.className='chip';b.textContent=c;
       b.onclick=()=>{answers[s.key]=c==='Make it a half day'?'Half day (4 h)':c;row.remove();bubble(c,'me');step++;setTimeout(ask,350);};row.appendChild(b);});
@@ -379,13 +393,14 @@ function ask(){
 }
 function summary(){
   const t=bubble('•••','coach typing');
-  setTimeout(()=>{t.classList.remove('typing');t.textContent='That’s everything. Send it over and I’ll confirm on WhatsApp within a few hours.';
+  setTimeout(()=>{t.classList.remove('typing');t.textContent=`That’s everything. Send it over and I’ll confirm on ${answers.channel||'WhatsApp'} within a few hours.`;
     const price=(bikes.find(b=>b.id===st.bike)||{}).price||'€140'; // same price as on the bike card
     const s=document.createElement('div');s.className='summary';
     s.innerHTML=`<b>${st.bikeName} · ${answers.length}</b>
       <div class="row"><span class="micro">Where</span>${st.trails.length?tags(st.trails):'<span>coach picks</span>'}</div>
       <div class="row"><span class="micro">When</span><span>${answers.when}</span></div>
       <div class="row"><span class="micro">Level</span><span>${answers.level}</span></div>
+      <div class="row"><span class="micro">Contact</span><span>${esc(answers.channel)} · ${esc(answers.contact)}</span></div>
       <div class="row"><span class="micro">Meeting</span><span>pin sent the day before</span></div>
       <div class="row"><span class="micro">Includes</span><span>bike, gear, coach, fuel or charge</span></div>
       <div class="row"><span class="micro">Price</span><span><strong>${price}</strong></span></div>
@@ -395,7 +410,7 @@ function summary(){
 }
 function sent(){
   chat.querySelector('.summary .actions').innerHTML='<span class="micro sent">Sent ✓</span>';
-  setTimeout(()=>{bubble('Got it! Go drink some water and rest those arms — I’ll message you the pin tomorrow evening. Can’t wait to ride with you 😘','coach');
+  setTimeout(()=>{bubble('Got it! Go drink some water, rest those arms — I’ll text you right away. Can’t wait to ride with you 😘','coach');
     const row=document.createElement('div');row.className='chips';const b=document.createElement('button');b.className='chip';b.textContent='Done';b.onclick=closeBook;row.appendChild(b);chat.appendChild(row);back.scrollTop=back.scrollHeight;b.focus();},700);
 }
 </script>
