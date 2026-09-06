@@ -15,7 +15,7 @@ const SYSTEM_PROMPT = `You are a Modern Greek tutor writing spaced-repetition fl
 
 You receive either a passage of text (usually Greek, sometimes English words the learner wants in Greek) or a list of words with the passage as context. Produce one card per vocabulary item.
 
-Choosing words (when no list is given): pick the content words a learner would want on cards: nouns, verbs, adjectives, useful adverbs. Skip articles, pronouns, prepositions, conjunctions, numbers and names. Words listed under "Already in deck" still get a card (the app marks them itself). Merge inflected forms of the same word into one card. Keep the passage order. A single word or a short phrase is a valid passage: make cards for what is there. The passage may also be in English or another language, or mix languages: then treat each content word or short phrase as a request for its Greek equivalent and write the card for that Greek word (greek holds the Greek form, translation the English). At most 12 cards. Return an empty list only when there are no words to work with at all (numbers, symbols, gibberish).
+Choosing words (when no list is given): pick the content words a learner would want on cards: nouns, verbs, adjectives, useful adverbs. Skip articles, pronouns, prepositions, conjunctions, numbers and names. Words listed under "Already in deck" still get a card (the app marks them itself). Merge inflected forms of the same word into one card. Keep the passage order. A single word or a short phrase is a valid passage: make cards for what is there. The message names the learner's input languages. Greek text is vocabulary to card. Text in any other listed language (a whole passage, a few words, or mixed with Greek) is a request for the Greek equivalents: write the card for the Greek word (greek holds the Greek form, translation the English sense). Text in a language that is not listed still gets its best Greek equivalents rather than nothing. At most 12 cards. Return an empty list only when there are no words to work with at all (numbers, symbols, gibberish).
 
 Each card:
 - greek: the dictionary form (nominative singular for nouns, 1st person singular present for verbs), capitalised, in Greek letters with correct accents.
@@ -82,6 +82,8 @@ export interface WriteCardsInput {
   text?: string
   words?: string[]
   known?: string[]
+  /** Languages the text may be in, Greek first. Defaults to Greek and English. */
+  languages?: string[]
   apiKey?: string
 }
 
@@ -99,12 +101,14 @@ export interface WriteCardsResult {
 
 const norm = (s: string) => s.trim().toLowerCase().replace(/^(ο|η|το)\s+/, '')
 
-export async function writeCards({ text, words, known, apiKey }: WriteCardsInput): Promise<WriteCardsResult> {
+export async function writeCards({ text, words, known, languages, apiKey }: WriteCardsInput): Promise<WriteCardsResult> {
   if (!apiKey) throw new ServiceError(400, 'apiKey is required')
   if (!text?.trim() && !words?.length) throw new ServiceError(400, 'text or words is required')
 
   const knownSet = new Set((known ?? []).map(norm))
+  const spoken = [...new Set(['Greek', ...(languages?.length ? languages : ['English'])])]
   const user =
+    `Input languages: ${spoken.join(', ')}\n\n` +
     (words?.length
       ? `Words: ${words.join(', ')}\n\nContext:\n${text?.trim() || '(none)'}`
       : `Text:\n${text!.trim()}`) +
