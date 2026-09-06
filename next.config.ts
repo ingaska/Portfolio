@@ -5,10 +5,9 @@ const nextConfig: NextConfig = {
   // copies; serve it uncached so every open shows the current build.
   async headers() {
     return [
-      {
-        source: '/flipsi/:path*',
-        headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }],
-      },
+      // Both: '/flipsi' is the page's own URL, ':path*' its files and functions' assets.
+      { source: '/flipsi', headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }] },
+      { source: '/flipsi/:path*', headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }] },
     ]
   },
   images: {
