@@ -18,7 +18,7 @@ const MODEL = 'gemini-2.5-flash-image'
 const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`
 
 /** Bump when the prompt or references change, so cached pictures are redrawn. */
-const STYLE = 'flat-v6'
+const STYLE = 'flat-v7'
 
 /** The five tile colours of the Figma set, with their hues. */
 export const TILES = [
@@ -29,9 +29,15 @@ export const TILES = [
   { hex: '#FF8D28', hue: 28 },    // orange
 ]
 
-/** The background colour Gemini is asked for: nothing in the flat style uses it,
- *  so every pixel near it, enclosed or not, can be made transparent. */
-const CHROMA = { hex: '#FF00FF', rgb: [255, 0, 255] as [number, number, number] }
+/** The background colour Gemini is asked for, keyed out afterwards. It must
+ *  be far from anything in the subject: green for most things, magenta for
+ *  subjects that are probably green (a pink heart on magenta came back grey). */
+const CHROMAS = {
+  green:   { hex: '#00FF00', rgb: [0, 255, 0] as [number, number, number], name: 'neon green' },
+  magenta: { hex: '#FF00FF', rgb: [255, 0, 255] as [number, number, number], name: 'neon magenta' },
+}
+const GREENISH = /\b(leaf|leaves|tree|trees|plant|plants|grass|forest|frog|cucumber|lime|olive|olives|green|salad|lettuce|broccoli|pea|peas|mint|cactus|herb|herbs|bush|garden|park|jungle|turtle|lizard|crocodile|kiwi|avocado|pear|melon|watermelon|apple|pepper|spinach|zucchini|basil|dill|parsley|vine|vineyard|meadow|hill|hills|mountain|mountains|field|fields|island|palm)\b/i
+const chromaFor = (subject: string) => (GREENISH.test(subject) ? CHROMAS.magenta : CHROMAS.green)
 
 /** The reference illustrations, as Gemini wants them. */
 export type ReferencePart = { inlineData: { mimeType: string; data: string } }
@@ -39,10 +45,13 @@ export const REFERENCE_FILES = ['ice-cream.png', 'dog.png', 'runner.png']
 
 const STYLE_BRIEF =
   'The attached images are examples of one illustration style. Reproduce that style exactly: a flat two-dimensional ' +
-  'drawing with thin dark outlines of even weight, flat soft pastel fills, at most one slightly darker flat tone for ' +
-  'simple shading, no gradients, no highlights, no texture, simple rounded friendly shapes. '
+  'drawing with thin dark outlines of even weight, flat bright pastel fills, at most one slightly darker flat tone for ' +
+  'simple shading, no gradients, no highlights, no texture, simple rounded friendly shapes. ' +
+  'Colours come from the same palette as the examples, light but clearly saturated: sky blue #8CCBEE, sunny yellow #F6D96B, ' +
+  'warm sand #E6C79C, coral #F28B82, mint #9EDCC5, lavender #C9B8F0, plus a warm brown #C68B59 and ink #2B2B3A for outlines. ' +
+  'Every fill is clean and vivid; nothing muddy, greyish, dusty or desaturated. '
 
-const objectPrompt = (subject: string) =>
+const objectPrompt = (subject: string, chroma: { hex: string; name: string }) =>
   STYLE_BRIEF +
   `In precisely that style, draw only this: ${subject}. ` +
   'Keep it as simple as a picture-dictionary entry: one subject, few details, no decoration, no extra elements, ' +
@@ -51,7 +60,7 @@ const objectPrompt = (subject: string) =>
   'The subject is complete and entirely inside the picture: nothing is cropped or cut off by any edge. ' +
   'A person or an animal is shown whole, from the top of the head to the feet or shoes, standing on nothing, ' +
   'with empty background below the feet as well as above the head. ' +
-  `The background is a vivid, fully saturated neon magenta, exactly ${CHROMA.hex} (pure red plus pure blue, no white or grey mixed in), ` +
+  `The background is a vivid, fully saturated ${chroma.name}, exactly ${chroma.hex} (no white or grey mixed in), ` +
   'one perfectly uniform flat colour filling every pixel that is not the subject, ' +
   'including any gaps and holes inside the subject: no ground line, no shadow, no props, no frame or border, ' +
   'and absolutely no text, letters, numbers, labels, captions or watermark anywhere in the image.'
@@ -79,6 +88,8 @@ export interface IllustrateInput {
   mode?: 'object' | 'scene'
   /** Force a tile colour (#RRGGBB) instead of choosing by contrast. */
   tile?: string
+  /** Skip the cache and draw again (the card's regenerate button). */
+  fresh?: boolean
   apiKey?: string
 }
 
@@ -95,7 +106,7 @@ export async function illustrate(
   cache: MediaCache,
   loadReferences: () => Promise<ReferencePart[]>,
 ): Promise<IllustrateResult> {
-  const { greek, translation, subject: requestedSubject, mode = 'object', tile: requested, apiKey } = input
+  const { greek, translation, subject: requestedSubject, mode = 'object', tile: requested, fresh = false, apiKey } = input
   if (!greek?.trim() || !translation?.trim()) throw new ServiceError(400, 'greek and translation are required')
   if (!apiKey) throw new ServiceError(400, 'apiKey is required')
 
@@ -104,11 +115,12 @@ export async function illustrate(
   const forced = requested && /^#[0-9a-f]{6}$/i.test(requested) ? requested.toUpperCase() : null
   const key = cacheKey('image', MODEL, STYLE, mode, greek.trim(), subject)
 
-  const cached = await cache.read('image', key, 'png')
+  const cached = fresh ? null : await cache.read('image', key, 'png')
   if (cached) return { bytes: cached, mimeType: 'image/png', tile: scene ? null : forced ?? pickTile(dominantHue(cached)), cached: true }
 
   const references = await loadReferences()
-  const brief = scene ? scenePrompt(subject) : objectPrompt(subject)
+  const chroma = chromaFor(subject)
+  const brief = scene ? scenePrompt(subject) : objectPrompt(subject, chroma)
   let drawn = await draw(apiKey, references, brief, scene)
 
   let bytes: Buffer = drawn.raw
@@ -118,13 +130,13 @@ export async function illustrate(
     tile = null
   } else {
     try {
-      let cut = cutOutWithReport(drawn.raw, CHROMA.rgb)
+      let cut = cutOutWithReport(drawn.raw, chroma.rgb)
       if (cut.cropped) {
         // The model ran the subject into an edge (legs cut off). One more
         // try, asking for it smaller; the second render is used either way.
         console.warn(`image: "${greek}" was cropped at the edge, redrawing smaller`)
         drawn = await draw(apiKey, references, brief + SMALLER, scene)
-        cut = cutOutWithReport(drawn.raw, CHROMA.rgb)
+        cut = cutOutWithReport(drawn.raw, chroma.rgb)
         if (cut.cropped) console.warn(`image: "${greek}" still touches the edge after the redraw`)
       }
       bytes = cut.bytes

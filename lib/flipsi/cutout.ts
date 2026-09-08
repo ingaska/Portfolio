@@ -14,8 +14,10 @@ import { PNG } from 'pngjs'
 
 /** Output frame: the reference set's proportions. */
 const FRAME = { width: 843, height: 1049 }
-/** How much of the frame the subject occupies, and where its centre sits. */
-const FIT = { height: 0.66, width: 0.76, centreY: 0.54 }
+/** How much of the frame the subject may occupy, and where its base sits:
+ *  the reference set puts feet and bases at about 90% of the height, with
+ *  the ground shadow (drawn by the card) just below. */
+const FIT = { height: 0.66, width: 0.76, bottom: 0.9 }
 
 export function cutOut(pngBytes: Buffer, chroma?: [number, number, number]): Buffer {
   return cutOutWithReport(pngBytes, chroma).bytes
@@ -129,7 +131,7 @@ function reframe(img: PNG): PNG {
   const scale = Math.min((FRAME.height * FIT.height) / subjectH, (FRAME.width * FIT.width) / subjectW)
   const outW = Math.round(subjectW * scale), outH = Math.round(subjectH * scale)
   const left = Math.round((FRAME.width - outW) / 2)
-  const top = Math.round(FRAME.height * FIT.centreY - outH / 2)
+  const top = Math.round(FRAME.height * FIT.bottom - outH)
 
   const out = new PNG({ width: FRAME.width, height: FRAME.height })
   out.data.fill(0)
