@@ -97,5 +97,9 @@ export function supabaseBackend(): Backend {
     async deleteCards(owner, ids) {
       if (ids.length) check(await db().from('lexis_cards').delete().eq('owner', owner).in('id', ids))
     },
+
+    async deleteAllCards(owner) {
+      check(await db().from('lexis_cards').delete().eq('owner', owner))
+    },
   }
 }

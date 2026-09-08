@@ -50,6 +50,7 @@ export interface Backend {
   /** Insert or replace by id. A card arriving without a picture keeps the stored one. */
   upsertCards(owner: string, cards: StoredCard[]): Promise<void>
   deleteCards(owner: string, ids: string[]): Promise<void>
+  deleteAllCards(owner: string): Promise<void>
 }
 
 let backend: Backend | null = null
@@ -112,6 +113,11 @@ export async function deleteCards(ids: string[], owner = OWNER): Promise<number>
   if (!ids.length) return 0
   await store().deleteCards(owner, ids)
   return ids.length
+}
+
+/** Back to the very first screen: no cards at all. Settings stay. */
+export async function deleteAllCards(owner = OWNER): Promise<void> {
+  await store().deleteAllCards(owner)
 }
 
 /** Everything the app needs on open, in one round trip. */

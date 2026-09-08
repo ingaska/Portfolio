@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { deleteCards, upsertCards, type NewCard } from '@/lib/flipsi/store'
+import { deleteAllCards, deleteCards, upsertCards, type NewCard } from '@/lib/flipsi/store'
 import { guard } from '@/lib/flipsi/sync-route'
 import { fail } from '@/lib/flipsi/route'
 
@@ -24,7 +24,8 @@ export async function DELETE(request: Request) {
   const denied = guard(request)
   if (denied) return denied
   try {
-    const { ids = [] } = (await request.json()) as { ids?: string[] }
+    const { ids = [], all = false } = (await request.json()) as { ids?: string[]; all?: boolean }
+    if (all === true) { await deleteAllCards(); return NextResponse.json({ deleted: 'all' }) }
     return NextResponse.json({ deleted: await deleteCards(ids) })
   } catch (err) {
     return fail(err)
