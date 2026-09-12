@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
       // Both: '/flipsi' is the page's own URL, ':path*' its files and functions' assets.
       { source: '/flipsi', headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }] },
       { source: '/flipsi/:path*', headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }] },
+      // The CS Space prototype is iterated on the same way.
+      { source: '/csspace', headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }] },
+      { source: '/csspace/:path*', headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }] },
     ]
   },
   images: {
