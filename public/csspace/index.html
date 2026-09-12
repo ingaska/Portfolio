@@ -14,7 +14,7 @@
   --page:#1C1A24; --panel:#282633; --surface:#312F3D; --surface-hover:#3B3949; --elevated:#403D4D;
   --o8:rgba(204,210,255,.08); --o16:rgba(204,210,255,.16); --border:rgba(255,255,255,.08);
   --t1:#fff; --t2:#BBB9C7; --t3:#817E8F; --placeholder:rgba(204,210,255,.32);
-  --purple:#806CF5; --teal:#2EC9B7; --green:#5BC27A; --green-bg:rgba(49,82,63,.6);
+  --purple:#6950FF; --teal:#22AA9A; --green:#5BC27A; --green-bg:rgba(49,82,63,.6); --accent-soft:rgba(105,80,255,.2);
   --blue:#0E7DDB; --magenta:#C85CD1; --danger:#FF8095; --orange:#F2892F;
   --r-consumer:#A9AFB8; --r-industrial:#5E98D9; --r-milspec:#4B69FF; --r-restricted:#8847FF;
   --r-classified:#D32CE6; --r-covert:#EB4B4B; --r-extraordinary:#F2C94C;
@@ -76,9 +76,9 @@ svg{display:block;flex:none}
 .tbtn:hover{background:var(--o8);color:var(--t1)}
 .tbtn.on{background:var(--o16);color:var(--t1)}
 .balance{display:flex;align-items:center;gap:8px;height:40px;padding:0 4px 0 10px;border-radius:6px;background:var(--elevated);font-weight:600;font-size:13px}
-.balance .topup{width:32px;height:32px;border-radius:4px;background:var(--teal);color:#141018;display:grid;place-items:center}
+.balance .topup{width:32px;height:32px;border-radius:4px;background:var(--teal);color:#fff;display:grid;place-items:center}
 .cartbtn{position:relative;display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:6px;background:var(--elevated);color:var(--t2);font-weight:600;font-size:14px}
-.cartbtn.has{background:var(--teal);color:#141018}
+.cartbtn.has{background:var(--teal);color:#fff}
 .cart-count{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--magenta);color:#fff;font-size:11px;font-weight:600;display:none;place-items:center;border:2px solid var(--page)}
 .cartbtn.has .cart-count{display:grid}
 
@@ -102,7 +102,7 @@ svg{display:block;flex:none}
 .dash{width:8px;height:2px;background:var(--elevated);flex:none}
 .fchips{display:flex;gap:6px}
 .fchip{flex:1;height:26px;border-radius:13px;background:var(--o8);border:1px solid var(--o16);color:var(--t2);font-size:12px;font-weight:500}
-.fchip.on{background:var(--teal);border-color:transparent;color:#141018}
+.fchip.on{background:var(--teal);border-color:transparent;color:#fff}
 .check{display:flex;align-items:center;gap:10px;height:32px;color:var(--t2);font-size:13px;cursor:pointer}
 .check .box{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--t3);flex:none;display:grid;place-items:center}
 .check.on .box{background:var(--purple);border-color:var(--purple)}
@@ -143,7 +143,7 @@ svg{display:block;flex:none}
 .price{font-weight:600;font-size:18px;line-height:22px;white-space:nowrap}
 .badge{display:inline-flex;align-items:center;gap:4px;height:18px;padding:0 6px;border-radius:4px;font-size:11px;font-weight:500;flex:none}
 .badge.disc{background:var(--green-bg);color:var(--green)}
-.badge.del{background:#22AA9A;color:#fff;padding-left:5px}
+.badge.del{background:var(--teal);color:#fff;padding-left:5px}
 .badge.del .ic{width:11px;height:11px}
 .ref{font-size:11px;line-height:14px;color:var(--t3);padding-top:2px}
 .ref .rs{display:none}
@@ -154,7 +154,7 @@ svg{display:block;flex:none}
 .addrow{padding-top:12px}
 .add{width:100%;height:32px;border-radius:4px;background:var(--elevated);color:var(--t2);display:flex;align-items:center;justify-content:center;gap:8px;font-weight:500;font-size:13px}
 .card:hover .add{background:var(--purple);color:#fff}
-.card.incart .add,.card.incart:hover .add{background:var(--green-bg);color:var(--green)}
+.card.incart .add,.card.incart:hover .add{background:var(--accent-soft);color:var(--green)}
 
 /* ---------- mini cart ---------- */
 .scrim{position:fixed;inset:0;background:rgba(11,10,16,.6);opacity:0;pointer-events:none;transition:opacity .18s;z-index:70}
@@ -210,7 +210,7 @@ svg{display:block;flex:none}
 .m-price b{font-size:32px;font-weight:600;line-height:40px}
 .m-ref{color:var(--t3);font-size:14px;padding:2px 0 16px}
 .m-add{width:100%;height:48px;border-radius:6px;background:var(--purple);color:#fff;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px}
-.m-add.incart{background:var(--green-bg);color:var(--green)}
+.m-add.incart{background:var(--accent-soft);color:var(--green)}
 .lbl{font-weight:600;font-size:13px;padding:16px 0 8px}
 .seller{display:flex;align-items:center;gap:10px}
 .seller .avatar{width:32px;height:32px}
@@ -263,7 +263,7 @@ svg{display:block;flex:none}
   .mlogo .bars i{display:block;width:8px;height:1.2px;background:#fff}
   .mcart{position:relative;display:flex;align-items:center;gap:4px;height:36px;padding:0 6px;border-radius:4px;background:var(--elevated);color:var(--t2);font-weight:600;font-size:12px;flex:none}
   .mcart .ic{width:16px;height:16px}
-  .mcart.has{background:#22AA9A;color:#fff}
+  .mcart.has{background:var(--teal);color:#fff}
   .mcart.has .cart-count{display:grid}
   .mcart .cart-count{border:0;top:-7px;right:-7px}
   .mav{position:relative;width:32px;height:32px;flex:none}
@@ -316,7 +316,7 @@ svg{display:block;flex:none}
   .add{height:30px;font-size:12px}
   .card:hover{transform:none;box-shadow:none;background:var(--surface)}
   .card:hover .add{background:var(--elevated);color:var(--t2)}
-  .card.incart .add{background:var(--green-bg);color:var(--green)}
+  .card.incart .add{background:var(--accent-soft);color:var(--green)}
   /* Mobile 360 / Cart - Figma 234:8562 */
   .minicart{left:10px!important;right:10px!important;width:auto!important;max-width:none;top:64px!important}
   /* Mobile 360 / Product details */
