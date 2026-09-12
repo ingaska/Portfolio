@@ -666,11 +666,14 @@ function openItem(i,keep){
  document.getElementById("mFav").onclick=()=>toggleFav(i);
  document.querySelectorAll("#modal .mhead").forEach(h=>h.onclick=()=>{const sec=h.parentElement;sec.classList.toggle("open");
   h.querySelector("path").setAttribute("d",sec.classList.contains("open")?"M5 12h14":"M12 5v14M5 12h14")});
- if(!keep){document.getElementById("modal").classList.add("on");document.getElementById("scrim").classList.add("on")}
+ if(!keep){const m=document.getElementById("modal");m.style.minHeight="";
+  m.classList.add("on");document.getElementById("scrim").classList.add("on");
+  m.style.minHeight=m.offsetHeight+"px"}
 }
 
 /* ---------- overlays ---------- */
 function closeAll(){document.querySelectorAll(".modal,.minicart,.msheet").forEach(n=>n.classList.remove("on"));
+ document.getElementById("modal").style.minHeight="";
  document.getElementById("scrim").classList.remove("on")}
 function openCart(anchor){
  const mc=document.getElementById("minicart");
