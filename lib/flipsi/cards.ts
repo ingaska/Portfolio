@@ -13,7 +13,7 @@ const PRICE = { input: 1, output: 5, cacheWrite: 1.25, cacheRead: 0.1 }
 
 const SYSTEM_PROMPT = `You are a Modern Greek tutor writing spaced-repetition flashcards for an English-speaking learner who reads Greek text in the wild.
 
-You receive either a passage of text (usually Greek, sometimes English words the learner wants in Greek) or a list of words with the passage as context. Produce one card per vocabulary item.
+You receive either a passage of text (usually Greek, sometimes English words the learner wants in Greek), a list of words with the passage as context, or a photo (a page, a sign, a menu, a screen) in which case you read the Greek text in the photo yourself and treat it as the passage; any typed text that comes with a photo is a note about what to focus on. Produce one card per vocabulary item.
 
 Choosing words (when no list is given): pick the content words a learner would want on cards: nouns, verbs, adjectives, useful adverbs. Skip articles, pronouns, prepositions, conjunctions, numbers and names. Words listed under "Already in deck" still get a card (the app marks them itself). Merge inflected forms of the same word into one card. Keep the passage order. A single word or a short phrase is a valid passage, and the common case: "dog", "sun", "hi", "καλά" or "το σπίτι" each get their card. Never treat a real word as gibberish because it is short. The message names the learner's input languages. Greek text is vocabulary to card. Text in any other listed language (a whole passage, a few words, or mixed with Greek) is a request for the Greek equivalents: write the card for the Greek word (greek holds the Greek form, translation the English sense). Text in a language that is not listed still gets its best Greek equivalents rather than nothing. At most 12 cards. Return an empty list only when there are no words to work with at all (numbers, symbols, gibberish).
 
@@ -82,6 +82,8 @@ export interface WriteCardsInput {
   text?: string
   words?: string[]
   known?: string[]
+  /** A photo of Greek text, read by Claude directly (no separate OCR step). */
+  image?: { data: string; mediaType: 'image/jpeg' | 'image/png' | 'image/webp' | 'image/gif' }
   /** Languages the text may be in, Greek first. Defaults to Greek and English. */
   languages?: string[]
   apiKey?: string
@@ -101,9 +103,15 @@ export interface WriteCardsResult {
 
 const norm = (s: string) => s.trim().toLowerCase().replace(/^(ο|η|το)\s+/, '')
 
-export async function writeCards({ text, words, known, languages, apiKey }: WriteCardsInput): Promise<WriteCardsResult> {
+const IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+
+export async function writeCards({ text, words, known, languages, image, apiKey }: WriteCardsInput): Promise<WriteCardsResult> {
   if (!apiKey) throw new ServiceError(400, 'apiKey is required')
-  if (!text?.trim() && !words?.length) throw new ServiceError(400, 'text or words is required')
+  if (!text?.trim() && !words?.length && !image) throw new ServiceError(400, 'text, words or an image is required')
+  if (image) {
+    if (!IMAGE_TYPES.has(image.mediaType)) throw new ServiceError(400, 'the image must be JPEG, PNG, WebP or GIF')
+    if (!image.data || image.data.length > 7_000_000) throw new ServiceError(413, 'the image is too large; the app should have resized it')
+  }
 
   const knownSet = new Set((known ?? []).map(norm))
   const spoken = [...new Set(['Greek', ...(languages?.length ? languages : ['English'])])]
@@ -111,8 +119,16 @@ export async function writeCards({ text, words, known, languages, apiKey }: Writ
     `Input languages: ${spoken.join(', ')}\n\n` +
     (words?.length
       ? `Words: ${words.join(', ')}\n\nContext:\n${text?.trim() || '(none)'}`
-      : `Text:\n${text!.trim()}`) +
+      : image
+        ? `Photo attached: read the Greek text in it.${text?.trim() ? `\nNote from the learner: ${text.trim()}` : ''}`
+        : `Text:\n${text!.trim()}`) +
     (knownSet.size ? `\n\nAlready in deck: ${[...knownSet].join(', ')}` : '')
+  const content: Anthropic.MessageParam['content'] = image
+    ? [
+        { type: 'image', source: { type: 'base64', media_type: image.mediaType, data: image.data } },
+        { type: 'text', text: user },
+      ]
+    : user
 
   const client = new Anthropic({ apiKey })
   const started = Date.now()
@@ -127,7 +143,7 @@ export async function writeCards({ text, words, known, languages, apiKey }: Writ
       // prompt is well under that, and padding it out would cost more per call
       // than the cache saves. The breakpoint is here for when the prompt grows.
       system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
-      messages: [{ role: 'user', content: user }],
+      messages: [{ role: 'user', content }],
       output_config: { format: { type: 'json_schema', schema: CARD_SCHEMA } },
     })
   } catch (err) {
@@ -151,7 +167,7 @@ export async function writeCards({ text, words, known, languages, apiKey }: Writ
       (u.cache_creation_input_tokens ?? 0) * PRICE.cacheWrite +
       (u.cache_read_input_tokens ?? 0) * PRICE.cacheRead) / 1_000_000
 
-  console.log(`generate: ${cards.length} cards (${cards.filter(c => c.in_deck).length} in deck) from ${(text ?? '').length} chars in ${((Date.now() - started) / 1000).toFixed(1)}s, $${cost.toFixed(5)}`)
+  console.log(`generate: ${cards.length} cards (${cards.filter(c => c.in_deck).length} in deck) from ${image ? `a photo (${Math.round(image.data.length * 0.75 / 1024)} KB)` : `${(text ?? '').length} chars`} in ${((Date.now() - started) / 1000).toFixed(1)}s, $${cost.toFixed(5)}`)
 
   return {
     cards,
