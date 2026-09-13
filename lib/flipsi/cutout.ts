@@ -13,11 +13,15 @@ import { PNG } from 'pngjs'
  * keep their anti-aliasing without a pink fringe. */
 
 /** Output frame: the reference set's proportions. */
-const FRAME = { width: 843, height: 1049 }
+/* Square, because the card's picture tile is square: nothing is cropped when
+   it is shown, so what is framed here is exactly what appears. */
+const FRAME = { width: 1000, height: 1000 }
 /** How much of the frame the subject may occupy, and where its base sits:
  *  the reference set puts feet and bases at about 90% of the height, with
  *  the ground shadow (drawn by the card) just below. */
-const FIT = { height: 0.66, width: 0.76, bottom: 0.9 }
+/* The subject sits in the middle of the tile, up to 70% of its height or 76%
+   of its width, and the card paints the ground shadow just under its base. */
+const FIT = { height: 0.7, width: 0.76, centreY: 0.5 }
 
 export function cutOut(pngBytes: Buffer, chroma?: [number, number, number]): Buffer {
   return cutOutWithReport(pngBytes, chroma).bytes
@@ -131,7 +135,7 @@ function reframe(img: PNG): PNG {
   const scale = Math.min((FRAME.height * FIT.height) / subjectH, (FRAME.width * FIT.width) / subjectW)
   const outW = Math.round(subjectW * scale), outH = Math.round(subjectH * scale)
   const left = Math.round((FRAME.width - outW) / 2)
-  const top = Math.round(FRAME.height * FIT.bottom - outH)
+  const top = Math.round(FRAME.height * FIT.centreY - outH / 2)
 
   const out = new PNG({ width: FRAME.width, height: FRAME.height })
   out.data.fill(0)

@@ -18,7 +18,7 @@ const MODEL = 'gemini-2.5-flash-image'
 const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`
 
 /** Bump when the prompt or references change, so cached pictures are redrawn. */
-const STYLE = 'flat-v7'
+const STYLE = 'flat-v8'
 
 /** The five tile colours of the Figma set, with their hues. */
 export const TILES = [
@@ -121,7 +121,7 @@ export async function illustrate(
   const references = await loadReferences()
   const chroma = chromaFor(subject)
   const brief = scene ? scenePrompt(subject) : objectPrompt(subject, chroma)
-  let drawn = await draw(apiKey, references, brief, scene)
+  let drawn = await draw(apiKey, references, brief)
 
   let bytes: Buffer = drawn.raw
   let mimeType = drawn.mimeType
@@ -135,7 +135,7 @@ export async function illustrate(
         // The model ran the subject into an edge (legs cut off). One more
         // try, asking for it smaller; the second render is used either way.
         console.warn(`image: "${greek}" was cropped at the edge, redrawing smaller`)
-        drawn = await draw(apiKey, references, brief + SMALLER, scene)
+        drawn = await draw(apiKey, references, brief + SMALLER)
         cut = cutOutWithReport(drawn.raw, chroma.rgb)
         if (cut.cropped) console.warn(`image: "${greek}" still touches the edge after the redraw`)
       }
@@ -154,14 +154,14 @@ export async function illustrate(
 }
 
 /** One Gemini image call. */
-async function draw(apiKey: string, references: ReferencePart[], text: string, scene: boolean): Promise<{ raw: Buffer; mimeType: string }> {
+async function draw(apiKey: string, references: ReferencePart[], text: string): Promise<{ raw: Buffer; mimeType: string }> {
   const r = await fetch(ENDPOINT, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': apiKey },
     body: JSON.stringify({
       contents: [{ parts: [...references, { text }] }],
-      // Scenes fill the card's square picture; objects match the 4:5 reference frame.
-      generationConfig: { responseModalities: ['IMAGE'], imageConfig: { aspectRatio: scene ? '1:1' : '4:5' } },
+      // Square either way: the card's picture tile is square, and the cut-out is re-framed to a square.
+      generationConfig: { responseModalities: ['IMAGE'], imageConfig: { aspectRatio: '1:1' } },
     }),
   })
   if (!r.ok) {
