@@ -217,3 +217,62 @@ export async function rewriteSentence({ greek, article, translation, current, ap
   console.log(`sentence: "${greek}" → "${sentence}" $${cost.toFixed(5)}`)
   return { sentence: sentence.trim(), cost }
 }
+
+/* ---- A different picture idea ------------------------------------------ */
+
+const SUBJECT_PROMPT = `You are choosing what a picture dictionary should draw for a Greek flashcard, for a second attempt: the learner did not like the first picture, so the new subject must be a clearly different depiction, not a variation of the current one (a different object, action or stand-in, not the same thing recoloured or reposed).
+
+Rules for the subject, as a short English phrase (at most 12 words) naming ONE simple, instantly recognisable thing: a verb or an action gets a person doing it ("a man running with a sports bag"); a word for a person or a role gets that person ("a girl with a backpack"); an object gets the object alone ("a red gift box with a yellow bow"); an abstract word or a natural force gets a plain object as its visual stand-in, never a person or a figure ("air": "three curved wind swooshes carrying two small leaves"; "freedom": "an open birdcage with a small bird flying out"). No text, no symbols, no metaphors that need explaining, no scenes with several elements.
+
+mode: "object" when the picture is one thing (or person) that can be cut out and placed on a coloured tile; "scene" when the word is a place, an environment, weather, a time of day or a landscape, in which case the subject describes the whole view.`
+
+const SUBJECT_SCHEMA = {
+  type: 'object',
+  properties: {
+    subject: { type: 'string' },
+    mode: { type: 'string', enum: ['object', 'scene'] },
+  },
+  required: ['subject', 'mode'],
+  additionalProperties: false,
+} as const
+
+export interface RethinkSubjectInput {
+  greek?: string
+  translation?: string
+  /** What the current picture shows, so the new idea differs. */
+  current?: string | null
+  apiKey?: string
+}
+
+export async function rethinkSubject({ greek, translation, current, apiKey }: RethinkSubjectInput): Promise<{ subject: string; mode: 'object' | 'scene'; cost: number }> {
+  if (!apiKey) throw new ServiceError(400, 'apiKey is required')
+  if (!greek?.trim() || !translation?.trim()) throw new ServiceError(400, 'greek and translation are required')
+
+  const client = new Anthropic({ apiKey })
+  let message: Anthropic.Message
+  try {
+    message = await client.messages.create({
+      model: MODEL,
+      max_tokens: 256,
+      system: SUBJECT_PROMPT,
+      messages: [{
+        role: 'user',
+        content: `Word: ${greek} (${translation})\nCurrent picture: ${current?.trim() || '(unknown; a plain depiction of the word)'}`,
+      }],
+      output_config: { format: { type: 'json_schema', schema: SUBJECT_SCHEMA } },
+    })
+  } catch (err) {
+    if (err instanceof Anthropic.AuthenticationError) throw new ServiceError(401, 'The Anthropic API key was rejected')
+    if (err instanceof Anthropic.RateLimitError) throw new ServiceError(429, 'Anthropic rate limit reached. Wait a minute, then try again')
+    if (err instanceof Anthropic.APIError) throw new ServiceError(502, `Anthropic API error ${err.status}: ${err.message}`)
+    throw err
+  }
+  if (message.stop_reason === 'refusal') throw new ServiceError(422, 'Claude declined to suggest a picture for this word')
+  const block = message.content.find(b => b.type === 'text')
+  if (!block || block.type !== 'text') throw new ServiceError(502, 'No text in the response')
+  const { subject, mode } = JSON.parse(block.text) as { subject: string; mode: 'object' | 'scene' }
+  const u = message.usage
+  const cost = (u.input_tokens * PRICE.input + u.output_tokens * PRICE.output) / 1_000_000
+  console.log(`subject: "${greek}" ${current ? `"${current}" → ` : ''}"${subject}" (${mode}) $${cost.toFixed(5)}`)
+  return { subject: subject.trim(), mode, cost }
+}
