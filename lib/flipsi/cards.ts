@@ -27,13 +27,18 @@ Each card:
 - difficulty_tag: one of "verb", "noun", "adjective", "other".
 - image_subject: what a picture dictionary would draw for this word, as a short English phrase (at most 12 words) naming ONE simple, instantly recognisable thing. The rule: a verb or an action gets a person doing it ("a man running with a sports bag"); a word for a person or a role gets that person ("a girl with a backpack"); an object gets the object alone ("a red gift box with a yellow bow"); an abstract word or a natural force gets a plain object as its visual stand-in, never a person or a figure ("air": "three curved wind swooshes carrying two small leaves"; "freedom": "an open birdcage with a small bird flying out"). No text, no symbols, no metaphors that need explaining, no scenes with several elements.
 - image_mode: "object" when the picture is one thing (or person) that can be cut out and placed on a coloured tile: things, animals, people, actions. "scene" when the word is a place, an environment, weather, a time of day, a landscape or anything that is by nature a whole view rather than a thing: sky, sea, forest, night, rain, city, beach. A scene fills its picture edge to edge; for "scene", image_subject describes the whole view ("a blue sky with a pale sun and three small clouds").
+- folder: which of the learner's folders (listed in the message) the card belongs in. Animals and creatures go to Animals; food, drink and meals go to Food; verbs go to Verbs; every other word, nouns first of all, goes to Nouns. Use exactly one of the listed names.
 
 Examples of finished cards:
-{"greek":"Σκύλος","article":"ο","translation":"Dog","transliteration":"/o skílos/","example_sentence":"Ο σκύλος κάθεται και περιμένει","grammar_note":"noun, masculine","difficulty_tag":"noun","image_subject":"a golden retriever standing and facing the viewer","image_mode":"object"}
-{"greek":"Διαβάζω","article":null,"translation":"I read","transliteration":"/diavázo/","example_sentence":"Διαβάζω ένα βιβλίο το βράδυ","grammar_note":"verb, 1st person singular present","difficulty_tag":"verb","image_subject":"a young woman sitting and reading an open book","image_mode":"object"}
-{"greek":"Ουρανός","article":"ο","translation":"Sky","transliteration":"/o ouranós/","example_sentence":"Ο ουρανός είναι καθαρός σήμερα","grammar_note":"noun, masculine","difficulty_tag":"noun","image_subject":"a blue sky with a pale yellow sun and three small white clouds","image_mode":"scene"}`
+{"greek":"Σκύλος","article":"ο","translation":"Dog","transliteration":"/o skílos/","example_sentence":"Ο σκύλος κάθεται και περιμένει","grammar_note":"noun, masculine","difficulty_tag":"noun","image_subject":"a golden retriever standing and facing the viewer","image_mode":"object","folder":"Animals"}
+{"greek":"Διαβάζω","article":null,"translation":"I read","transliteration":"/diavázo/","example_sentence":"Διαβάζω ένα βιβλίο το βράδυ","grammar_note":"verb, 1st person singular present","difficulty_tag":"verb","image_subject":"a young woman sitting and reading an open book","image_mode":"object","folder":"Verbs"}
+{"greek":"Ουρανός","article":"ο","translation":"Sky","transliteration":"/o ouranós/","example_sentence":"Ο ουρανός είναι καθαρός σήμερα","grammar_note":"noun, masculine","difficulty_tag":"noun","image_subject":"a blue sky with a pale yellow sun and three small white clouds","image_mode":"scene","folder":"Nouns"}`
 
-const CARD_SCHEMA = {
+/** The folders a card may be filed in, when the caller names none. */
+const DEFAULT_FOLDERS = ['Verbs', 'Animals', 'Food', 'Nouns']
+
+/* Built per request: the folder enum is the learner's own folder list. */
+const cardSchema = (folderNames: string[]) => ({
   type: 'object',
   properties: {
     cards: {
@@ -52,15 +57,16 @@ const CARD_SCHEMA = {
           difficulty_tag: { type: 'string', enum: ['verb', 'noun', 'adjective', 'other'] },
           image_subject: { type: 'string' },
           image_mode: { type: 'string', enum: ['object', 'scene'] },
+          folder: { type: 'string', enum: folderNames },
         },
-        required: ['greek', 'article', 'translation', 'transliteration', 'example_sentence', 'grammar_note', 'difficulty_tag', 'image_subject', 'image_mode'],
+        required: ['greek', 'article', 'translation', 'transliteration', 'example_sentence', 'grammar_note', 'difficulty_tag', 'image_subject', 'image_mode', 'folder'],
         additionalProperties: false,
       },
     },
   },
   required: ['cards'],
   additionalProperties: false,
-} as const
+} as const)
 
 export interface GeneratedCard {
   greek: string
@@ -74,6 +80,8 @@ export interface GeneratedCard {
   image_subject: string
   /** A cut-out on a tile, or a view that fills the picture edge to edge. */
   image_mode: 'object' | 'scene'
+  /** One of the learner's folder names, as passed in `folders`. */
+  folder: string
   /** True when the word (or its article-less form) is already in the deck. */
   in_deck: boolean
 }
@@ -84,6 +92,8 @@ export interface WriteCardsInput {
   known?: string[]
   /** A photo of Greek text, read by Claude directly (no separate OCR step). */
   image?: { data: string; mediaType: 'image/jpeg' | 'image/png' | 'image/webp' | 'image/gif' }
+  /** The learner's folder names; each card is filed into one of them. */
+  folders?: string[]
   /** Languages the text may be in, Greek first. Defaults to Greek and English. */
   languages?: string[]
   apiKey?: string
@@ -105,7 +115,7 @@ const norm = (s: string) => s.trim().toLowerCase().replace(/^(ο|η|το)\s+/, '
 
 const IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
 
-export async function writeCards({ text, words, known, languages, image, apiKey }: WriteCardsInput): Promise<WriteCardsResult> {
+export async function writeCards({ text, words, known, languages, image, folders, apiKey }: WriteCardsInput): Promise<WriteCardsResult> {
   if (!apiKey) throw new ServiceError(400, 'apiKey is required')
   if (!text?.trim() && !words?.length && !image) throw new ServiceError(400, 'text, words or an image is required')
   if (image) {
@@ -115,8 +125,10 @@ export async function writeCards({ text, words, known, languages, image, apiKey 
 
   const knownSet = new Set((known ?? []).map(norm))
   const spoken = [...new Set(['Greek', ...(languages?.length ? languages : ['English'])])]
+  const folderNames = [...new Set((folders ?? []).map(f => f.trim()).filter(Boolean))]
+  const shelves = folderNames.length ? folderNames : DEFAULT_FOLDERS
   const user =
-    `Input languages: ${spoken.join(', ')}\n\n` +
+    `Input languages: ${spoken.join(', ')}\nFolders: ${shelves.join(', ')}\n\n` +
     (words?.length
       ? `Words: ${words.join(', ')}\n\nContext:\n${text?.trim() || '(none)'}`
       : image
@@ -144,7 +156,7 @@ export async function writeCards({ text, words, known, languages, image, apiKey 
       // than the cache saves. The breakpoint is here for when the prompt grows.
       system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
       messages: [{ role: 'user', content }],
-      output_config: { format: { type: 'json_schema', schema: CARD_SCHEMA } },
+      output_config: { format: { type: 'json_schema', schema: cardSchema(shelves) } },
     })
   } catch (err) {
     if (err instanceof Anthropic.AuthenticationError) throw new ServiceError(401, 'The Anthropic API key was rejected')
