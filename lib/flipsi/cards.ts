@@ -164,3 +164,56 @@ export async function writeCards({ text, words, known, languages, apiKey }: Writ
     cost,
   }
 }
+
+/* ---- One sentence, again ------------------------------------------------ */
+
+const SENTENCE_PROMPT = `You are a Modern Greek tutor. Write ONE new example sentence for a flashcard: short, natural, everyday Modern Greek that a learner could reuse, using the given word in its given sense. It must differ clearly from the current sentence (different situation or structure, not a paraphrase). Correct accents. No translation, no quotes, no explanation.`
+
+const SENTENCE_SCHEMA = {
+  type: 'object',
+  properties: { sentence: { type: 'string' } },
+  required: ['sentence'],
+  additionalProperties: false,
+} as const
+
+export interface RewriteSentenceInput {
+  greek?: string
+  article?: string | null
+  translation?: string
+  /** The sentence on the card now, so the new one differs. */
+  current?: string
+  apiKey?: string
+}
+
+export async function rewriteSentence({ greek, article, translation, current, apiKey }: RewriteSentenceInput): Promise<{ sentence: string; cost: number }> {
+  if (!apiKey) throw new ServiceError(400, 'apiKey is required')
+  if (!greek?.trim() || !translation?.trim()) throw new ServiceError(400, 'greek and translation are required')
+
+  const client = new Anthropic({ apiKey })
+  let message: Anthropic.Message
+  try {
+    message = await client.messages.create({
+      model: MODEL,
+      max_tokens: 256,
+      system: SENTENCE_PROMPT,
+      messages: [{
+        role: 'user',
+        content: `Word: ${article ? `${article} ` : ''}${greek} (${translation})\nCurrent sentence: ${current?.trim() || '(none)'}`,
+      }],
+      output_config: { format: { type: 'json_schema', schema: SENTENCE_SCHEMA } },
+    })
+  } catch (err) {
+    if (err instanceof Anthropic.AuthenticationError) throw new ServiceError(401, 'The Anthropic API key was rejected')
+    if (err instanceof Anthropic.RateLimitError) throw new ServiceError(429, 'Anthropic rate limit reached. Wait a minute, then try again')
+    if (err instanceof Anthropic.APIError) throw new ServiceError(502, `Anthropic API error ${err.status}: ${err.message}`)
+    throw err
+  }
+  if (message.stop_reason === 'refusal') throw new ServiceError(422, 'Claude declined to write a sentence for this word')
+  const block = message.content.find(b => b.type === 'text')
+  if (!block || block.type !== 'text') throw new ServiceError(502, 'No text in the response')
+  const { sentence } = JSON.parse(block.text) as { sentence: string }
+  const u = message.usage
+  const cost = (u.input_tokens * PRICE.input + u.output_tokens * PRICE.output) / 1_000_000
+  console.log(`sentence: "${greek}" → "${sentence}" $${cost.toFixed(5)}`)
+  return { sentence: sentence.trim(), cost }
+}
