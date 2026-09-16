@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
       // The CS Space prototype is iterated on the same way.
       { source: '/csspace', headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }] },
       { source: '/csspace/:path*', headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }] },
+      // The AskGPT funnel prototype, same treatment.
+      { source: '/askgpt', headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }] },
+      { source: '/askgpt/:path*', headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }] },
     ]
   },
   images: {

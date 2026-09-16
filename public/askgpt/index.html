@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <base href="/askgpt/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AskGPT — Funnel prototype</title>
+  <meta name="color-scheme" content="dark light">
+  <script>(function () { try { var t = new URLSearchParams(location.search).get('theme') || 'dark'; document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/funnel.css">
+</head>
+<body class="funnel-body">
+<div class="proto" id="proto">
+
+  <!-- ===================================================== 1 · Google (entry) -->
+  <section class="step step--google" data-step="google" aria-label="Google search results">
+    <div class="g">
+      <div class="g__head">
+        <div class="g__logo"><b>G</b><b>o</b><b>o</b><b>g</b><b>l</b><b>e</b></div>
+        <div class="g__search"><span>best model for vibecoding ios app</span><span class="icon icon--close icon-16" aria-hidden="true"></span><span class="icon icon--globe" aria-hidden="true"></span></div>
+        <div class="g__avatar" aria-hidden="true"></div>
+      </div>
+      <div class="g__tabs"><span class="g__tab">AI Mode</span><span class="g__tab is-active">All</span><span class="g__tab">Short videos</span><span class="g__tab">Images</span><span class="g__tab">Videos</span><span class="g__tab">Forums</span><span class="g__tab">News</span><span class="g__tab">More ▾</span><span class="g__tab">Tools ▾</span></div>
+      <div class="g__results">
+        <h2 class="g__section">Sponsored results</h2>
+        <p class="g__note">Your ad · the headline is reused as the first chat message</p>
+        <a class="g__ad g__ad--you" href="#" data-go="loading" aria-label="Open AskGPT">
+          <div class="g__site"><span class="g__fav g__fav--askgpt">✱</span><div><div class="g__name">AskGPT</div><div class="g__url">https://askgpt.com › ios</div></div></div>
+          <span class="g__title">Which AI model is best for vibe coding iOS apps?</span>
+          <div class="g__desc">Get a straight answer in one chat — Claude, GPT-5, Cursor and Lovable compared for iOS. Free to start, no card. Your question is already typed when you land.</div>
+        </a>
+        <div class="g__ad">
+          <div class="g__site"><span class="g__fav">B</span><div><div class="g__name">Base44</div><div class="g__url">https://www.base44.com</div></div></div>
+          <span class="g__title">No Code: Build iOS App with AI</span>
+          <div class="g__desc">Fast AI iOS App Builder — AI iOS app builder. Perfect for entrepreneurs. Ideas realized. Build iOS app with AI. No integrations needed. All-in-one. Download...</div>
+          <div class="g__links">Build iOS App with AI Today · Base44: Build iOS App with AI · AI App Builder · Our Plans</div>
+        </div>
+        <div class="g__hide">Hide sponsored results <span class="icon icon--chevron-down icon-16" style="transform:rotate(180deg)" aria-hidden="true"></span></div>
+        <div class="g__result">
+          <div class="g__site"><span class="g__fav g__fav--zite">Z</span><div><div class="g__name">Zite</div><div class="g__url">https://www.zite.com › blog › best-vibe-coding-tools</div></div></div>
+          <span class="g__title">8 Best Vibe Coding Tools in 2026: Tested and Ranked</span>
+          <div class="g__desc">7 Jul 2026 — The best vibe coding tool for building business apps is Zite because it generates apps with visible workflows, a built-in database, and built- ...</div>
+        </div>
+        <div class="g__result">
+          <div class="g__site"><span class="g__fav g__fav--x1">x</span><div><div class="g__name">x1.new</div><div class="g__url">https://x1.new › post › vibe-coding-apps-mobile-tested-...</div></div></div>
+          <span class="g__title">Best Vibe Coding Apps for Mobile in 2026 (Tested &amp; Compared)</span>
+          <div class="g__desc">19 Jun 2026 — Rork Max → Best for generating full Apple ecosystem apps using SwiftUI with cloud build tools. Cursor → Best AI coding IDE for developers ...</div>
+        </div>
+        <div class="g__result">
+          <div class="g__site"><span class="g__fav">S</span><div><div class="g__name">superappp.com</div><div class="g__url">https://www.superappp.com › Blog</div></div></div>
+          <span class="g__title">Best Vibe Coding Tools for iOS Apps (2026) - Superapp</span>
+          <div class="g__desc">2 Sept 2026 — For vibe coding a real native iPhone app with no coding, the clearest tool is Superapp, which turns a prompt into native Swift and SwiftUI. If ...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== 2–4 · AskGPT app -->
+  <section class="step step--app" data-step="app">
+    <div class="app" id="app" data-sidebar="collapsed" data-drawer="closed" data-screen="chat" data-phase="idle">
+      <div class="scrim" data-sidebar-close data-open="false" aria-hidden="true"></div>
+<aside class="sidebar" id="sidebar" aria-label="Primary">
+    <div class="sidebar__panel">
+      <div class="sidebar__header">
+        <a class="brand" href="#" aria-label="AskGPT home">
+          <span class="brand__mark-box"><span class="icon icon--logo brand__mark" aria-hidden="true"></span></span>
+          <span class="icon icon--wordmark brand__wordmark" aria-hidden="true"></span>
+        </a>
+        <button class="icon-btn icon-btn--24 sidebar__collapse" type="button" data-sidebar-toggle aria-expanded="true" aria-controls="sidebar" aria-label="Collapse sidebar">
+          <span class="icon icon--sidebar-collapse" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="sidebar__body">
+        <nav aria-label="Products">
+          <ul class="nav">
+            <li><a class="nav-item nav-item--highlight" href="#" data-tooltip="Ask Council">
+              <span class="icon icon--council tint-council" aria-hidden="true"></span>
+              <span class="nav-item__label">Ask Council</span>
+              <span class="nav-item__trailing"><span class="badge badge--new">New</span></span>
+            </a></li>
+            <li><a class="nav-item is-active" href="#" aria-current="page" data-tooltip="AI Chat">
+              <span class="icon icon--ai-chat" aria-hidden="true"></span>
+              <span class="nav-item__label">AI Chat</span>
+            </a></li>
+            <li><a class="nav-item" href="#" data-tooltip="Academy">
+              <span class="icon icon--academy" aria-hidden="true"></span>
+              <span class="nav-item__label">Academy</span>
+              <span class="nav-item__trailing"><span class="badge badge--new">New</span></span>
+            </a></li>
+            <li><a class="nav-item" href="#" data-tooltip="AI Library">
+              <span class="icon icon--library" aria-hidden="true"></span>
+              <span class="nav-item__label">AI Library</span>
+              <span class="nav-item__trailing"><span class="badge badge--pro"><span class="badge__text">Pro</span></span></span>
+            </a></li>
+            <li><a class="nav-item" href="#" data-tooltip="Images">
+              <span class="icon icon--images" aria-hidden="true"></span>
+              <span class="nav-item__label">Images</span>
+              <span class="nav-item__trailing"><span class="badge badge--pro"><span class="badge__text">Pro</span></span></span>
+            </a></li>
+            <li><a class="nav-item" href="#" data-tooltip="Tools">
+              <span class="icon icon--tools" aria-hidden="true"></span>
+              <span class="nav-item__label">Tools</span>
+            </a></li>
+            <li><a class="nav-item" href="#" data-tooltip="AI Detector">
+              <span class="icon icon--detector" aria-hidden="true"></span>
+              <span class="nav-item__label">AI Detector</span>
+              <span class="nav-item__trailing"><span class="badge badge--pro"><span class="badge__text">Pro</span></span></span>
+            </a></li>
+            <li><a class="nav-item" href="#" data-tooltip="AI Humanizer">
+              <span class="icon icon--humanizer" aria-hidden="true"></span>
+              <span class="nav-item__label">AI Humanizer</span>
+              <span class="nav-item__trailing"><span class="badge badge--pro"><span class="badge__text">Pro</span></span></span>
+            </a></li>
+            <li><a class="nav-item" href="#" data-tooltip="Plagiarism Checker">
+              <span class="icon icon--plagiarism" aria-hidden="true"></span>
+              <span class="nav-item__label">Plagiarism Checker</span>
+              <span class="nav-item__trailing"><span class="badge badge--pro"><span class="badge__text">Pro</span></span></span>
+            </a></li>
+          </ul>
+        </nav>
+
+        <hr class="divider sidebar__divider">
+
+        <section class="recents" aria-labelledby="recents-title">
+          <h2 class="recents__title" id="recents-title">Recents</h2>
+          <ul>
+            <li data-current><a class="recent-item" href="#">
+              <span class="recent-item__label">What is the best model for vibecoding ios app</span>
+              <button class="recent-item__action" type="button" aria-label="Delete chat"><span class="icon icon--trash icon-16" aria-hidden="true"></span></button>
+            </a></li>
+            <li><a class="recent-item" href="#">
+              <span class="icon icon--recent icon-16 recent-item__icon" aria-hidden="true"></span>
+              <span class="recent-item__label">No Title</span>
+              <button class="recent-item__action" type="button" aria-label="Delete chat"><span class="icon icon--trash icon-16" aria-hidden="true"></span></button>
+            </a></li>
+            <li><a class="recent-item" href="#">
+              <span class="icon icon--recent icon-16 recent-item__icon" aria-hidden="true"></span>
+              <span class="recent-item__label">No Title</span>
+              <button class="recent-item__action" type="button" aria-label="Delete chat"><span class="icon icon--trash icon-16" aria-hidden="true"></span></button>
+            </a></li>
+            <li><a class="recent-item" href="#">
+              <span class="recent-item__label">I want to explore the AI trends shaping the next 5 years</span>
+              <button class="recent-item__action" type="button" aria-label="Delete chat"><span class="icon icon--trash icon-16" aria-hidden="true"></span></button>
+            </a></li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="sidebar__footer">
+        <div class="menu-wrap" style="width:100%">
+          <button class="profile" type="button" aria-haspopup="menu" aria-controls="profile-menu" aria-expanded="false" data-tooltip="My profile">
+            <span class="avatar"><span class="icon icon--user icon-13" aria-hidden="true"></span></span>
+            <span class="profile__label">My profile</span>
+            <span class="icon icon--chevron-right profile__chevron" aria-hidden="true"></span>
+          </button>
+          <div class="menu menu--left" id="profile-menu" role="menu" data-open="false">
+            <div class="menu__label">Appearance</div>
+            <button class="menu__item" role="menuitem" type="button" data-theme-toggle><span data-theme-label>Light mode</span></button>
+            <div class="menu__sep"></div>
+            <button class="menu__item" role="menuitem" type="button">Settings</button>
+            <button class="menu__item" role="menuitem" type="button">Log out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+      <div class="app__main">
+        <header class="ftopbar">
+          <button class="icon-btn icon-btn--40 icon-btn--outlined ftopbar__menu" type="button" data-sidebar-toggle aria-label="Open menu"><span class="icon icon--sidebar-expand" aria-hidden="true"></span></button>
+          <a class="ftopbar__brand" href="#" data-go="register"><span class="icon icon--logo" aria-hidden="true"></span><span class="icon icon--wordmark" aria-hidden="true"></span></a>
+          <span class="ftopbar__with">answers with</span>
+          <div class="ftopbar__models" aria-label="Models">
+          <span class="chip chip--outline"><span class="icon icon--logo-gpt icon-18" aria-hidden="true"></span>ChatGPT</span>
+          <span class="chip chip--outline"><span class="icon icon--logo-claude icon-18" aria-hidden="true"></span>Claude</span>
+          <span class="chip chip--outline"><span class="icon icon--logo-gemini icon-18" aria-hidden="true"></span>Gemini</span>
+          <span class="chip chip--outline"><span class="icon icon--logo-grok icon-18" aria-hidden="true"></span>Grok</span>
+          <span class="chip chip--outline"><span class="icon icon--logo-perplexity icon-18" aria-hidden="true"></span>Perplexity</span>
+          </div>
+        </header>
+
+        <main class="chat" id="main">
+          <div class="chat__scroll">
+            <div class="chat__inner">
+              <div class="loading" id="loading">
+                <div>
+                  <div class="loading__title">Loading AI orchestration</div>
+                  <div class="loading__logos" aria-hidden="true"><span class="icon icon--logo-claude"></span><span class="icon icon--logo-grok"></span><span class="icon icon--logo-gpt"></span><span class="icon icon--logo-gemini"></span><span class="icon icon--logo-perplexity"></span></div>
+                  <div class="loading__bar" aria-hidden="true"><i></i></div>
+                </div>
+              </div>
+              <div class="thread thread--chat" id="thread" hidden aria-live="polite">
+                <div class="continued"><span class="chip chip--outline">Continued from your Google search</span></div>
+                <div class="message message--user"><div class="message__bubble" id="userMsg"></div></div>
+                <div class="message message--assistant answer" id="answer"><p></p><p></p><p></p></div>
+                <div class="gate-cta" id="gateCta" hidden>
+                  <button class="btn btn--primary btn--lg" type="button" data-go="register"><span class="icon icon--sparkle icon-18" aria-hidden="true"></span>Register for free</button>
+                  <p class="gate-cta__note">Register to see the answer and save the chat</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chat__dock">
+            <div class="dock__inner">
+              <div class="prompts" id="prompts">
+            <button class="chip chip--outline" type="button" data-prompt="Compare Claude Code vs Cursor">Compare Claude Code vs Cursor</button>
+            <button class="chip chip--outline" type="button" data-prompt="Write my first SwiftUI prompt">Write my first SwiftUI prompt</button>
+            <button class="chip chip--outline" type="button" data-prompt="Which model is cheapest to start?">Which model is cheapest to start?</button>
+              </div>
+              <form class="composer" aria-label="Message composer">
+                <div class="composer__field">
+                  <label class="sr-only" for="composerInput">Your message</label>
+                  <textarea class="composer__input" id="composerInput" rows="1" placeholder="Ask the 5-in-1 AI Council"></textarea>
+                </div>
+                <div class="composer__toolbar">
+                  <button class="tool-btn tool-btn--icon" type="button" aria-label="Attach file"><span class="icon icon--plus icon-18" aria-hidden="true"></span></button>
+                  <div class="composer__models" aria-hidden="true">
+                <span class="chip chip--outline"><span class="icon icon--logo-gpt icon-16" aria-hidden="true"></span>ChatGPT</span>
+                <span class="chip chip--outline"><span class="icon icon--logo-claude icon-16" aria-hidden="true"></span>Claude</span>
+                <span class="chip chip--outline"><span class="icon icon--logo-gemini icon-16" aria-hidden="true"></span>Gemini</span>
+                <span class="chip chip--outline"><span class="icon icon--logo-grok icon-16" aria-hidden="true"></span>Grok</span>
+                <span class="chip chip--outline"><span class="icon icon--logo-perplexity icon-16" aria-hidden="true"></span>Perplexity</span>
+                  </div>
+                  <div class="composer__spacer"></div>
+                  <button class="send-btn" id="sendBtn" type="submit" disabled aria-label="Send"><span class="icon icon--arrow-up" aria-hidden="true"></span></button>
+                </div>
+              </form>
+              <p class="disclaimer">AI can make mistakes. Double-check important information.</p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== 5 · Register -->
+  <div class="modal modal--auth" id="auth" role="dialog" aria-modal="true" aria-labelledby="auth-title" data-open="false">
+    <div class="modal__dialog auth">
+      <button class="icon-btn icon-btn--24 modal__close" type="button" data-modal-close aria-label="Close"><span class="icon icon--close-24" aria-hidden="true"></span></button>
+      <h2 class="auth__title" id="auth-title">Sign up to unlock<br>All major models power</h2>
+      <p class="auth__subtitle">You’ll get smarter responses, upload any document and keep all chats history</p>
+      <label class="input"><span class="sr-only">Email address</span><input class="input__control" type="email" placeholder="Email address" autocomplete="email"></label>
+      <button class="btn btn--inverse btn--md" type="button" data-go="paywall">Continue</button>
+      <div class="auth__or">or</div>
+      <button class="btn btn--secondary btn--md" type="button" data-go="paywall"><img class="icon-img" src="assets/icons/google.svg" alt="">Continue with Google</button>
+      <button class="btn btn--secondary btn--md" type="button" data-go="paywall"><span class="icon icon--apple" aria-hidden="true"></span>Continue with Apple</button>
+    </div>
+  </div>
+
+  <!-- ===================================================== 6 · Paywall -->
+  <div class="modal" id="paywall" role="dialog" aria-modal="true" aria-labelledby="paywall-title" data-open="false">
+    <div class="modal__dialog">
+      <div class="modal__mhead"><span class="modal__mhead-pill">Upgrade to PRO</span><button class="icon-btn icon-btn--24 modal__mhead-close" type="button" data-modal-close aria-label="Close"><span class="icon icon--close-24" aria-hidden="true"></span></button></div>
+      <button class="icon-btn icon-btn--24 modal__close" type="button" data-modal-close aria-label="Close"><span class="icon icon--close-24" aria-hidden="true"></span></button>
+      <div class="modal__pane modal__pane--visual">
+        <div class="included">
+          <div class="included__head"><h3 class="included__title">What's Included</h3></div>
+          <ul class="included__list">
+              <li class="included__item"><span class="icon icon--check" aria-hidden="true"></span>Everything in Basic</li>
+              <li class="included__item"><span class="icon icon--check" aria-hidden="true"></span>All AI Models with advanced prompting</li>
+              <li class="included__item"><span class="icon icon--check" aria-hidden="true"></span>Human-like copy</li>
+              <li class="included__item"><span class="icon icon--check" aria-hidden="true"></span>Image generation</li>
+              <li class="included__item"><span class="icon icon--check" aria-hidden="true"></span>Upload documents</li>
+              <li class="included__item"><span class="icon icon--check" aria-hidden="true"></span>All chats history</li>
+              <li class="included__item"><span class="icon icon--check" aria-hidden="true"></span>No Ads</li>
+              <li class="included__item"><span class="icon icon--check" aria-hidden="true"></span>Cross platform sync</li>
+          </ul>
+        </div>
+        <div class="models-strip" aria-label="Models included in Pro">
+            <span class="models-strip__item"><span class="icon icon--logo-gpt" aria-hidden="true"></span>ChatGPT</span>
+            <span class="models-strip__item"><span class="icon icon--logo-claude" aria-hidden="true"></span>Claude</span>
+            <span class="models-strip__item"><span class="icon icon--logo-gemini" aria-hidden="true"></span>Gemini</span>
+            <span class="models-strip__item"><span class="icon icon--logo-grok" aria-hidden="true"></span>Grok</span>
+            <span class="models-strip__item"><span class="icon icon--logo-perplexity" aria-hidden="true"></span>Perplexity</span>
+        </div>
+      </div>
+      <div class="modal__pane modal__pane--form">
+        <h2 class="modal__title" id="paywall-title">Unlock all major models<br>with Pro</h2>
+        <p class="modal__subtitle">Full access to advanced prompting, human-like copy, image generation, uploading documents</p>
+        <form class="modal__stack">
+            <label class="plan-card"><input type="radio" name="plan" value="4w"><span class="plan-card__radio" aria-hidden="true"></span><span class="plan-card__main"><span class="plan-card__period">4 Weeks</span><span class="plan-card__price">$24.99</span></span><span class="plan-card__daily">$0.89 <small>Per Day</small></span></label>
+            <label class="plan-card"><input type="radio" name="plan" value="3m"><span class="plan-card__tag plan-card__tag--popular">Most Popular</span><span class="plan-card__radio" aria-hidden="true"></span><span class="plan-card__main"><span class="plan-card__period">3 Months</span><span class="plan-card__price">$39.99</span></span><span class="plan-card__daily">$0.44 <small>Per Day</small></span></label>
+            <label class="plan-card"><input type="radio" name="plan" value="1y" checked><span class="plan-card__tag plan-card__tag--save">Save 75%</span><span class="plan-card__radio" aria-hidden="true"></span><span class="plan-card__main"><span class="plan-card__period">1 Year</span><span class="plan-card__price">$79.99</span></span><span class="plan-card__daily">$0.22 <small>Per Day</small></span></label>
+          <button class="pay-btn pay-btn--paypal" type="button" data-pay aria-label="Pay with PayPal"><span class="paypal-logo"><img src="assets/logos/paypal-mark.svg" alt=""><b>Pay</b><i>Pal</i></span></button>
+          <button class="pay-btn pay-btn--apple" type="button" data-pay>Buy with <span class="icon icon--apple" aria-hidden="true"></span><b>Pay</b></button>
+          <button class="pay-btn pay-btn--card" type="button" data-pay>Credit or debit card</button>
+          <span class="safe-note"><span class="icon icon--shield icon-16" aria-hidden="true"></span>Pay safe &amp; secure</span>
+          <p class="modal__legal">By continuing an account, you agree to our <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a>, <a href="#">Cookie Statement</a>, <a href="#">CA Notice at Collection</a> and <a href="#">Refund &amp; Cancellation Policy</a>.</p>
+          <img class="modal__payments" src="assets/images/payment-types.png" alt="PayPal, Apple Pay, Visa, Mastercard, American Express, Diners Club, Discover">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="proto-bar" aria-label="Prototype controls"><span class="proto-bar__step" id="protoStep">Step 1 / 6</span><button type="button" data-go="google">Restart</button><button type="button" data-theme-toggle>Theme</button></div>
+  <div class="toast" id="toast" role="status"></div>
+</div>
+<script src="js/funnel.js"></script>
+</body>
+</html>

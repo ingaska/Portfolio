@@ -1,0 +1,350 @@
+/* =============================================================================
+   AskGPT Design System — Tokens
+   -----------------------------------------------------------------------------
+   Layer 1  Primitives  — raw palette, type ramp, spacing/radius scales.
+   Layer 2  Semantic    — what components consume. Light lives on :root,
+                          dark on [data-theme="dark"] and prefers-color-scheme.
+   Source   Figma "askGPT" · file w1uuzeunBn30JG4sCDVvNl · page "UI".
+            Dark values are lifted verbatim; light values mirror the same
+            luminance curve (the paywall modal supplied the light ink/greys).
+   ============================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------- Neutral */
+  --color-white:   #ffffff;
+  --color-gray-50:  #f7f7f8;
+  --color-gray-100: #f4f4f4;   /* Figma: chevron fg */
+  --color-gray-150: #eceef0;
+  --color-gray-200: #e2e4e6;
+  --color-gray-300: #cdcfd2;
+  --color-gray-400: #a3a4a5;   /* Figma: secondary text, placeholders */
+  --color-gray-500: #878787;   /* Figma: tertiary text (paywall) */
+  --color-gray-550: #626262;   /* Figma: paywall body copy */
+  --color-gray-600: #585a5c;   /* Figma: composer border · focus */
+  --color-gray-700: #303234;   /* Figma: composer border */
+  --color-gray-750: #282a2d;   /* Figma: sidebar border, dividers */
+  --color-gray-800: #212427;   /* Figma: composer, active nav, chips */
+  --color-gray-850: #191c1f;   /* Figma: user bubble, avatar */
+  --color-gray-900: #111314;   /* Figma: app background */
+  --color-gray-950: #0f1011;   /* Figma: paywall ink */
+
+  /* ------------------------------------------------------------------ Brand */
+  --color-cyan-500:    #009fc5;
+  --color-violet-700:  #5227ad;
+  --color-teal-400:  #00bfa8;
+  --color-blue-400:  #5d91ff;
+  --color-orange-300:  #da996a;
+
+  --color-blue-950: #081125;   /* Figma: credits banner bg (dark) */
+  --color-blue-700: #2955bb;   /* Figma: Web Search "on" */
+  --color-blue-500: #5477c9;   /* Figma: banner text/link */
+  --color-blue-100: #dfe7fb;
+  --color-blue-50:  #eef2fd;
+
+  --color-green-900: #027561;  /* Figma: WhatsApp tag */
+  --color-green-600: #0fab6d;  /* Figma: success, "Most popular" */
+  --color-green-50:  #f2f9f5;  /* Figma: "Pay safe & secure" bg */
+  --color-red-600:   #dc2728;  /* Figma: "save 67%" */
+  --color-red-200:   #f0aaa8;  /* Figma: "save 33%" */
+
+  /* Accent set — suggestion chip glyphs (Figma icon fills) */
+  --color-amber-400:   #e7a44c;
+  --color-sky-500:     #44a0d5;
+  --color-purple-500:  #a15be9;
+  --color-emerald-600: #01a07f;
+  --color-pink-500:    #ee3a6f;
+  /* AI model brand marks */
+  --color-perplexity:  #22b8cd;
+  --color-claude:      #d97757;
+  --color-gemini:      #3186ff;
+  --color-paypal:      #ffc439;
+
+  /* -------------------------------------------------------------- Gradients */
+  --gradient-brand:   linear-gradient(90deg, var(--color-cyan-500) 0%, var(--color-violet-700) 100%);
+  --gradient-council: linear-gradient(105deg, var(--color-teal-400) 12%, var(--color-blue-400) 45%, var(--color-orange-300) 77%);
+
+  /* ------------------------------------------------------------- Typography */
+  /* UI Kit rule: Inter, styles named {size}/{weight}. Sizes 5xl 48/62 · 4xl 36/47 · 3xl 30/39 ·
+     2xl 24/34 · xl 20/32 · lg 18/25 · base 16/26 · sm 14/21 · xs 12/18. Weights bold · semibold · medium · normal. */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --text-5xl-bold: var(--fw-bold) 48px/62px var(--font-sans);
+  --text-5xl-semibold: var(--fw-semibold) 48px/62px var(--font-sans);
+  --text-5xl-medium: var(--fw-medium) 48px/62px var(--font-sans);
+  --text-5xl-normal: var(--fw-regular) 48px/62px var(--font-sans);
+
+  --text-4xl-bold: var(--fw-bold) 36px/47px var(--font-sans);
+  --text-4xl-semibold: var(--fw-semibold) 36px/47px var(--font-sans);
+  --text-4xl-medium: var(--fw-medium) 36px/47px var(--font-sans);
+  --text-4xl-normal: var(--fw-regular) 36px/47px var(--font-sans);
+
+  --text-3xl-bold: var(--fw-bold) 30px/39px var(--font-sans);
+  --text-3xl-semibold: var(--fw-semibold) 30px/39px var(--font-sans);
+  --text-3xl-medium: var(--fw-medium) 30px/39px var(--font-sans);
+  --text-3xl-normal: var(--fw-regular) 30px/39px var(--font-sans);
+
+  --text-2xl-bold: var(--fw-bold) 24px/34px var(--font-sans);
+  --text-2xl-semibold: var(--fw-semibold) 24px/34px var(--font-sans);
+  --text-2xl-medium: var(--fw-medium) 24px/34px var(--font-sans);
+  --text-2xl-normal: var(--fw-regular) 24px/34px var(--font-sans);
+
+  --text-xl-bold: var(--fw-bold) 20px/32px var(--font-sans);
+  --text-xl-semibold: var(--fw-semibold) 20px/32px var(--font-sans);
+  --text-xl-medium: var(--fw-medium) 20px/32px var(--font-sans);
+  --text-xl-normal: var(--fw-regular) 20px/32px var(--font-sans);
+
+  --text-lg-bold: var(--fw-bold) 18px/25px var(--font-sans);
+  --text-lg-semibold: var(--fw-semibold) 18px/25px var(--font-sans);
+  --text-lg-medium: var(--fw-medium) 18px/25px var(--font-sans);
+  --text-lg-normal: var(--fw-regular) 18px/25px var(--font-sans);
+
+  --text-base-bold: var(--fw-bold) 16px/26px var(--font-sans);
+  --text-base-semibold: var(--fw-semibold) 16px/26px var(--font-sans);
+  --text-base-medium: var(--fw-medium) 16px/26px var(--font-sans);
+  --text-base-normal: var(--fw-regular) 16px/26px var(--font-sans);
+
+  --text-sm-bold: var(--fw-bold) 14px/21px var(--font-sans);
+  --text-sm-semibold: var(--fw-semibold) 14px/21px var(--font-sans);
+  --text-sm-medium: var(--fw-medium) 14px/21px var(--font-sans);
+  --text-sm-normal: var(--fw-regular) 14px/21px var(--font-sans);
+
+  --text-xs-bold: var(--fw-bold) 12px/18px var(--font-sans);
+  --text-xs-semibold: var(--fw-semibold) 12px/18px var(--font-sans);
+  --text-xs-medium: var(--fw-medium) 12px/18px var(--font-sans);
+  --text-xs-normal: var(--fw-regular) 12px/18px var(--font-sans);
+
+  /* ---------------------------------------------------------------- Spacing */
+  /* UI Kit rule: spacing/{n} = n × 4px (Tailwind). Halves written 0-5, 1-5, 2-5 … */
+  --spacing-0: 0px;
+  --spacing-0-5: 2px;
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-2-5: 10px;
+  --spacing-3: 12px;
+  --spacing-3-5: 14px;
+  --spacing-4: 16px;
+  --spacing-4-5: 18px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-7-5: 30px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-10-5: 42px;
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-28: 112px;
+  --spacing-32: 128px;
+  --spacing-36: 144px;
+  --spacing-40: 160px;
+
+  /* ------------------------------------------------------------------ Radii */
+  /* UI Kit rule: rounded-none 0 · xs 2 · sm 4 · md 6 · lg 8 · xl 12 · 2xl 16 · 3xl 24 · 4xl 32 · full */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;      /* toolbar controls */
+  --radius-lg: 8px;      /* nav items, chips, rail */
+  --radius-xl: 12px;     /* sidebar panel, composer, menus */
+  --radius-2xl: 16px;    /* banner */
+  --radius-3xl: 24px;    /* modal, plan cards, user bubble */
+  --radius-4xl: 32px;
+  --radius-full: 9999px;
+
+  /* Opacity (UI Kit: opacity/{n}) */
+  --opacity-30: 0.3;
+  --opacity-40: 0.4;
+  --opacity-70: 0.7;
+  --opacity-90: 0.9;
+  --opacity-100: 1;
+
+  /* ------------------------------------------------------------ Dimensions */
+  --sidebar-w: 272px;
+  --sidebar-w-collapsed: 72px;
+  --sidebar-gutter: 12px;
+  --header-h: 80px;
+  --header-h-mobile: 64px;
+  --content-max: 800px;
+  --composer-max: 824px;
+  --chips-max: 620px;
+  --nav-item-h: 44px;
+  --control-h: 36px;
+  --button-h: 44px;
+  --icon-size: 24px;
+  --touch-min: 44px;
+
+  /* ---------------------------------------------------------------- Z-index */
+  --z-header: 10;
+  --z-sidebar: 20;
+  --z-scrim: 30;
+  --z-drawer: 40;
+  --z-dropdown: 50;
+  --z-modal: 60;
+  --z-demo: 70;
+
+  /* ----------------------------------------------------------------- Motion */
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 320ms;
+}
+
+/* =============================================================================
+   Semantic — LIGHT (default)
+   ============================================================================= */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --surface-base:              var(--color-white);
+  --surface-card:       var(--color-gray-50);    /* user bubble, avatar */
+  --surface-muted:       var(--color-gray-100);   /* composer, active nav, chips */
+  --surface-hover:       var(--color-gray-150);   /* hover */
+  --surface-pressed:       var(--color-gray-200);   /* pressed */
+
+  --border-default:          var(--color-gray-200);
+  --border-strong:   var(--color-gray-300);
+  --border-focus:    var(--color-gray-400);
+
+  --text-primary:            var(--color-gray-950);
+  --text-muted:  var(--color-gray-550);
+  --text-subtle:   var(--color-gray-500);
+  --text-on-brand:   var(--color-white);
+
+  --surface-inverse:         var(--color-gray-950);   /* send button bg */
+  --text-inverse:      var(--color-white);
+
+  --surface-info:         var(--color-blue-50);
+  --text-info:         var(--color-blue-700);
+  --text-selected:          var(--color-blue-700);   /* Web Search "on" */
+
+  --status-success:         var(--color-green-600);
+  --surface-success:      var(--color-green-50);
+  --status-destructive:          var(--color-red-600);
+  --status-destructive-soft:     var(--color-red-200);
+
+  --surface-scrim:           rgba(15, 16, 17, .35);
+  --surface-fade:            var(--color-white);      /* gate gradient end */
+
+  --shadow-header: 0 2px 5px var(--surface-base);
+  --shadow-2xs:    0 1px 0 rgba(0, 0, 0, .05);
+  --shadow-xs:     0 1px 2px rgba(0, 0, 0, .05);
+  --shadow-sm:     0 1px 3px rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
+  --shadow-md:     0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -2px rgba(0, 0, 0, .1);
+  --shadow-lg:     0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
+  --shadow-xl:     0 20px 25px -5px rgba(0, 0, 0, .1), 0 8px 10px -6px rgba(0, 0, 0, .1);
+  --shadow-2xl:    0 25px 50px -12px rgba(0, 0, 0, .25);
+  --shadow-inner:  inset 0 2px 4px rgba(0, 0, 0, .05);
+  --shadow-ring:   0 0 0 2px var(--surface-base), 0 0 0 4px var(--color-blue-400);
+}
+
+/* =============================================================================
+   Semantic — DARK
+   ============================================================================= */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --surface-base:              var(--color-gray-900);
+  --surface-card:       var(--color-gray-850);
+  --surface-muted:       var(--color-gray-800);
+  --surface-hover:       var(--color-gray-750);
+  --surface-pressed:       var(--color-gray-700);
+
+  --border-default:          var(--color-gray-750);
+  --border-strong:   var(--color-gray-700);
+  --border-focus:    var(--color-gray-600);
+
+  --text-primary:            var(--color-white);
+  --text-muted:  var(--color-gray-400);
+  --text-subtle:   var(--color-gray-500);
+  --text-on-brand:   var(--color-white);
+
+  --surface-inverse:         var(--color-white);
+  --text-inverse:      var(--color-gray-900);
+
+  --surface-info:         var(--color-blue-950);
+  --text-info:         var(--color-blue-500);
+  --text-selected:          var(--color-blue-700);
+
+  --status-success:         var(--color-green-600);
+  --surface-success:      rgba(15, 171, 109, .12);
+  --status-destructive:          var(--color-red-600);
+  --status-destructive-soft:     var(--color-red-200);
+
+  --surface-scrim:           rgba(0, 0, 0, .35);
+  --surface-fade:            var(--color-gray-900);
+
+  --shadow-header: 0 2px 5px var(--surface-base);
+  --shadow-2xs:    0 1px 0 rgba(0, 0, 0, .05);
+  --shadow-xs:     0 1px 2px rgba(0, 0, 0, .05);
+  --shadow-sm:     0 1px 3px rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
+  --shadow-md:     0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -2px rgba(0, 0, 0, .1);
+  --shadow-lg:     0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
+  --shadow-xl:     0 20px 25px -5px rgba(0, 0, 0, .1), 0 8px 10px -6px rgba(0, 0, 0, .1);
+  --shadow-2xl:    0 25px 50px -12px rgba(0, 0, 0, .25);
+  --shadow-inner:  inset 0 2px 4px rgba(0, 0, 0, .05);
+  --shadow-ring:   0 0 0 2px var(--surface-base), 0 0 0 4px var(--color-blue-400);
+}
+
+/* System preference wins when no explicit choice has been made */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --surface-base:              var(--color-gray-900);
+    --surface-card:       var(--color-gray-850);
+    --surface-muted:       var(--color-gray-800);
+    --surface-hover:       var(--color-gray-750);
+    --surface-pressed:       var(--color-gray-700);
+
+    --border-default:          var(--color-gray-750);
+    --border-strong:   var(--color-gray-700);
+    --border-focus:    var(--color-gray-600);
+
+    --text-primary:            var(--color-white);
+    --text-muted:  var(--color-gray-400);
+    --text-subtle:   var(--color-gray-500);
+    --text-on-brand:   var(--color-white);
+
+    --surface-inverse:         var(--color-white);
+    --text-inverse:      var(--color-gray-900);
+
+    --surface-info:         var(--color-blue-950);
+    --text-info:         var(--color-blue-500);
+    --text-selected:          var(--color-blue-700);
+
+    --status-success:         var(--color-green-600);
+    --surface-success:      rgba(15, 171, 109, .12);
+    --status-destructive:          var(--color-red-600);
+    --status-destructive-soft:     var(--color-red-200);
+
+    --surface-scrim:           rgba(0, 0, 0, .35);
+    --surface-fade:            var(--color-gray-900);
+
+    --shadow-header: 0 2px 5px var(--surface-base);
+    --shadow-2xs:    0 1px 0 rgba(0, 0, 0, .05);
+    --shadow-xs:     0 1px 2px rgba(0, 0, 0, .05);
+    --shadow-sm:     0 1px 3px rgba(0, 0, 0, .1), 0 1px 2px -1px rgba(0, 0, 0, .1);
+    --shadow-md:     0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -2px rgba(0, 0, 0, .1);
+    --shadow-lg:     0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
+    --shadow-xl:     0 20px 25px -5px rgba(0, 0, 0, .1), 0 8px 10px -6px rgba(0, 0, 0, .1);
+    --shadow-2xl:    0 25px 50px -12px rgba(0, 0, 0, .25);
+    --shadow-inner:  inset 0 2px 4px rgba(0, 0, 0, .05);
+    --shadow-ring:   0 0 0 2px var(--surface-base), 0 0 0 4px var(--color-blue-400);
+  }
+}
+
+/* Reduced motion: collapse durations */
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 0ms; --dur: 0ms; --dur-slow: 0ms; }
+}
