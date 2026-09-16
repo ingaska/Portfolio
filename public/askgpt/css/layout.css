@@ -185,7 +185,7 @@
   .modal__subtitle { margin-top: var(--spacing-2); font-size: 16px; line-height: 24px; }
   .modal__stack { gap: var(--spacing-3); margin-top: var(--spacing-5); }
   .plan-card, .pay-btn { width: 100%; }
-  .plan-card { min-height: 88px; padding: var(--spacing-4) var(--spacing-5); }
+  .plan-card { min-height: 0; padding: var(--spacing-2) var(--spacing-5); }
   .plan-card__period { font-size: 18px; line-height: 24px; }
   .plan-card__price { font-size: 16px; line-height: 22px; }
   .plan-card__daily { font-size: 24px; line-height: 30px; }

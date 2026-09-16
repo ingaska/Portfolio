@@ -526,8 +526,8 @@
 @media (max-width: 767.98px) { .only-desktop { display: none; } .only-mobile { display: inline; } }
 .modal__title { font: var(--fw-bold) 32px/40px var(--font-sans); letter-spacing: -.8px; text-align: center; }
 .modal__subtitle { margin-top: var(--spacing-3); font: var(--fw-medium) 18px/28px var(--font-sans); letter-spacing: -.45px; text-align: center; }
-.modal__stack { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-4); margin-top: var(--spacing-6); width: 100%; }
-.modal__stack .pay-btn:first-of-type { margin-top: var(--spacing-3); }
+.modal__stack { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-3); margin-top: var(--spacing-5); width: 100%; }
+.modal__stack .plan-card + .plan-card { margin-top: var(--spacing-2); }   /* 20px between plans, 12px elsewhere (Figma) */
 .modal__pane--form .social-proof { margin-top: var(--spacing-5); justify-content: center; }
 .modal__legal { max-width: 360px; text-align: center; font: var(--text-xs-normal); color: var(--color-gray-500); letter-spacing: -.3px; }
 .modal__legal a { text-decoration: underline; }
@@ -552,7 +552,7 @@
 /* Plan card (radio) */
 .plan-card {
   position: relative; display: flex; align-items: center; gap: var(--spacing-4); width: min(360px, 100%);
-  min-height: 100px; padding: var(--spacing-5) var(--spacing-6);
+  min-height: 0; padding: var(--spacing-2) var(--spacing-6);
   border: 1.5px solid var(--color-gray-300); border-radius: var(--radius-2xl);
   color: var(--color-gray-950); cursor: pointer; background: #fff;
   transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
@@ -578,7 +578,7 @@
 .plan-card__tag--popular { color: var(--color-amber-400); }
 .plan-card__tag--save { color: var(--color-green-600); background: var(--color-green-50); }
 .plan-card input { position: absolute; opacity: 0; pointer-events: none; }
-.plan-card:has(input:checked) { border-width: 2px; border-color: var(--color-blue-400); background: var(--color-blue-50); padding: calc(var(--spacing-5) - .5px) calc(var(--spacing-6) - .5px); }
+.plan-card:has(input:checked) { border-width: 2px; border-color: var(--color-blue-400); background: var(--color-blue-50); padding: calc(var(--spacing-2) - .5px) calc(var(--spacing-6) - .5px); }
 .plan-card:has(input:checked) .plan-card__radio { border-width: 2px; border-color: var(--color-blue-400); }
 .plan-card:has(input:checked) .plan-card__radio::after { opacity: 1; transform: scale(1); }
 .plan-card:has(input:focus-visible) { box-shadow: var(--shadow-ring); }
