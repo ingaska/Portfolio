@@ -126,7 +126,7 @@
     thread.insertBefore(gateCta, answer.nextSibling);       // CTA always sits under the latest answer
     answer.style.setProperty('--gate-h', gateHeight() + 'px');
     answer.classList.add('is-gated');                       // …and covered by the overlay + CTA after the third row
-    gateCta.hidden = false; requestAnimationFrame(() => { gateCta.classList.add('is-in'); prompts.classList.add('is-in'); scrollThread(); });
+    gateCta.hidden = false; setTimeout(() => { gateCta.classList.add('is-in'); prompts.classList.add('is-in'); scrollThread(); }, 30);
     setStep(4);
   }
 
