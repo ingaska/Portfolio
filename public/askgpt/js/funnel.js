@@ -100,7 +100,7 @@
     const token = ++run; phase = 'loading';
     activate('app'); app.classList.add('is-locked'); app.dataset.phase = 'loading';
     loading.hidden = false; thread.hidden = true; gateCta.classList.remove('is-in'); gateCta.hidden = true; prompts.classList.remove('is-in');
-    resetTurns(); $$('p', answer).forEach((p) => { p.textContent = ''; p.classList.remove('is-in', 'is-typing'); });
+    resetTurns(); $$('p', answer).forEach((p) => { p.textContent = ''; p.classList.remove('is-in', 'is-typing'); }); const continued = $('.continued', thread); if (continued) continued.hidden = false;
     const barEl = $('.loading__bar i', loading); barEl.style.animation = 'none'; void barEl.offsetWidth; barEl.style.animation = '';
     setStep(2);
     await sleep(reduce ? 300 : LOADING_MS);
@@ -136,7 +136,10 @@
     const copy = COPY.followups[text] || COPY.answer;
     const token = ++run; phase = 'typing'; app.dataset.phase = 'typing';
     gateCta.classList.remove('is-in'); gateCta.hidden = true; composerInput.value = ''; composerInput.dispatchEvent(new Event('input'));
-    createTurn(text, copy); scrollThread();
+    resetTurns(); currentCopy = copy;                        // start from scratch: the new question replaces the previous answer
+    $$('p', answer).forEach((p) => { p.textContent = ''; p.classList.remove('is-in', 'is-typing'); });
+    const continued = $('.continued', thread); if (continued) continued.hidden = true;
+    userMsg.textContent = text; scrollThread();
     await sleep(reduce ? 100 : 600); if (token !== run) return;
     if (!(await typeAnswer(token))) return;
     goGate();
