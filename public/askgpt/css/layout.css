@@ -175,15 +175,18 @@
   .modal__title { font-size: 26px; line-height: 32px; }
 }
 @media (max-width: 767.98px) {
+  .modal__pane--visual { display: none; }               /* Figma Size=Mobile hides the photo pane */
   .included { padding: var(--spacing-14) var(--spacing-5) var(--spacing-5); gap: var(--spacing-4); }
   .included__title { font: var(--text-lg-semibold); }
   .included__list { gap: var(--spacing-2-5); }
   .included__item { font: var(--text-sm-medium); gap: var(--spacing-2-5); }
   .models-strip { padding: var(--spacing-3) var(--spacing-5); gap: var(--spacing-5); }
   .modal__pane--form { padding: var(--spacing-6) var(--spacing-4) calc(var(--spacing-8) + env(safe-area-inset-bottom)); }
-  .modal__title { font-size: 24px; line-height: 30px; letter-spacing: -.5px; }
-  .modal__subtitle { margin-top: var(--spacing-2); font-size: 16px; line-height: 24px; }
-  .modal__stack { gap: var(--spacing-3); margin-top: var(--spacing-5); }
+  .modal__title { font-size: 28px; line-height: 36px; letter-spacing: -.6px; }
+  .modal__subtitle { margin-top: var(--spacing-2); font-size: 16px; line-height: 24px; font-weight: var(--fw-regular); }
+  .modal__stack { gap: var(--spacing-3); margin-top: var(--spacing-3); }
+  .modal__stack .plan-card + .plan-card { margin-top: var(--spacing-3); }   /* 24px between plans on mobile */
+  .modal__stack .pay-btn:first-of-type { margin-top: var(--spacing-2); }
   .plan-card, .pay-btn { width: 100%; }
   .plan-card { min-height: 0; padding: var(--spacing-2) var(--spacing-5); }
   .plan-card__period { font-size: 18px; line-height: 24px; }
@@ -194,6 +197,6 @@
   .social-proof { gap: var(--spacing-1-5); }
   .social-proof__pill { flex: 1 1 auto; min-width: 0; font-size: 13px; line-height: 18px; padding: var(--spacing-2) var(--spacing-3); white-space: normal; text-align: center; }
   .social-proof__avatar { width: 34px; height: 34px; margin-left: -12px; }
-  .modal__legal { font-size: 11px; }
+  .modal__legal { font-size: 12px; line-height: 20px; }
 }
 }
