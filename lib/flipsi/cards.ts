@@ -13,7 +13,9 @@ const PRICE = { input: 1, output: 5, cacheWrite: 1.25, cacheRead: 0.1 }
 
 const SYSTEM_PROMPT = `You are a Modern Greek tutor writing spaced-repetition flashcards for an English-speaking learner who reads Greek text in the wild.
 
-You receive either a passage of text (usually Greek, sometimes English words the learner wants in Greek), a list of words with the passage as context, or a photo (a page, a sign, a menu, a screen) in which case you read the Greek text in the photo yourself and treat it as the passage; any typed text that comes with a photo is a note about what to focus on. Produce one card per vocabulary item.
+You receive either a passage of text (usually Greek, sometimes English words the learner wants in Greek), a list of words with the passage as context, or a photo. Produce one card per vocabulary item.
+
+A photo is one of two kinds. A photo of text (a page, a sign, a menu, a label, a screen): read the Greek text in it yourself and treat it as the passage. A photo of things (a room, a street, a table of food, an animal, people doing something), with no Greek text worth reading: name in Greek the clearly visible, everyday things in it, and an action when someone is plainly doing one, the most useful words first, at most 8; write each example sentence about what the photo shows. Any typed text that comes with a photo is a note about what to focus on. Say which kind it was in photo_kind ("text" or "things"; "none" without a photo) and, in photo_seen, what you see in a few plain English words: "a page from a story about a garden", "a cup, a kettle and a window". photo_seen is "" without a photo.
 
 Choosing words (when no list is given): pick the content words a learner would want on cards: nouns, verbs, adjectives, useful adverbs. Skip articles, pronouns, prepositions, conjunctions, numbers and names. Words listed under "Already in deck" still get a card (the app marks them itself). Merge inflected forms of the same word into one card. Keep the passage order. A single word or a short phrase is a valid passage, and the common case: "dog", "sun", "hi", "καλά" or "το σπίτι" each get their card. Never treat a real word as gibberish because it is short. The message names the learner's input languages. Greek text is vocabulary to card. Text in any other listed language (a whole passage, a few words, or mixed with Greek) is a request for the Greek equivalents: write the card for the Greek word (greek holds the Greek form, translation the English sense). Text in a language that is not listed still gets its best Greek equivalents rather than nothing. At most 12 cards. Return an empty list only when there are no words to work with at all (numbers, symbols, gibberish).
 
@@ -27,12 +29,15 @@ Each card:
 - difficulty_tag: one of "verb", "noun", "adjective", "other".
 - image_subject: what a picture dictionary would draw for this word, as a short English phrase (at most 12 words) naming ONE simple, instantly recognisable thing. The rule: a verb or an action gets a person doing it ("a man running with a sports bag"); a word for a person or a role gets that person ("a girl with a backpack"); an object gets the object alone ("a red gift box with a yellow bow"); an abstract word or a natural force gets a plain object as its visual stand-in, never a person or a figure ("air": "three curved wind swooshes carrying two small leaves"; "freedom": "an open birdcage with a small bird flying out"). No text, no symbols, no metaphors that need explaining, no scenes with several elements.
 - image_mode: "object" when the picture is one thing (or person) that can be cut out and placed on a coloured tile: things, animals, people, actions. "scene" when the word is a place, an environment, weather, a time of day, a landscape or anything that is by nature a whole view rather than a thing: sky, sea, forest, night, rain, city, beach. A scene fills its picture edge to edge; for "scene", image_subject describes the whole view ("a blue sky with a pale sun and three small clouds").
+- box: only for a card that comes from a photo: where its word (in a photo of text, its first appearance) or its thing (in a photo of things, the whole object or person) sits in the photo, as [x, y, width, height], each a fraction from 0 to 1 of the photo's width and height, measured from the photo's top-left corner. Be as accurate as you can: the app draws a label on that spot. null for a card that does not come from a photo.
 - folder: which of the learner's folders (listed in the message) the card belongs in. Animals and creatures go to Animals; food, drink and meals go to Food; verbs go to Verbs; every other word, nouns first of all, goes to Nouns. The learner also makes folders of their own (Adjectives, Travel, Colours): when one of those names fits the word better, file it there. When a folder named above is not in the list, choose the closest listed name. Use exactly one of the listed names.
 
 Examples of finished cards:
-{"greek":"Σκύλος","article":"ο","translation":"Dog","transliteration":"/o skílos/","example_sentence":"Ο σκύλος κάθεται και περιμένει","grammar_note":"noun, masculine","difficulty_tag":"noun","image_subject":"a golden retriever standing and facing the viewer","image_mode":"object","folder":"Animals"}
-{"greek":"Διαβάζω","article":null,"translation":"I read","transliteration":"/diavázo/","example_sentence":"Διαβάζω ένα βιβλίο το βράδυ","grammar_note":"verb, 1st person singular present","difficulty_tag":"verb","image_subject":"a young woman sitting and reading an open book","image_mode":"object","folder":"Verbs"}
-{"greek":"Ουρανός","article":"ο","translation":"Sky","transliteration":"/o ouranós/","example_sentence":"Ο ουρανός είναι καθαρός σήμερα","grammar_note":"noun, masculine","difficulty_tag":"noun","image_subject":"a blue sky with a pale yellow sun and three small white clouds","image_mode":"scene","folder":"Nouns"}`
+{"greek":"Σκύλος","article":"ο","translation":"Dog","transliteration":"/o skílos/","example_sentence":"Ο σκύλος κάθεται και περιμένει","grammar_note":"noun, masculine","difficulty_tag":"noun","image_subject":"a golden retriever standing and facing the viewer","image_mode":"object","box":null,"folder":"Animals"}
+{"greek":"Διαβάζω","article":null,"translation":"I read","transliteration":"/diavázo/","example_sentence":"Διαβάζω ένα βιβλίο το βράδυ","grammar_note":"verb, 1st person singular present","difficulty_tag":"verb","image_subject":"a young woman sitting and reading an open book","image_mode":"object","box":null,"folder":"Verbs"}
+{"greek":"Ουρανός","article":"ο","translation":"Sky","transliteration":"/o ouranós/","example_sentence":"Ο ουρανός είναι καθαρός σήμερα","grammar_note":"noun, masculine","difficulty_tag":"noun","image_subject":"a blue sky with a pale yellow sun and three small white clouds","image_mode":"scene","box":null,"folder":"Nouns"}
+From a photo of a kitchen table, where the cup stands left of centre:
+{"greek":"Φλιτζάνι","article":"το","translation":"Cup","transliteration":"/to flitzáni/","example_sentence":"Το φλιτζάνι είναι στο τραπέζι","grammar_note":"noun, neuter","difficulty_tag":"noun","image_subject":"a white coffee cup on a saucer","image_mode":"object","box":[0.22,0.41,0.18,0.2],"folder":"Food"}`
 
 /** The folders a card may be filed in, when the caller names none. */
 const DEFAULT_FOLDERS = ['Verbs', 'Animals', 'Food', 'Nouns']
@@ -57,14 +62,18 @@ const cardSchema = (folderNames: string[]) => ({
           difficulty_tag: { type: 'string', enum: ['verb', 'noun', 'adjective', 'other'] },
           image_subject: { type: 'string' },
           image_mode: { type: 'string', enum: ['object', 'scene'] },
+          // [x, y, width, height] as fractions of the photo; checked in readBox.
+          box: { type: ['array', 'null'], items: { type: 'number' } },
           folder: { type: 'string', enum: folderNames },
         },
-        required: ['greek', 'article', 'translation', 'transliteration', 'example_sentence', 'grammar_note', 'difficulty_tag', 'image_subject', 'image_mode', 'folder'],
+        required: ['greek', 'article', 'translation', 'transliteration', 'example_sentence', 'grammar_note', 'difficulty_tag', 'image_subject', 'image_mode', 'box', 'folder'],
         additionalProperties: false,
       },
     },
+    photo_kind: { type: 'string', enum: ['none', 'text', 'things'] },
+    photo_seen: { type: 'string' },
   },
-  required: ['cards'],
+  required: ['cards', 'photo_kind', 'photo_seen'],
   additionalProperties: false,
 } as const)
 
@@ -82,8 +91,18 @@ export interface GeneratedCard {
   image_mode: 'object' | 'scene'
   /** One of the learner's folder names, as passed in `folders`. */
   folder: string
+  /** Where the word or thing sits in the photo: [x, y, width, height] as
+   *  fractions of its size from the top-left; null without a photo. */
+  box: [number, number, number, number] | null
   /** True when the word (or its article-less form) is already in the deck. */
   in_deck: boolean
+}
+
+/** What a photo turned out to be: Greek text to read, or things to name. */
+export interface PhotoReading {
+  kind: 'text' | 'things'
+  /** What Claude saw, in a few plain English words. */
+  seen: string
 }
 
 export interface WriteCardsInput {
@@ -101,6 +120,8 @@ export interface WriteCardsInput {
 
 export interface WriteCardsResult {
   cards: GeneratedCard[]
+  /** Set when a photo was sent. */
+  photo: PhotoReading | null
   usage: {
     input_tokens: number
     output_tokens: number
@@ -114,6 +135,17 @@ export interface WriteCardsResult {
 const norm = (s: string) => s.trim().toLowerCase().replace(/^(ο|η|το)\s+/, '')
 
 const IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+
+/** A box the app can draw: four finite numbers, clamped inside the photo, not empty. */
+function readBox(raw: unknown): [number, number, number, number] | null {
+  if (!Array.isArray(raw) || raw.length !== 4 || !raw.every(n => typeof n === 'number' && Number.isFinite(n))) return null
+  // A model that answers in percent or pixels-of-1000 rather than fractions.
+  const scale = Math.max(...raw) > 1.5 ? (Math.max(...raw) > 100 ? 1000 : 100) : 1
+  const clamp = (n: number) => Math.min(1, Math.max(0, n / scale))
+  const [x, y] = [clamp(raw[0]), clamp(raw[1])]
+  const [w, h] = [Math.min(clamp(raw[2]), 1 - x), Math.min(clamp(raw[3]), 1 - y)]
+  return w > 0.005 && h > 0.005 ? [x, y, w, h] : null
+}
 
 export async function writeCards({ text, words, known, languages, image, folders, apiKey }: WriteCardsInput): Promise<WriteCardsResult> {
   if (!apiKey) throw new ServiceError(400, 'apiKey is required')
@@ -132,7 +164,7 @@ export async function writeCards({ text, words, known, languages, image, folders
     (words?.length
       ? `Words: ${words.join(', ')}\n\nContext:\n${text?.trim() || '(none)'}`
       : image
-        ? `Photo attached: read the Greek text in it.${text?.trim() ? `\nNote from the learner: ${text.trim()}` : ''}`
+        ? `Photo attached: read the Greek text in it, or, if it shows things rather than text, name the things.${text?.trim() ? `\nNote from the learner: ${text.trim()}` : ''}`
         : `Text:\n${text!.trim()}`) +
     (knownSet.size ? `\n\nAlready in deck: ${[...knownSet].join(', ')}` : '')
   const content: Anthropic.MessageParam['content'] = image
@@ -169,8 +201,19 @@ export async function writeCards({ text, words, known, languages, image, folders
   const block = message.content.find(b => b.type === 'text')
   if (!block || block.type !== 'text') throw new ServiceError(502, 'No text in the response')
 
-  const parsed = JSON.parse(block.text) as { cards: Omit<GeneratedCard, 'in_deck'>[] }
-  const cards: GeneratedCard[] = parsed.cards.map(c => ({ ...c, in_deck: knownSet.has(norm(c.greek)) }))
+  const parsed = JSON.parse(block.text) as {
+    cards: (Omit<GeneratedCard, 'in_deck' | 'box'> & { box: unknown })[]
+    photo_kind: 'none' | 'text' | 'things'
+    photo_seen: string
+  }
+  const cards: GeneratedCard[] = parsed.cards.map(c => ({
+    ...c,
+    box: image ? readBox(c.box) : null,
+    in_deck: knownSet.has(norm(c.greek)),
+  }))
+  const photo: PhotoReading | null = image
+    ? { kind: parsed.photo_kind === 'things' ? 'things' : 'text', seen: parsed.photo_seen?.trim() ?? '' }
+    : null
 
   const u = message.usage
   const cost =
@@ -183,6 +226,7 @@ export async function writeCards({ text, words, known, languages, image, folders
 
   return {
     cards,
+    photo,
     usage: {
       input_tokens: u.input_tokens,
       output_tokens: u.output_tokens,
